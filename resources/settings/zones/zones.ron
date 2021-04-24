@@ -3,5 +3,9 @@
 
 #![enable(implicit_some)]
 (
-    config: (),
+    config: (
+        zone_order: [
+            "dev",
+        ],
+    ),
 )

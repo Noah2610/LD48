@@ -2,6 +2,7 @@ use super::component_prelude::*;
 
 #[derive(Component, Deserialize, Clone)]
 #[storage(VecStorage)]
+#[serde(deny_unknown_fields)]
 pub struct OnLane {
     pub current:      usize,
     pub switch_speed: f32,

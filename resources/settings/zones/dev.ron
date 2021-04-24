@@ -4,6 +4,16 @@
 #![enable(implicit_some)]
 (
     zones: {
-        "dev": (),
+        "dev": (
+            segments: {
+                "dev/00.json": [
+                    "dev/01.json",
+                ],
+                "dev/01.json": [
+                    "dev/00.json",
+                    "dev/01.json",
+                ],
+            }
+        ),
     },
 )

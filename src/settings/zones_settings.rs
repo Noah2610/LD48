@@ -7,15 +7,22 @@ use std::collections::HashMap;
 pub type ZoneId = String;
 
 #[derive(Deserialize, Default)]
+#[serde(deny_unknown_fields)]
 pub struct ZonesSettings {
+    #[serde(default)]
     pub config: ZonesConfig,
+    #[serde(default)]
     pub zones:  HashMap<ZoneId, ZoneSettings>,
 }
 
 #[derive(Deserialize, Default)]
-pub struct ZonesConfig {}
+#[serde(deny_unknown_fields)]
+pub struct ZonesConfig {
+    pub zone_order: Vec<ZoneId>,
+}
 
 #[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct ZoneSettings {}
 
 impl Merge for ZonesSettings {
@@ -46,12 +53,23 @@ impl Merge for ZonesSettings {
 
 impl Merge for ZonesConfig {
     fn merge(&mut self, other: Self) {
-        // TODO
+        let ZonesConfig {
+            zone_order: mut other_zone_order,
+        } = other;
+        if !other_zone_order.is_empty() {
+            eprintln!(
+                "[WARNING]\n    Careful, you have `config.zone_order` arrays \
+                 configured in multiple zone configs.\n    This will merge \
+                 multiple `config.zone_order` arrays together.\n    This is \
+                 probably not intended."
+            );
+            self.zone_order.append(&mut other_zone_order);
+        }
     }
 }
 
 impl Merge for ZoneSettings {
     fn merge(&mut self, other: Self) {
-        // TODO
+        let ZoneSettings {} = other;
     }
 }
