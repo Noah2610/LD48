@@ -112,6 +112,12 @@ pub(super) fn build_game_data<'a, 'b>(
             UpdateOnLane::default(),
             "update_on_lane_system",
             &["control_player_system", "move_entities_system"],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            UpdateZonesManager::default(),
+            "update_zones_manager_system",
+            &[],
         )?;
 
     Ok(custom_game_data)

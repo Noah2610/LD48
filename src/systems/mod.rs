@@ -1,9 +1,11 @@
 pub mod control_player;
 pub mod update_on_lane;
+pub mod update_zones_manager;
 
 pub mod prelude {
     pub use super::control_player::ControlPlayer;
     pub use super::update_on_lane::UpdateOnLane;
+    pub use super::update_zones_manager::UpdateZonesManager;
     pub use deathframe::systems::prelude::*;
 }
 

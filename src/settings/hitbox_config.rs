@@ -18,8 +18,7 @@ impl HitboxConfig {
         match self {
             HitboxConfig::Size => {
                 if let Some(size) = size_opt {
-                    entity_builder
-                        .with(Hitbox::new().with_rect(Rect::from(size)))
+                    entity_builder.with(Hitbox::from(size))
                 } else {
                     panic!("HitboxConfig::Size entity doesn't have a Size");
                 }

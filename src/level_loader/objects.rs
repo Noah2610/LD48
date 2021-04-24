@@ -2,6 +2,7 @@ use super::data::*;
 use super::ObjectType;
 use crate::components::prelude::*;
 use crate::resource;
+use crate::resources::prelude::CollisionTag;
 use crate::settings::entity_components::add_components_to_entity;
 use crate::settings::prelude::*;
 use amethyst::ecs::{Builder, Entity, World, WorldExt};
@@ -107,7 +108,7 @@ pub fn build_camera(
     player: Entity,
     level_size: Size,
 ) -> amethyst::Result<()> {
-    use amethyst::renderer::Camera;
+    use amethyst::renderer::Camera as AmethystCamera;
     use amethyst::utils::ortho_camera::{
         CameraNormalizeMode,
         CameraOrtho,
@@ -118,7 +119,7 @@ pub fn build_camera(
 
     let size = settings.size;
 
-    let camera = Camera::standard_2d(size.w, size.h);
+    let camera = AmethystCamera::standard_2d(size.w, size.h);
     let mut camera_ortho =
         CameraOrtho::normalized(CameraNormalizeMode::Contain);
     let half_size = size.half();
@@ -135,6 +136,8 @@ pub fn build_camera(
     let mut transform = Transform::default();
     transform.set_translation_xyz(level_center.w, level_center.h, settings.z);
 
+    let hitbox = Hitbox::from(&size);
+
     world
         .create_entity()
         .with(Follow::new(player))
@@ -148,6 +151,9 @@ pub fn build_camera(
         .with(size)
         .with(camera)
         .with(camera_ortho)
+        .with(Camera::default())
+        .with(Collider::from(CollisionTag::Camera))
+        .with(hitbox)
         .build();
 
     Ok(())

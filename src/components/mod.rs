@@ -1,9 +1,11 @@
+pub mod camera;
 pub mod object;
 pub mod on_lane;
 pub mod player;
 pub mod tile;
 
 pub mod prelude {
+    pub use super::camera::Camera;
     pub use super::object::Object;
     pub use super::on_lane::OnLane;
     pub use super::player::Player;
