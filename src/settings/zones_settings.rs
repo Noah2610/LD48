@@ -5,6 +5,7 @@ use replace_with::replace_with_or_abort;
 use std::collections::HashMap;
 
 pub type ZoneId = String;
+pub type SegmentId = String;
 
 #[derive(Deserialize, Default)]
 #[serde(deny_unknown_fields)]
@@ -23,7 +24,9 @@ pub struct ZonesConfig {
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
-pub struct ZoneSettings {}
+pub struct ZoneSettings {
+    pub segments: HashMap<SegmentId, Vec<SegmentId>>,
+}
 
 impl Merge for ZonesSettings {
     fn merge(&mut self, other: Self) {
@@ -70,6 +73,12 @@ impl Merge for ZonesConfig {
 
 impl Merge for ZoneSettings {
     fn merge(&mut self, other: Self) {
-        let ZoneSettings {} = other;
+        let ZoneSettings { segments: _ } = other;
+        eprintln!(
+            "[WARNING]\n    Careful, you have the same `zones.<ZONE-ID>` \
+             configured in multiple zone configs.\n    This will NOT merge \
+             them together.\n    You should probably find and fix the \
+             duplicate configurations."
+        );
     }
 }
