@@ -1,10 +1,10 @@
 // src/settings/objects_settings.rs
 
 #![enable(implicit_some)]
-(
-    z: 10.0,
-    size: (
-        w: 256.0,
-        h: 144.0,
+{
+    Solid: (
+        components: [
+            Hitbox(Size),
+        ],
     ),
-)
+}

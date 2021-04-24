@@ -49,6 +49,7 @@ pub fn load_objects(
                     entity_builder = add_components_to_entity(
                         entity_builder,
                         object_settings.components.clone(),
+                        Some(size.clone()),
                     );
 
                     entity_builder.build();
@@ -88,8 +89,11 @@ fn build_player(world: &mut World, transform: Transform, size: Size) -> Entity {
         .with(Velocity::default())
         .with(sprite_render);
 
-    entity_builder =
-        add_components_to_entity(entity_builder, settings.components.clone());
+    entity_builder = add_components_to_entity(
+        entity_builder,
+        settings.components.clone(),
+        Some(size.clone()),
+    );
 
     entity_builder.build()
 }

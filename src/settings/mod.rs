@@ -7,6 +7,7 @@ pub mod prelude {
 
 pub mod camera_settings;
 pub mod entity_components;
+pub mod hitbox_config;
 pub mod objects_settings;
 pub mod player_settings;
 
