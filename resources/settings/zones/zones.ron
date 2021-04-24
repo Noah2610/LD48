@@ -1,11 +1,13 @@
 // src/settings/zones_settings.rs
-// ./dev.ron
+// ./dev_0.ron
+// ./dev_1.ron
 
 #![enable(implicit_some)]
 (
     config: (
         zone_order: [
-            "dev",
+            "dev_0",
+            "dev_1",
         ],
     ),
 )

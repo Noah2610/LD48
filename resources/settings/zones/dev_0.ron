@@ -1,0 +1,19 @@
+// src/settings/zones_settings.rs
+// ./zones.ron
+
+#![enable(implicit_some)]
+(
+    zones: {
+        "dev_0": (
+            segments: {
+                "dev_0/00.json": [
+                    "dev_0/01.json",
+                ],
+                "dev_0/01.json": [
+                    "dev_0/00.json",
+                    "dev_0/01.json",
+                ],
+            }
+        ),
+    },
+)
