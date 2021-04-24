@@ -3,9 +3,13 @@
 #![enable(implicit_some)]
 (
     components: [
-        Size((
+        Size(
             w: 32.0,
             h: 32.0,
-        )),
+        ),
+        Hitbox(Size),
+        Collider(Player),
+        Collidable(Player),
+        Solid(Player),
     ],
 )

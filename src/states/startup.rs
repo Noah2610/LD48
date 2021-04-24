@@ -19,6 +19,12 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Startup {
 }
 
 fn insert_resources(world: &mut World) {
+    use crate::components::prelude::{Object, Player, Tile};
+
+    world.register::<Player>();
+    world.register::<Tile>();
+    world.register::<Object>();
+
     let sprite_sheet_handles = SpriteSheetHandles::<PathBuf>::default();
     world.insert(sprite_sheet_handles);
 }
