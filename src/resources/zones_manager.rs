@@ -20,11 +20,14 @@ impl ZonesManager {
         self.current_zone = Some(zone_id);
     }
 
-    pub fn levels_to_load(&mut self) -> Vec<DataLevel> {
+    pub fn levels_to_load(&mut self) -> Vec<(SegmentId, DataLevel)> {
         self.staged_segments
             .split_off(0)
             .into_iter()
-            .filter_map(|segment| self.get_level_or_load(segment))
+            .filter_map(|segment| {
+                self.get_level_or_load(segment.clone())
+                    .map(|level| (segment, level))
+            })
             .collect()
     }
 

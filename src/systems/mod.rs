@@ -1,16 +1,17 @@
-pub mod control_player;
-pub mod update_on_lane;
-pub mod update_zones_manager;
+mod control_player;
+mod delete_segment_entities;
+mod update_on_lane;
+mod update_zones_manager;
 
 pub mod prelude {
     pub use super::control_player::ControlPlayer;
+    pub use super::delete_segment_entities::DeleteSegmentEntities;
     pub use super::update_on_lane::UpdateOnLane;
     pub use super::update_zones_manager::UpdateZonesManager;
     pub use deathframe::systems::prelude::*;
 }
 
 mod system_prelude {
-
     pub use crate::components::prelude::*;
     pub use crate::input::prelude::*;
     pub use crate::resources::prelude::*;

@@ -1,6 +1,7 @@
 use super::data::*;
 use crate::components::prelude::*;
 use crate::resource;
+use crate::settings::zones_settings::SegmentId;
 use amethyst::ecs::{Builder, World, WorldExt};
 use deathframe::amethyst;
 use deathframe::resources::SpriteSheetHandles;
@@ -10,6 +11,7 @@ pub fn build_tiles(
     world: &mut World,
     tiles: Vec<DataTile>,
     tile_size: Size,
+    segment_id: SegmentId,
     offset_y: f32,
 ) -> amethyst::Result<()> {
     for tile in tiles {
@@ -43,7 +45,8 @@ pub fn build_tiles(
             .with(sprite_render)
             .with(Transparent)
             .with(ScaleOnce::default())
-            .with(Tile::default());
+            .with(Tile::default())
+            .with(BelongsToSegment(segment_id.clone()));
 
         entity_builder.build();
     }

@@ -5,6 +5,7 @@ use crate::resource;
 use crate::resources::prelude::CollisionTag;
 use crate::settings::entity_components::add_components_to_entity;
 use crate::settings::prelude::*;
+use crate::settings::zones_settings::SegmentId;
 use amethyst::ecs::{Builder, Entity, World, WorldExt};
 use deathframe::amethyst;
 use deathframe::resources::SpriteSheetHandles;
@@ -14,6 +15,7 @@ pub fn build_objects(
     world: &mut World,
     objects: Vec<DataObject>,
     level_size: Size,
+    segment_id: SegmentId,
     offset_y: f32,
 ) -> amethyst::Result<()> {
     let objects_settings = (*world.read_resource::<ObjectsSettings>()).clone();
@@ -45,7 +47,8 @@ pub fn build_objects(
                         .create_entity()
                         .with(transform)
                         .with(size.clone())
-                        .with(Object::from(object_type.clone()));
+                        .with(Object::from(object_type.clone()))
+                        .with(BelongsToSegment(segment_id.clone()));
 
                     entity_builder = add_components_to_entity(
                         entity_builder,
@@ -159,12 +162,19 @@ pub fn build_camera(
     Ok(())
 }
 
-pub fn build_segment_collision(world: &mut World, size: Size, offset_y: f32) {
+pub fn build_segment_collision(
+    world: &mut World,
+    size: Size,
+    segment_id: SegmentId,
+    offset_y: f32,
+) {
     let mut transform = Transform::default();
     transform.set_translation_xyz(size.w * 0.5, -offset_y, 0.0);
     let hitbox = Hitbox::from(&size);
     world
         .create_entity()
+        .with(Segment(segment_id.clone()))
+        .with(BelongsToSegment(segment_id))
         .with(transform)
         .with(size)
         .with(hitbox)

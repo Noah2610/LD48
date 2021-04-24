@@ -65,7 +65,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
     ) -> Trans<GameData<'a, 'b>, StateEvent> {
         let levels_to_load =
             data.world.write_resource::<ZonesManager>().levels_to_load();
-        for level in levels_to_load {
+        for (segment_id, level) in levels_to_load {
             // let _ = data
             //     .world
             //     .write_resource::<Option<Lanes>>()
@@ -77,7 +77,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
             //         lanes
             //     });
 
-            build_level(data.world, level).unwrap();
+            build_level(data.world, level, segment_id).unwrap();
         }
 
         Trans::None

@@ -3,6 +3,7 @@ pub mod prelude {
     pub use super::collision_tag::{CollisionTag, SolidTag};
     pub use super::dispatcher_id::DispatcherId;
     pub use super::lanes::{Lane, Lanes};
+    pub use super::segments_to_delete::SegmentsToDelete;
     pub use super::song_key::SongKey;
     pub use super::sound_key::SoundKey;
     pub use super::zone_height::ZoneHeight;
@@ -14,6 +15,7 @@ mod animation_key;
 mod collision_tag;
 mod dispatcher_id;
 mod lanes;
+mod segments_to_delete;
 mod song_key;
 mod sound_key;
 mod zone_height;

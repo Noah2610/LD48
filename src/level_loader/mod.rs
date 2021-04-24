@@ -4,6 +4,7 @@ pub mod tiles;
 
 use crate::components::prelude::Size;
 use crate::resources::prelude::ZoneHeight;
+use crate::settings::zones_settings::SegmentId;
 use amethyst::ecs::{World, WorldExt};
 use data::*;
 use deathframe::amethyst;
@@ -31,6 +32,7 @@ pub fn load_level(filepath: PathBuf) -> amethyst::Result<DataLevel> {
 pub fn build_level(
     world: &mut World,
     level_data: DataLevel,
+    segment_id: SegmentId,
 ) -> amethyst::Result<()> {
     let offset_y = world.read_resource::<ZoneHeight>().height;
 
@@ -39,16 +41,28 @@ pub fn build_level(
     let tile_size =
         Size::new(level_data.level.tile_size.w, level_data.level.tile_size.h);
 
-    tiles::build_tiles(world, level_data.tiles, tile_size, offset_y)?;
+    tiles::build_tiles(
+        world,
+        level_data.tiles,
+        tile_size,
+        segment_id.clone(),
+        offset_y,
+    )?;
     objects::build_objects(
         world,
         level_data.objects,
         level_size.clone(),
+        segment_id.clone(),
         offset_y,
     )?;
 
     {
-        objects::build_segment_collision(world, level_size.clone(), offset_y);
+        objects::build_segment_collision(
+            world,
+            level_size.clone(),
+            segment_id,
+            offset_y,
+        );
     }
 
     world.write_resource::<ZoneHeight>().height += level_size.h;
