@@ -1,4 +1,5 @@
 extern crate deathframe;
+extern crate replace_with;
 extern crate ron;
 #[macro_use]
 extern crate serde;

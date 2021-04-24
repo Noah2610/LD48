@@ -1,0 +1,7 @@
+// src/settings/zones_settings.rs
+// ./dev.ron
+
+#![enable(implicit_some)]
+(
+    config: (),
+)

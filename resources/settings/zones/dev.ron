@@ -1,0 +1,9 @@
+// src/settings/zones_settings.rs
+// ./zones.ron
+
+#![enable(implicit_some)]
+(
+    zones: {
+        "dev": (),
+    },
+)
