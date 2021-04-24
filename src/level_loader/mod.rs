@@ -1,7 +1,6 @@
 pub mod data;
-
-mod objects;
-mod tiles;
+pub mod objects;
+pub mod tiles;
 
 use crate::components::prelude::Size;
 use amethyst::ecs::World;

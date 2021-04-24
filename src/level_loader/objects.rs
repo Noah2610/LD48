@@ -65,7 +65,11 @@ pub fn build_objects(
     Ok(())
 }
 
-fn build_player(world: &mut World, transform: Transform, size: Size) -> Entity {
+pub fn build_player(
+    world: &mut World,
+    transform: Transform,
+    size: Size,
+) -> Entity {
     let sprite_render = {
         let sprite_sheet = world
             .write_resource::<SpriteSheetHandles<PathBuf>>()
