@@ -1,6 +1,7 @@
-mod data;
-mod load_objects;
-mod load_tiles;
+pub mod data;
+
+mod objects;
+mod tiles;
 
 use crate::components::prelude::Size;
 use amethyst::ecs::World;
@@ -21,19 +22,23 @@ pub enum ObjectType {
     Solid,
 }
 
-pub fn load_level(
-    world: &mut World,
-    filepath: PathBuf,
-) -> amethyst::Result<Size> {
+pub fn load_level(filepath: PathBuf) -> amethyst::Result<DataLevel> {
     let level_file = File::open(filepath)?;
     let level_data = serde_json::de::from_reader::<_, DataLevel>(level_file)?;
+    Ok(level_data)
+}
+
+pub fn build_level(
+    world: &mut World,
+    level_data: DataLevel,
+) -> amethyst::Result<()> {
     let level_size =
         Size::new(level_data.level.size.w, level_data.level.size.h);
     let tile_size =
         Size::new(level_data.level.tile_size.w, level_data.level.tile_size.h);
 
-    load_tiles::load_tiles(world, level_data.tiles, tile_size)?;
-    load_objects::load_objects(world, level_data.objects, level_size.clone())?;
+    tiles::build_tiles(world, level_data.tiles, tile_size)?;
+    objects::build_objects(world, level_data.objects, level_size.clone())?;
 
-    Ok(level_size)
+    Ok(())
 }

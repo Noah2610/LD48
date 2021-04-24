@@ -6,7 +6,7 @@ use deathframe::amethyst;
 use deathframe::resources::SpriteSheetHandles;
 use std::path::PathBuf;
 
-pub fn load_tiles(
+pub fn build_tiles(
     world: &mut World,
     tiles: Vec<DataTile>,
     tile_size: Size,

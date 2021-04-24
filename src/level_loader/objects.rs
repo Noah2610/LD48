@@ -10,7 +10,7 @@ use deathframe::core::geo::prelude::Rect;
 use deathframe::resources::SpriteSheetHandles;
 use std::path::PathBuf;
 
-pub fn load_objects(
+pub fn build_objects(
     world: &mut World,
     objects: Vec<DataObject>,
     level_size: Size,
@@ -105,7 +105,9 @@ pub fn build_camera(
 ) -> amethyst::Result<()> {
     use amethyst::renderer::Camera;
     use amethyst::utils::ortho_camera::{
-        CameraNormalizeMode, CameraOrtho, CameraOrthoWorldCoordinates,
+        CameraNormalizeMode,
+        CameraOrtho,
+        CameraOrthoWorldCoordinates,
     };
 
     let settings = (*world.read_resource::<CameraSettings>()).clone();
@@ -117,12 +119,12 @@ pub fn build_camera(
         CameraOrtho::normalized(CameraNormalizeMode::Contain);
     let half_size = size.half();
     camera_ortho.world_coordinates = CameraOrthoWorldCoordinates {
-        top: half_size.h,
+        top:    half_size.h,
         bottom: -half_size.h,
-        left: -half_size.w,
-        right: half_size.w,
-        near: 0.0,
-        far: 20.0,
+        left:   -half_size.w,
+        right:  half_size.w,
+        near:   0.0,
+        far:    20.0,
     };
 
     let level_center = level_size.half();
@@ -133,10 +135,10 @@ pub fn build_camera(
         .create_entity()
         .with(Follow::new(player))
         .with(Confined::from(Rect {
-            top: level_size.h,
+            top:    level_size.h,
             bottom: 0.0,
-            left: 0.0,
-            right: level_size.w,
+            left:   0.0,
+            right:  level_size.w,
         }))
         .with(transform)
         .with(size)
