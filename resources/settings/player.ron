@@ -12,5 +12,9 @@
         Collidable(Player),
         Solid(Player),
         Gravity((y: -100.0)),
+        OnLane((
+            current: 0,
+            switch_speed: 100.0,
+        ))
     ],
 )

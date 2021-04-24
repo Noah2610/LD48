@@ -20,6 +20,7 @@ pub enum EntityComponent {
     Solid(Solid<SolidTag>),
     SolidPusher(SolidPusher),
     SolidPushable(SolidPushable),
+    OnLane(OnLane),
 }
 
 pub fn add_components_to_entity(
@@ -52,5 +53,6 @@ pub fn add_components_to_entity(
             Comp::Solid(solid) => builder.with(solid),
             Comp::SolidPusher(solid_pusher) => builder.with(solid_pusher),
             Comp::SolidPushable(solid_pushable) => builder.with(solid_pushable),
+            Comp::OnLane(on_lane) => builder.with(on_lane),
         })
 }

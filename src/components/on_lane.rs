@@ -1,6 +1,6 @@
 use super::component_prelude::*;
 
-#[derive(Component, Deserialize)]
+#[derive(Component, Deserialize, Clone)]
 #[storage(VecStorage)]
 pub struct OnLane {
     pub current:      usize,
@@ -11,6 +11,7 @@ pub struct OnLane {
     actions:          Vec<OnLaneAction>,
 }
 
+#[derive(Clone)]
 pub enum Dir {
     Left,
     Right,
@@ -26,6 +27,7 @@ impl OnLane {
     }
 }
 
+#[derive(Clone)]
 pub enum OnLaneAction {
     NextLane,
     PrevLane,
