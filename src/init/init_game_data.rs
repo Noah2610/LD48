@@ -79,16 +79,16 @@ pub(super) fn build_game_data<'a, 'b>(
             "confine_entities_system",
             &["move_entities_system"],
         )?
-        .with(
-            DispatcherId::Ingame,
-            EntityLoaderSystem::default(),
-            "entity_loader_system",
-            &[
-                "move_entities_system",
-                "follow_system",
-                "confine_entities_system",
-            ],
-        )?
+        // .with(
+        //     DispatcherId::Ingame,
+        //     EntityLoaderSystem::default(),
+        //     "entity_loader_system",
+        //     &[
+        //         "move_entities_system",
+        //         "follow_system",
+        //         "confine_entities_system",
+        //     ],
+        // )?
         .with(
             DispatcherId::Ingame,
             UpdateHealthSystem::default(),

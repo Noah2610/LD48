@@ -7,7 +7,6 @@ use deathframe::amethyst;
 pub type EntityComponents = Vec<EntityComponent>;
 
 #[derive(Deserialize, Clone)]
-#[serde(untagged)]
 pub enum EntityComponent {
     Velocity(Velocity),
     Size(Size),

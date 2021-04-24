@@ -4,9 +4,9 @@
 {
     Solid: (
         components: [
-            Hitbox(Size),
-            Collidable(Solid),
-            Solid(Solid),
+            Hitbox((Size)),
+            Collidable((Solid)),
+            Solid((Solid)),
         ],
     ),
 }

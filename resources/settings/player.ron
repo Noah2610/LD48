@@ -3,13 +3,14 @@
 #![enable(implicit_some)]
 (
     components: [
-        Size(
+        Size((
             w: 32.0,
             h: 32.0,
-        ),
-        Hitbox(Size),
-        Collider(Player),
-        Collidable(Player),
-        Solid(Player),
+        )),
+        Hitbox((Size)),
+        Collider((Player)),
+        Collidable((Player)),
+        Solid((Player)),
+        Gravity((y: -100.0)),
     ],
 )
