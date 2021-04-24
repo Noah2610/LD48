@@ -3,9 +3,17 @@ use super::component_prelude::*;
 #[derive(Component, Deserialize)]
 #[storage(VecStorage)]
 pub struct OnLane {
-    pub current: usize,
+    pub current:      usize,
+    pub switch_speed: f32,
     #[serde(skip)]
-    actions: Vec<OnLaneAction>,
+    pub moving_dir:   Option<Dir>,
+    #[serde(skip)]
+    actions:          Vec<OnLaneAction>,
+}
+
+pub enum Dir {
+    Left,
+    Right,
 }
 
 impl OnLane {

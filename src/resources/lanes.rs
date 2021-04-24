@@ -8,6 +8,12 @@ pub struct Lane {
     pub x: f32,
 }
 
+impl Lanes {
+    pub fn get(&self, i: usize) -> Option<&Lane> {
+        self.lanes.get(i)
+    }
+}
+
 impl From<&LanesSettings> for Lanes {
     fn from(settings: &LanesSettings) -> Self {
         let total_lanes_width = settings.spacing * settings.count as f32;

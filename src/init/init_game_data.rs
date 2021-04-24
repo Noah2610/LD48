@@ -100,6 +100,12 @@ pub(super) fn build_game_data<'a, 'b>(
             UpdateLifecycleSystem::default(),
             "update_lifecycle_system",
             &[],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            UpdateOnLane::default(),
+            "update_on_lane_system",
+            &["move_entities_system"],
         )?;
 
     Ok(custom_game_data)

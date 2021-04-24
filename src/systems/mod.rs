@@ -1,8 +1,12 @@
+pub mod update_on_lane;
+
 pub mod prelude {
+    pub use super::update_on_lane::UpdateOnLane;
     pub use deathframe::systems::prelude::*;
 }
 
 mod system_prelude {
+
     pub use crate::components::prelude::*;
     pub use crate::input::prelude::*;
     pub use crate::resources::prelude::*;
