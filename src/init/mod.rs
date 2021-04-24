@@ -19,6 +19,7 @@ pub fn run() -> amethyst::Result<()> {
         camera: camera_settings,
         player: player_settings,
         objects: objects_settings,
+        lanes: lanes_settings,
     } = settings;
 
     let mut game: amethyst::CoreApplication<GameData> =
@@ -27,6 +28,7 @@ pub fn run() -> amethyst::Result<()> {
             .with_resource(camera_settings)
             .with_resource(player_settings)
             .with_resource(objects_settings)
+            .with_resource(lanes_settings)
             .build(game_data)?;
 
     game.run();

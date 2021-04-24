@@ -1,0 +1,8 @@
+// src/settings/lanes_settings.rs
+
+#![enable(implicit_some)]
+(
+    count: 5,
+    width: 32.0,
+    padding: 0.0,
+)

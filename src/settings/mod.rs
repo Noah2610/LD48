@@ -1,5 +1,6 @@
 pub mod prelude {
     pub use super::camera_settings::CameraSettings;
+    pub use super::lanes_settings::LanesSettings;
     pub use super::objects_settings::{ObjectSettings, ObjectsSettings};
     pub use super::player_settings::PlayerSettings;
     pub use super::Settings;
@@ -8,6 +9,7 @@ pub mod prelude {
 pub mod camera_settings;
 pub mod entity_components;
 pub mod hitbox_config;
+pub mod lanes_settings;
 pub mod objects_settings;
 pub mod player_settings;
 
@@ -21,11 +23,13 @@ pub struct Settings {
     pub camera: CameraSettings,
     pub player: PlayerSettings,
     pub objects: ObjectsSettings,
+    pub lanes: LanesSettings,
 }
 
 impl Settings {
     pub fn load() -> deathframe::amethyst::Result<Self> {
         Ok(Self {
+            lanes: load_settings("settings/lanes.ron")?,
             camera: load_settings("settings/camera.ron")?,
             player: load_settings("settings/player.ron")?,
             objects: load_settings("settings/objects.ron")?,
