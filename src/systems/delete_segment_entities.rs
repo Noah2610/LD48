@@ -8,6 +8,8 @@ impl<'a> System<'a> for DeleteSegmentEntities {
         Entities<'a>,
         Write<'a, SegmentsToDelete>,
         ReadStorage<'a, BelongsToSegment>,
+        ReadStorage<'a, Camera>,
+        ReadStorage<'a, Transform>,
     );
 
     fn run(
@@ -16,13 +18,27 @@ impl<'a> System<'a> for DeleteSegmentEntities {
             entities,
             mut segments_to_delete,
             belongs_to_segment_store,
+            camera_store,
+            transform_store,
         ): Self::SystemData,
     ) {
-        for (entity, belongs_to_segment) in
-            (&entities, &belongs_to_segment_store).join()
+        if let Some(camera_pos) = (&camera_store, &transform_store)
+            .join()
+            .next()
+            .map(|(_, transform)| transform.translation())
         {
-            if segments_to_delete.to_delete.contains(&belongs_to_segment.0) {
-                let _ = entities.delete(entity);
+            for (entity, belongs_to_segment, transform) in
+                (&entities, &belongs_to_segment_store, &transform_store).join()
+            {
+                let pos = transform.translation();
+
+                if pos.y > camera_pos.y
+                    && segments_to_delete
+                        .to_delete
+                        .contains(&belongs_to_segment.0)
+                {
+                    let _ = entities.delete(entity);
+                }
             }
         }
 
