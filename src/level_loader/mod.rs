@@ -3,7 +3,8 @@ pub mod objects;
 pub mod tiles;
 
 use crate::components::prelude::Size;
-use amethyst::ecs::World;
+use crate::resources::prelude::ZoneHeight;
+use amethyst::ecs::{World, WorldExt};
 use data::*;
 use deathframe::amethyst;
 use std::fs::File;
@@ -31,13 +32,26 @@ pub fn build_level(
     world: &mut World,
     level_data: DataLevel,
 ) -> amethyst::Result<()> {
+    let offset_y = world.read_resource::<ZoneHeight>().height;
+
     let level_size =
         Size::new(level_data.level.size.w, level_data.level.size.h);
     let tile_size =
         Size::new(level_data.level.tile_size.w, level_data.level.tile_size.h);
 
-    tiles::build_tiles(world, level_data.tiles, tile_size)?;
-    objects::build_objects(world, level_data.objects, level_size.clone())?;
+    tiles::build_tiles(world, level_data.tiles, tile_size, offset_y)?;
+    objects::build_objects(
+        world,
+        level_data.objects,
+        level_size.clone(),
+        offset_y,
+    )?;
+
+    {
+        objects::build_segment_collision(world, level_size.clone(), offset_y);
+    }
+
+    world.write_resource::<ZoneHeight>().height += level_size.h;
 
     Ok(())
 }

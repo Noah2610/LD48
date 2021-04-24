@@ -10,12 +10,13 @@ pub fn build_tiles(
     world: &mut World,
     tiles: Vec<DataTile>,
     tile_size: Size,
+    offset_y: f32,
 ) -> amethyst::Result<()> {
     for tile in tiles {
         let transform = {
             let mut transform = Transform::default();
             transform.set_translation_x(tile.pos.x);
-            transform.set_translation_y(tile.pos.y);
+            transform.set_translation_y(tile.pos.y - offset_y);
             if let Some(z) = tile.props.get("z").and_then(|val| val.as_f64()) {
                 transform.set_translation_z(z as f32);
             }

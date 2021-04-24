@@ -7,7 +7,6 @@ use crate::settings::entity_components::add_components_to_entity;
 use crate::settings::prelude::*;
 use amethyst::ecs::{Builder, Entity, World, WorldExt};
 use deathframe::amethyst;
-use deathframe::core::geo::prelude::Rect;
 use deathframe::resources::SpriteSheetHandles;
 use std::path::PathBuf;
 
@@ -15,6 +14,7 @@ pub fn build_objects(
     world: &mut World,
     objects: Vec<DataObject>,
     level_size: Size,
+    offset_y: f32,
 ) -> amethyst::Result<()> {
     let objects_settings = (*world.read_resource::<ObjectsSettings>()).clone();
 
@@ -22,7 +22,7 @@ pub fn build_objects(
         let transform = {
             let mut transform = Transform::default();
             transform.set_translation_x(object.pos.x);
-            transform.set_translation_y(object.pos.y);
+            transform.set_translation_y(object.pos.y - offset_y);
             if let Some(z) = object.props.get("z").and_then(|val| val.as_f64())
             {
                 transform.set_translation_z(z as f32);
@@ -141,12 +141,12 @@ pub fn build_camera(
     world
         .create_entity()
         .with(Follow::new(player))
-        .with(Confined::from(Rect {
-            top:    level_size.h,
-            bottom: 0.0,
-            left:   0.0,
-            right:  level_size.w,
-        }))
+        // .with(Confined::from(Rect {
+        //     top:    level_size.h,
+        //     bottom: 0.0,
+        //     left:   0.0,
+        //     right:  level_size.w,
+        // }))
         .with(transform)
         .with(size)
         .with(camera)
@@ -157,4 +157,17 @@ pub fn build_camera(
         .build();
 
     Ok(())
+}
+
+pub fn build_segment_collision(world: &mut World, size: Size, offset_y: f32) {
+    let mut transform = Transform::default();
+    transform.set_translation_xyz(size.w * 0.5, -offset_y, 0.0);
+    let hitbox = Hitbox::from(&size);
+    world
+        .create_entity()
+        .with(transform)
+        .with(size)
+        .with(hitbox)
+        .with(Collidable::from(CollisionTag::Segment))
+        .build();
 }
