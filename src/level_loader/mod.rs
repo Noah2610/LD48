@@ -9,15 +9,16 @@ use deathframe::amethyst;
 use std::fs::File;
 use std::path::PathBuf;
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Clone)]
 pub enum TileType {
     #[serde(rename = "")]
     Empty,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, PartialEq, Eq, Hash, Clone, Debug)]
 pub enum ObjectType {
     Player,
+    Solid,
 }
 
 pub fn load_level(

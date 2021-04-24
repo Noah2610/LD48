@@ -1,9 +1,14 @@
 pub mod prelude {
     pub use super::camera_settings::CameraSettings;
+    pub use super::objects_settings::{ObjectSettings, ObjectsSettings};
+    pub use super::player_settings::PlayerSettings;
     pub use super::Settings;
 }
 
 pub mod camera_settings;
+pub mod entity_components;
+pub mod objects_settings;
+pub mod player_settings;
 
 use crate::resource;
 use deathframe::amethyst;
@@ -11,15 +16,18 @@ use prelude::*;
 use std::fmt;
 use std::fs::File;
 
-#[derive(Deserialize)]
 pub struct Settings {
     pub camera: CameraSettings,
+    pub player: PlayerSettings,
+    pub objects: ObjectsSettings,
 }
 
 impl Settings {
     pub fn load() -> deathframe::amethyst::Result<Self> {
         Ok(Self {
             camera: load_settings("settings/camera.ron")?,
+            player: load_settings("settings/player.ron")?,
+            objects: load_settings("settings/objects.ron")?,
         })
     }
 }

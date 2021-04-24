@@ -1,0 +1,11 @@
+// src/settings/player_settings.rs
+
+#![enable(implicit_some)]
+(
+    components: [
+        Size((
+            w: 32.0,
+            h: 32.0,
+        )),
+    ],
+)

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" infinite="0" nextlayerid="4" nextobjectid="7">
+ <editorsettings>
+  <export target="../../resources/levels/dev.json" format="ld48-export"/>
+ </editorsettings>
  <tileset firstgid="1" source="../tsx/dev.tsx"/>
  <layer id="1" name="tiles" width="64" height="64">
   <properties>
@@ -72,13 +75,10 @@
 133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136,133,134,135,136
 </data>
  </layer>
- <objectgroup id="2" name="collision">
-  <properties>
-   <property name="solid" type="bool" value="true"/>
-  </properties>
-  <object id="2" x="0" y="32" width="64" height="480"/>
-  <object id="4" x="448" y="32" width="64" height="480"/>
-  <object id="5" x="64" y="480" width="384" height="32"/>
+ <objectgroup id="2" name="solid">
+  <object id="2" type="Solid" x="0" y="32" width="64" height="480"/>
+  <object id="4" type="Solid" x="448" y="32" width="64" height="480"/>
+  <object id="5" type="Solid" x="64" y="480" width="384" height="32"/>
  </objectgroup>
  <objectgroup id="3" name="player">
   <properties>

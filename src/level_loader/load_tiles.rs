@@ -35,7 +35,7 @@ pub fn load_tiles(
             }
         };
 
-        let mut entity_builder = world
+        let entity_builder = world
             .create_entity()
             .with(transform)
             .with(tile_size.clone())
