@@ -14,7 +14,7 @@
         Gravity((y: -100.0)),
         OnLane((
             current: 0,
-            switch_speed: 100.0,
+            switch_speed: 500.0,
         ))
     ],
 )
