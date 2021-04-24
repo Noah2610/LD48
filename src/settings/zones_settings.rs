@@ -7,7 +7,7 @@ use std::collections::HashMap;
 pub type ZoneId = String;
 pub type SegmentId = String;
 
-#[derive(Deserialize, Default)]
+#[derive(Deserialize, Default, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct ZonesSettings {
     #[serde(default)]
@@ -16,13 +16,13 @@ pub struct ZonesSettings {
     pub zones:  HashMap<ZoneId, ZoneSettings>,
 }
 
-#[derive(Deserialize, Default)]
+#[derive(Deserialize, Default, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct ZonesConfig {
     pub zone_order: Vec<ZoneId>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct ZoneSettings {
     pub first_segment: Vec<SegmentId>,
@@ -35,9 +35,8 @@ impl Merge for ZonesSettings {
             config: other_config,
             zones: mut other_zones,
         } = other;
-        replace_with_or_abort(self, |self_| ZonesSettings {
-            config: self_.config.merged(other_config),
-            zones:  self_
+        replace_with_or_abort(self, |self_| {
+            let mut zones = self_
                 .zones
                 .into_iter()
                 .map(|(zone_id, zone_settings)| {
@@ -50,7 +49,12 @@ impl Merge for ZonesSettings {
                     };
                     (zone_id, merged_zone_settings)
                 })
-                .collect(),
+                .collect::<HashMap<_, _>>();
+            zones.extend(other_zones.into_iter());
+            ZonesSettings {
+                config: self_.config.merged(other_config),
+                zones,
+            }
         });
     }
 }

@@ -13,7 +13,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
             load_level(resource("levels/zones/dev_0/00.json")).unwrap();
         let level_size =
             Size::new(level_data.level.size.w, level_data.level.size.h);
-        build_level(data.world, level_data).unwrap();
+        // build_level(data.world, level_data).unwrap();
 
         {
             let lanes = Lanes::from((
@@ -43,6 +43,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
                     WriteExpect<ZonesManager>,
                     ReadExpect<ZonesSettings>,
                 )| {
+                    zones_manager.set_zone("dev_0".to_string());
                     zones_manager.stage_next_segment(&settings);
                 },
             );
@@ -65,6 +66,17 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         let levels_to_load =
             data.world.write_resource::<ZonesManager>().levels_to_load();
         for level in levels_to_load {
+            // let _ = data
+            //     .world
+            //     .write_resource::<Option<Lanes>>()
+            //     .get_or_insert_with(|| {
+            //         let lanes = Lanes::from((
+            //             &*data.world.read_resource::<LanesSettings>(),
+            //             &Size::new(level.level.size.w, level.level.size.h),
+            //         ));
+            //         lanes
+            //     });
+
             build_level(data.world, level).unwrap();
         }
 
