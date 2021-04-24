@@ -46,9 +46,13 @@ impl<'a> System<'a> for UpdateOnLane {
                 }
             }
 
-            let lane_diff = next_lane as i32 - on_lane.current as i32;
-            if lane_diff != 0 {
-                let is_moving_right = lane_diff.is_positive();
+            let pos_x = transform.translation().x;
+            let target_lane_x = lanes.lanes[next_lane].x;
+
+            let should_switch_lane = next_lane != on_lane.current;
+            if should_switch_lane {
+                let pos_diff = target_lane_x - pos_x;
+                let is_moving_right = pos_diff > 0.0;
 
                 let moving_dir = if is_moving_right {
                     Dir::Right
@@ -59,7 +63,7 @@ impl<'a> System<'a> for UpdateOnLane {
                 on_lane.current = next_lane;
                 on_lane.moving_dir = Some(moving_dir);
 
-                velocity.x = on_lane.switch_speed * lane_diff.signum() as f32;
+                velocity.x = on_lane.switch_speed * pos_diff.signum();
 
                 if let Some(animations) = animations_opt {
                     if is_moving_right {
@@ -71,24 +75,15 @@ impl<'a> System<'a> for UpdateOnLane {
             }
 
             if let Some(moving_dir) = &on_lane.moving_dir {
-                let x = transform.translation().x;
-                let target_x = lanes
-                    .get(on_lane.current)
-                    .expect(
-                        "OnLane's current lane index should always be a valid \
-                         lane index",
-                    )
-                    .x;
-
                 let stop_moving = match moving_dir {
-                    Dir::Right => x >= target_x,
-                    Dir::Left => x <= target_x,
+                    Dir::Right => pos_x >= target_lane_x,
+                    Dir::Left => pos_x <= target_lane_x,
                 };
 
                 if stop_moving {
                     on_lane.moving_dir = None;
                     velocity.x = 0.0;
-                    transform.set_translation_x(target_x);
+                    transform.set_translation_x(target_lane_x);
                 }
             }
         }
