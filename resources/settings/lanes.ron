@@ -3,6 +3,5 @@
 #![enable(implicit_some)]
 (
     count: 5,
-    width: 32.0,
-    padding: 0.0,
+    spacing: 32.0,
 )
