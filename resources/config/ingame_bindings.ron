@@ -1,4 +1,7 @@
 (
     axes: {},
-    actions: {},
+    actions: {
+        NextLane: [[Key(D)], [Key(Left)]],
+        PrevLane: [[Key(A)], [Key(Right)]],
+    },
 )

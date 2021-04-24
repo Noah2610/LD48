@@ -103,9 +103,15 @@ pub(super) fn build_game_data<'a, 'b>(
         )?
         .with(
             DispatcherId::Ingame,
+            ControlPlayer::default(),
+            "control_player_system",
+            &[],
+        )?
+        .with(
+            DispatcherId::Ingame,
             UpdateOnLane::default(),
             "update_on_lane_system",
-            &["move_entities_system"],
+            &["control_player_system", "move_entities_system"],
         )?;
 
     Ok(custom_game_data)

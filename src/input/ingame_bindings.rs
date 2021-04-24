@@ -8,7 +8,10 @@ pub struct IngameBindings;
 pub enum IngameAxis {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub enum IngameAction {}
+pub enum IngameAction {
+    NextLane,
+    PrevLane,
+}
 
 impl BindingTypes for IngameBindings {
     type Axis = IngameAxis;
