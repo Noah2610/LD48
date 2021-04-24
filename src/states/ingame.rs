@@ -7,9 +7,13 @@ pub struct Ingame;
 
 impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
     fn on_start(&mut self, data: StateData<GameData<'a, 'b>>) {
-        load_level(data.world, resource("levels/dev.json")).unwrap();
+        let level_size =
+            load_level(data.world, resource("levels/dev.json")).unwrap();
 
-        let lanes = Lanes::from(&*data.world.read_resource::<LanesSettings>());
+        let lanes = Lanes::from((
+            &*data.world.read_resource::<LanesSettings>(),
+            &level_size,
+        ));
         data.world.insert(lanes);
     }
 
