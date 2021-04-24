@@ -25,7 +25,8 @@ pub struct ZonesConfig {
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct ZoneSettings {
-    pub segments: HashMap<SegmentId, Vec<SegmentId>>,
+    pub first_segment: Vec<SegmentId>,
+    pub segments:      HashMap<SegmentId, Vec<SegmentId>>,
 }
 
 impl Merge for ZonesSettings {
@@ -73,7 +74,10 @@ impl Merge for ZonesConfig {
 
 impl Merge for ZoneSettings {
     fn merge(&mut self, other: Self) {
-        let ZoneSettings { segments: _ } = other;
+        let ZoneSettings {
+            segments: _,
+            first_segment: _,
+        } = other;
         eprintln!(
             "[WARNING]\n    Careful, you have the same `zones.<ZONE-ID>` \
              configured in multiple zone configs.\n    This will NOT merge \

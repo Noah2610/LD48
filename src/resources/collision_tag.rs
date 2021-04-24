@@ -5,14 +5,14 @@ pub enum CollisionTag {
     Player,
     Solid,
     Camera,
-    Level,
+    Segment,
 }
 
 impl CTag for CollisionTag {
     fn collides_with(&self, other: &Self) -> bool {
         match (self, other) {
             (CollisionTag::Player, CollisionTag::Solid) => true,
-            (CollisionTag::Camera, CollisionTag::Level) => true,
+            (CollisionTag::Camera, CollisionTag::Segment) => true,
             _ => false,
         }
     }

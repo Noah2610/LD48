@@ -1,4 +1,5 @@
 extern crate deathframe;
+extern crate rand;
 extern crate replace_with;
 extern crate ron;
 #[macro_use]

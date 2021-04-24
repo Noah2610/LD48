@@ -1,7 +1,6 @@
 use crate::components::prelude::{Hitbox, Size};
 use amethyst::ecs::{Builder, EntityBuilder};
 use deathframe::amethyst;
-use deathframe::core::geo::prelude::Rect;
 
 #[derive(Deserialize, Clone)]
 pub enum HitboxConfig {

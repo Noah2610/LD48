@@ -34,6 +34,19 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
             let player = build_player(data.world, transform, size);
             let _ = build_camera(data.world, player, level_size);
         }
+
+        {
+            use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
+
+            data.world.exec(
+                |(mut zones_manager, settings): (
+                    WriteExpect<ZonesManager>,
+                    ReadExpect<ZonesSettings>,
+                )| {
+                    zones_manager.stage_next_segment(&settings);
+                },
+            );
+        }
     }
 
     fn update(
@@ -45,13 +58,16 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         Trans::None
     }
 
-    // fn fixed_update(
-    //     &mut self,
-    //     data: StateData<GameData<'a, 'b>>,
-    // ) -> Trans<GameData<'a, 'b>, StateEvent> {
-    //     let zones_manager = data.world.write_resource::<ZonesManager>();
-    //     zones_manager.update(data.world);
+    fn fixed_update(
+        &mut self,
+        data: StateData<GameData<'a, 'b>>,
+    ) -> Trans<GameData<'a, 'b>, StateEvent> {
+        let levels_to_load =
+            data.world.write_resource::<ZonesManager>().levels_to_load();
+        for level in levels_to_load {
+            build_level(data.world, level).unwrap();
+        }
 
-    //     Trans::None
-    // }
+        Trans::None
+    }
 }
