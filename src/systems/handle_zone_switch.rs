@@ -49,7 +49,7 @@ impl<'a> System<'a> for HandleZoneSwitch {
                     camera_entity,
                     Confined::from(Rect {
                         top:    0.0,
-                        bottom: segment_pos.y - segment_size.h * 0.5,
+                        bottom: segment_pos.y,
                         left:   0.0,
                         right:  segment_size.w,
                     }),
