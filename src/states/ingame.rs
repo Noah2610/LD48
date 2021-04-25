@@ -1,8 +1,7 @@
 use super::state_prelude::*;
 use crate::components::prelude::{Size, Transform};
+use crate::level_loader::build_level;
 use crate::level_loader::objects::{build_camera, build_player};
-use crate::level_loader::{build_level, load_level};
-use crate::resource;
 
 const SEGMENT_WIDTH: f32 = 96.0;
 
@@ -12,6 +11,8 @@ pub struct Ingame;
 impl Ingame {
     fn start(&mut self, world: &mut World) {
         world.delete_all();
+
+        world.write_resource::<ZoneSize>().reset();
 
         {
             let mut transform = Transform::default();

@@ -40,7 +40,7 @@ impl<'a> System<'a> for HandleZoneSwitch {
                 )
             };
 
-            if dbg!(should_switch_zone) {
+            if should_switch_zone {
                 should_load_next_zone.0 = true;
             }
         }
