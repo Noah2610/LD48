@@ -2,7 +2,7 @@ use super::data::*;
 use crate::components::prelude::*;
 use crate::resource;
 use crate::settings::zones_settings::SegmentId;
-use amethyst::ecs::{Builder, World, WorldExt};
+use amethyst::ecs::{Builder, Entity, World, WorldExt};
 use deathframe::amethyst;
 use deathframe::resources::SpriteSheetHandles;
 use std::path::PathBuf;
@@ -12,13 +12,13 @@ pub fn build_tiles(
     tiles: Vec<DataTile>,
     tile_size: Size,
     segment_id: SegmentId,
-    offset_y: f32,
+    segment_entity: Entity,
 ) -> amethyst::Result<()> {
     for tile in tiles {
         let transform = {
             let mut transform = Transform::default();
             transform.set_translation_x(tile.pos.x);
-            transform.set_translation_y(tile.pos.y - offset_y);
+            transform.set_translation_y(tile.pos.y);
             if let Some(z) = tile.props.get("z").and_then(|val| val.as_f64()) {
                 transform.set_translation_z(z as f32);
             }
@@ -46,7 +46,8 @@ pub fn build_tiles(
             .with(Transparent)
             .with(ScaleOnce::default())
             .with(Tile::default())
-            .with(BelongsToSegment(segment_id.clone()));
+            .with(BelongsToSegment(segment_id.clone()))
+            .with(Parent::new(segment_entity));
 
         entity_builder.build();
     }

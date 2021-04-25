@@ -14,6 +14,7 @@ pub mod prelude {
     pub use super::player::Player;
     pub use super::segment::Segment;
     pub use super::tile::Tile;
+    pub use deathframe::amethyst::core::transform::Parent;
     pub use deathframe::components::prelude::*;
 }
 

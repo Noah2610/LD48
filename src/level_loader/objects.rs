@@ -8,6 +8,7 @@ use crate::settings::prelude::*;
 use crate::settings::zones_settings::SegmentId;
 use amethyst::ecs::{Builder, Entity, World, WorldExt};
 use deathframe::amethyst;
+use deathframe::core::geo::prelude::Rect;
 use deathframe::resources::SpriteSheetHandles;
 use std::path::PathBuf;
 
@@ -16,7 +17,7 @@ pub fn build_objects(
     objects: Vec<DataObject>,
     level_size: Size,
     segment_id: SegmentId,
-    offset_y: f32,
+    segment_entity: Entity,
 ) -> amethyst::Result<()> {
     let objects_settings = (*world.read_resource::<ObjectsSettings>()).clone();
 
@@ -24,7 +25,7 @@ pub fn build_objects(
         let transform = {
             let mut transform = Transform::default();
             transform.set_translation_x(object.pos.x);
-            transform.set_translation_y(object.pos.y - offset_y);
+            transform.set_translation_y(object.pos.y);
             if let Some(z) = object.props.get("z").and_then(|val| val.as_f64())
             {
                 transform.set_translation_z(z as f32);
@@ -48,7 +49,8 @@ pub fn build_objects(
                         .with(transform)
                         .with(size.clone())
                         .with(Object::from(object_type.clone()))
-                        .with(BelongsToSegment(segment_id.clone()));
+                        .with(BelongsToSegment(segment_id.clone()))
+                        .with(Parent::new(segment_entity));
 
                     entity_builder = add_components_to_entity(
                         entity_builder,
@@ -167,17 +169,20 @@ pub fn build_segment_collision(
     size: Size,
     segment_id: SegmentId,
     offset_y: f32,
-) {
+) -> Entity {
     let mut transform = Transform::default();
-    transform.set_translation_xyz(size.w * 0.5, -offset_y, 0.0);
-    let hitbox = Hitbox::from(&size);
+    transform.set_translation_xyz(0.0, -offset_y - size.h * 0.5, 0.0);
+    let mut hitbox_rect = Rect::from(&size);
+    let half_w = size.w * 0.5;
+    hitbox_rect.left += half_w;
+    hitbox_rect.right += half_w;
+    let hitbox = Hitbox::from(hitbox_rect);
     world
         .create_entity()
         .with(Segment(segment_id.clone()))
-        .with(BelongsToSegment(segment_id))
         .with(transform)
         .with(size)
         .with(hitbox)
         .with(Collidable::from(CollisionTag::Segment))
-        .build();
+        .build()
 }
