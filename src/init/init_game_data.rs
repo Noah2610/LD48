@@ -124,6 +124,12 @@ pub(super) fn build_game_data<'a, 'b>(
             ConfineCameraToFinalSegment::default(),
             "confine_camera_to_final_segment_system",
             &[],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            HandleZoneSwitch::default(),
+            "handle_zone_switch_system",
+            &["update_collisions_system"],
         )?;
 
     Ok(custom_game_data)

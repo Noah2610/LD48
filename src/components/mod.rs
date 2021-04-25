@@ -3,6 +3,7 @@ pub mod camera;
 pub mod object;
 pub mod on_lane;
 pub mod player;
+pub mod portal;
 pub mod segment;
 pub mod tile;
 
@@ -12,6 +13,7 @@ pub mod prelude {
     pub use super::object::Object;
     pub use super::on_lane::OnLane;
     pub use super::player::Player;
+    pub use super::portal::Portal;
     pub use super::segment::Segment;
     pub use super::tile::Tile;
     pub use deathframe::amethyst::core::transform::Parent;
