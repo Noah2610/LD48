@@ -37,6 +37,7 @@ pub(super) fn build_game_data<'a, 'b>(
         .dispatcher(DispatcherId::MainMenu)?
         .dispatcher(DispatcherId::Ingame)?
         .dispatcher(DispatcherId::Paused)?
+        .dispatcher(DispatcherId::ZoneTransition)?
         .with_core_bundle(FpsCounterBundle)?
         .with_core_bundle(transform_bundle)?
         .with_core_bundle(rendering_bundle)?
@@ -123,6 +124,18 @@ pub(super) fn build_game_data<'a, 'b>(
             DispatcherId::Ingame,
             ConfineCameraToFinalSegment::default(),
             "confine_camera_to_final_segment_system",
+            &[],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            HandleZoneSwitch::default(),
+            "handle_zone_switch_system",
+            &["update_collisions_system"],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            HandleParentDelete::default(),
+            "handle_parent_delete_system",
             &[],
         )?;
 

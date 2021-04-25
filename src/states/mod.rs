@@ -1,7 +1,13 @@
+mod ingame;
+mod main_menu;
+mod startup;
+mod zone_transition;
+
 pub mod prelude {
     pub use super::ingame::Ingame;
     pub use super::main_menu::MainMenu;
     pub use super::startup::Startup;
+    pub use super::zone_transition::ZoneTransition;
 }
 
 pub mod aliases {
@@ -30,7 +36,3 @@ mod menu_prelude {
     pub use deathframe::amethyst::ui::{UiEvent, UiEventType};
     pub use deathframe::core::menu::prelude::*;
 }
-
-mod ingame;
-mod main_menu;
-mod startup;
