@@ -15,7 +15,8 @@ pub struct ObjectsSettings {
 #[derive(Deserialize, Clone)]
 #[serde(deny_unknown_fields)]
 pub struct ObjectSettings {
-    pub components: EntityComponents,
+    pub components:  EntityComponents,
+    pub spritesheet: Option<String>,
 }
 
 impl From<ObjectsSettingsMap> for ObjectsSettings {

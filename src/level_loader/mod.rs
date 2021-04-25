@@ -21,6 +21,7 @@ pub enum TileType {
 pub enum ObjectType {
     Player,
     Solid,
+    Custom(String),
 }
 
 pub fn load_level(filepath: PathBuf) -> amethyst::Result<DataLevel> {

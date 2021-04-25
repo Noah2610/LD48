@@ -2,13 +2,12 @@ use super::data::*;
 use super::ObjectType;
 use crate::components::prelude::*;
 use crate::resource;
-use crate::resources::prelude::CollisionTag;
 use crate::settings::entity_components::add_components_to_entity;
 use crate::settings::prelude::*;
 use crate::settings::zones_settings::SegmentId;
 use amethyst::ecs::{Builder, Entity, World, WorldExt};
 use deathframe::amethyst;
-use deathframe::core::geo::prelude::{Axis, Rect};
+use deathframe::core::geo::prelude::Axis;
 use deathframe::resources::SpriteSheetHandles;
 use std::path::PathBuf;
 
@@ -44,6 +43,28 @@ pub fn build_objects(
                 if let Some(object_settings) =
                     objects_settings.objects.get(object_type)
                 {
+                    let sprite_render_opt = if let Some(spritesheet) =
+                        object_settings.spritesheet.as_ref()
+                    {
+                        let sprite_sheet = world
+                            .write_resource::<SpriteSheetHandles<PathBuf>>()
+                            .get_or_load(
+                                resource(format!(
+                                    "spritesheets/{}",
+                                    spritesheet
+                                )),
+                                world,
+                            );
+                        Some({
+                            SpriteRender {
+                                sprite_sheet,
+                                sprite_number: 0,
+                            }
+                        })
+                    } else {
+                        None
+                    };
+
                     let mut entity_builder = world
                         .create_entity()
                         .with(transform)
@@ -51,6 +72,10 @@ pub fn build_objects(
                         .with(Object::from(object_type.clone()))
                         .with(BelongsToSegment(segment_id.clone()))
                         .with(Parent::new(segment_entity));
+
+                    if let Some(sprite_render) = sprite_render_opt {
+                        entity_builder = entity_builder.with(sprite_render);
+                    }
 
                     entity_builder = add_components_to_entity(
                         entity_builder,
