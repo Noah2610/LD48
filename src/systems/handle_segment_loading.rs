@@ -1,9 +1,9 @@
 use super::system_prelude::*;
 
 #[derive(Default)]
-pub struct UpdateZonesManager;
+pub struct HandleSegmentLoading;
 
-impl<'a> System<'a> for UpdateZonesManager {
+impl<'a> System<'a> for HandleSegmentLoading {
     type SystemData = (
         Entities<'a>,
         WriteExpect<'a, ZonesManager>,

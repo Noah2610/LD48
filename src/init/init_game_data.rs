@@ -115,8 +115,8 @@ pub(super) fn build_game_data<'a, 'b>(
         )?
         .with(
             DispatcherId::Ingame,
-            UpdateZonesManager::default(),
-            "update_zones_manager_system",
+            HandleSegmentLoading::default(),
+            "handle_segment_loading_system",
             &[],
         )?;
 
