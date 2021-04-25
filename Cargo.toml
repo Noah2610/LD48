@@ -26,8 +26,10 @@ version = "1.0.125"
 features = ["derive"]
 
 [features]
-default = []
+default = ["vulkan"]
 debug = ["deathframe/debug"]
+vulkan = ["deathframe/vulkan"]
+metal = ["deathframe/metal"]
 
 [profile.dev]
 opt-level        = 2
