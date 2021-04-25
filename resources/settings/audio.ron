@@ -6,6 +6,12 @@
         Well: (
             file: "LD481.2.wav",
         ),
+        Green: (
+            file: "LD482.2.wav",
+        ),
+        Red: (
+            file: "LD483.2.wav",
+        ),
     },
 
     sfx: {},

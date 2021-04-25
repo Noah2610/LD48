@@ -5,6 +5,7 @@
 (
     zones: {
         "dev_2": (
+            song: Red,
             total_segments: 5,
             first_segment: [
                 "dev_2/test_0.json",

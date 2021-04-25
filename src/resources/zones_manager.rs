@@ -1,6 +1,7 @@
 use crate::level_loader::data::DataLevel;
 use crate::level_loader::load_level;
 use crate::resource;
+use crate::resources::prelude::SongKey;
 use crate::settings::zones_settings::{SegmentId, ZoneId, ZonesSettings};
 use rand::prelude::SliceRandom;
 use replace_with::replace_with_or_abort;
@@ -178,23 +179,13 @@ impl ZonesManager {
             })
     }
 
-    pub fn is_final_segment_loaded(&self, settings: &ZonesSettings) -> bool {
+    pub fn get_current_song<'a>(
+        &self,
+        settings: &'a ZonesSettings,
+    ) -> Option<&'a SongKey> {
         self.current_zone
             .as_ref()
-            .and_then(|current_zone| {
-                settings
-                    .zones
-                    .get(&current_zone.id)
-                    .map(|zone_settings| (current_zone, zone_settings))
-            })
-            .map(|(current_zone, zone_settings)| {
-                zone_settings
-                    .total_segments
-                    .map(|total_segments| {
-                        current_zone.total_segments_loaded > total_segments
-                    })
-                    .unwrap_or(false)
-            })
-            .unwrap_or(true)
+            .and_then(|current_zone| settings.zones.get(&current_zone.id))
+            .and_then(|zone_settings| zone_settings.song.as_ref())
     }
 }
