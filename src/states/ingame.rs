@@ -67,8 +67,6 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         let levels_to_load =
             data.world.write_resource::<ZonesManager>().levels_to_load();
         for (segment_id, level) in levels_to_load {
-            println!("Loading {}", &segment_id);
-
             build_level(data.world, level, segment_id).unwrap();
         }
 

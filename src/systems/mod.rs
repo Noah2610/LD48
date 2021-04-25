@@ -1,11 +1,9 @@
 mod control_player;
-mod delete_entities;
 mod update_on_lane;
 mod update_zones_manager;
 
 pub mod prelude {
     pub use super::control_player::ControlPlayer;
-    pub use super::delete_entities::DeleteEntities;
     pub use super::update_on_lane::UpdateOnLane;
     pub use super::update_zones_manager::UpdateZonesManager;
     pub use deathframe::systems::prelude::*;

@@ -118,14 +118,7 @@ pub(super) fn build_game_data<'a, 'b>(
             UpdateZonesManager::default(),
             "update_zones_manager_system",
             &[],
-        )?
-        // .with(
-        //     DispatcherId::Ingame,
-        //     DeleteEntities::default(),
-        //     "delete_entities_system",
-        //     &[],
-        // )?
-        ;
+        )?;
 
     Ok(custom_game_data)
 }

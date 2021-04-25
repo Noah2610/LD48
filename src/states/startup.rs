@@ -30,5 +30,4 @@ fn insert_resources(world: &mut World) {
     world.insert(sprite_sheet_handles);
     world.insert(ZonesManager::default());
     world.insert(ZoneHeight::default());
-    world.insert(EntitiesToDelete::default());
 }
