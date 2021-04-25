@@ -141,8 +141,6 @@ pub fn build_camera(
     let mut transform = Transform::default();
     transform.set_translation_xyz(level_center.w, level_center.h, settings.z);
 
-    let hitbox = Hitbox::from(&size);
-
     world
         .create_entity()
         .with(Follow::new(player))
@@ -157,8 +155,6 @@ pub fn build_camera(
         .with(camera)
         .with(camera_ortho)
         .with(Camera::default())
-        .with(Collider::from(CollisionTag::Camera))
-        .with(hitbox)
         .build();
 
     Ok(())
@@ -171,22 +167,11 @@ pub fn build_segment_collision(
     offset_y: f32,
 ) -> Entity {
     let mut transform = Transform::default();
-    transform.set_translation_xyz(0.0, -offset_y, 0.0);
-
-    let mut hitbox_rect = Rect::from(&size);
-    let half_size = size.half();
-    hitbox_rect.left += half_size.w;
-    hitbox_rect.right += half_size.w;
-    hitbox_rect.top += half_size.h;
-    hitbox_rect.bottom += half_size.h;
-
-    let hitbox = Hitbox::from(hitbox_rect);
+    transform.set_translation_xyz(0.0, 0.0 - offset_y, 0.0);
     world
         .create_entity()
-        .with(Segment(segment_id.clone()))
+        .with(Segment(segment_id))
         .with(transform)
         .with(size)
-        .with(hitbox)
-        .with(Collidable::from(CollisionTag::Segment))
         .build()
 }

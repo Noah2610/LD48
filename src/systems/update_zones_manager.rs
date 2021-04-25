@@ -8,9 +8,10 @@ impl<'a> System<'a> for UpdateZonesManager {
         Entities<'a>,
         WriteExpect<'a, ZonesManager>,
         ReadExpect<'a, ZonesSettings>,
-        Write<'a, EntitiesToDelete>,
         ReadStorage<'a, Camera>,
-        ReadStorage<'a, Collider<CollisionTag>>,
+        ReadStorage<'a, Segment>,
+        ReadStorage<'a, Transform>,
+        ReadStorage<'a, Size>,
     );
 
     fn run(
@@ -19,41 +20,27 @@ impl<'a> System<'a> for UpdateZonesManager {
             entities,
             mut zones_manager,
             zones_settings,
-            mut entities_to_delete,
             camera_store,
-            collider_store,
+            segment_store,
+            transform_store,
+            size_store,
         ): Self::SystemData,
     ) {
-        for (_, collider) in (&camera_store, &collider_store).join() {
-            let segment_leave_id_opt = {
-                use deathframe::physics::query::exp::prelude_variants::*;
-                use deathframe::physics::query::prelude::{
-                    FilterQuery,
-                    FindQuery,
-                    Query,
-                };
+        if let Some((_, camera_transform, camera_size)) =
+            (&camera_store, &transform_store, &size_store).join().next()
+        {
+            let camera_top =
+                camera_transform.translation().y + camera_size.h * 0.5;
 
-                let query_exp =
-                    And(vec![IsTag(CollisionTag::Segment), IsState(Leave)]);
+            for (segment_entity, _, segment_transform) in
+                (&entities, &segment_store, &transform_store).join()
+            {
+                let segment_bot = segment_transform.translation().y;
 
-                // let query_debug = IsTag(CollisionTag::Segment);
-                // dbg!(collider
-                //     .query::<FilterQuery<CollisionTag>>()
-                //     .exp(&query_debug)
-                //     .run()
-                //     .len());
-
-                collider
-                    .query::<FindQuery<CollisionTag>>()
-                    .exp(&query_exp)
-                    .run()
-                    .map(|data| data.id)
-            };
-
-            if let Some(entity_id) = segment_leave_id_opt {
-                println!("Load next segment");
-                zones_manager.stage_next_segment(&zones_settings);
-                entities_to_delete.stage(entities.entity(entity_id));
+                if segment_bot > camera_top {
+                    zones_manager.stage_next_segment(&zones_settings);
+                    let _ = entities.delete(segment_entity);
+                }
             }
         }
     }
