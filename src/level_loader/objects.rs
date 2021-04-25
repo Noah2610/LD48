@@ -171,11 +171,15 @@ pub fn build_segment_collision(
     offset_y: f32,
 ) -> Entity {
     let mut transform = Transform::default();
-    transform.set_translation_xyz(0.0, -offset_y - size.h * 0.5, 0.0);
+    transform.set_translation_xyz(0.0, -offset_y, 0.0);
+
     let mut hitbox_rect = Rect::from(&size);
-    let half_w = size.w * 0.5;
-    hitbox_rect.left += half_w;
-    hitbox_rect.right += half_w;
+    let half_size = size.half();
+    hitbox_rect.left += half_size.w;
+    hitbox_rect.right += half_size.w;
+    hitbox_rect.top += half_size.h;
+    hitbox_rect.bottom += half_size.h;
+
     let hitbox = Hitbox::from(hitbox_rect);
     world
         .create_entity()

@@ -67,16 +67,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         let levels_to_load =
             data.world.write_resource::<ZonesManager>().levels_to_load();
         for (segment_id, level) in levels_to_load {
-            // let _ = data
-            //     .world
-            //     .write_resource::<Option<Lanes>>()
-            //     .get_or_insert_with(|| {
-            //         let lanes = Lanes::from((
-            //             &*data.world.read_resource::<LanesSettings>(),
-            //             &Size::new(level.level.size.w, level.level.size.h),
-            //         ));
-            //         lanes
-            //     });
+            println!("Loading {}", &segment_id);
 
             build_level(data.world, level, segment_id).unwrap();
         }

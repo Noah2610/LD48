@@ -68,32 +68,17 @@ impl ZonesManager {
         let mut rng = rand::thread_rng();
         self.current_zone
             .as_ref()
-            .and_then(|current_zone| dbg!(settings.zones.get(current_zone)))
+            .and_then(|current_zone| settings.zones.get(current_zone))
             .map(|zone_settings| {
-                dbg!(self
-                    .last_staged_segment
+                self.last_staged_segment
                     .as_ref()
                     .and_then(|current_segment| {
                         zone_settings.segments.get(current_segment)
                     })
-                    .unwrap_or(&zone_settings.first_segment))
+                    .unwrap_or(&zone_settings.first_segment)
             })
             .and_then(|possible_segments| {
-                dbg!(possible_segments
-                    .choose(&mut rng)
-                    .map(ToString::to_string))
+                possible_segments.choose(&mut rng).map(ToString::to_string)
             })
     }
-
-    // pub fn update(&self, world: &mut World) {
-    //     if self.should_load_next_segment(&*world) {}
-    // }
-
-    // fn should_load_next_segment(&self, world: &World) -> bool {
-    //     if self.loaded_zones.len() < KEEP_COUNT_SEGMENTS_LOADED {
-    //         return true;
-    //     }
-
-    //     unimplemented!()
-    // }
 }

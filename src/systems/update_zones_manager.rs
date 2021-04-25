@@ -11,7 +11,6 @@ impl<'a> System<'a> for UpdateZonesManager {
         Write<'a, EntitiesToDelete>,
         ReadStorage<'a, Camera>,
         ReadStorage<'a, Collider<CollisionTag>>,
-        ReadStorage<'a, Segment>,
     );
 
     fn run(
@@ -23,16 +22,26 @@ impl<'a> System<'a> for UpdateZonesManager {
             mut entities_to_delete,
             camera_store,
             collider_store,
-            segment_store,
         ): Self::SystemData,
     ) {
         for (_, collider) in (&camera_store, &collider_store).join() {
             let segment_leave_id_opt = {
                 use deathframe::physics::query::exp::prelude_variants::*;
-                use deathframe::physics::query::prelude::{FindQuery, Query};
+                use deathframe::physics::query::prelude::{
+                    FilterQuery,
+                    FindQuery,
+                    Query,
+                };
 
                 let query_exp =
                     And(vec![IsTag(CollisionTag::Segment), IsState(Leave)]);
+
+                // let query_debug = IsTag(CollisionTag::Segment);
+                // dbg!(collider
+                //     .query::<FilterQuery<CollisionTag>>()
+                //     .exp(&query_debug)
+                //     .run()
+                //     .len());
 
                 collider
                     .query::<FindQuery<CollisionTag>>()
@@ -42,6 +51,7 @@ impl<'a> System<'a> for UpdateZonesManager {
             };
 
             if let Some(entity_id) = segment_leave_id_opt {
+                println!("Load next segment");
                 zones_manager.stage_next_segment(&zones_settings);
                 entities_to_delete.stage(entities.entity(entity_id));
             }

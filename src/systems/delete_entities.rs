@@ -4,22 +4,11 @@ use super::system_prelude::*;
 pub struct DeleteEntities;
 
 impl<'a> System<'a> for DeleteEntities {
-    type SystemData = (
-        Entities<'a>,
-        Write<'a, EntitiesToDelete>,
-        ReadStorage<'a, Segment>,
-    );
+    type SystemData = (Entities<'a>, Write<'a, EntitiesToDelete>);
 
-    fn run(
-        &mut self,
-        (entities, mut entities_to_delete, segment_store): Self::SystemData,
-    ) {
-        for (entity, segment) in (&entities, &segment_store).join() {
-            if entities_to_delete.to_delete.contains(&entity) {
-                let _ = entities.delete(entity);
-            }
+    fn run(&mut self, (entities, mut entities_to_delete): Self::SystemData) {
+        for entity in entities_to_delete.to_delete.drain() {
+            let _ = entities.delete(entity);
         }
-
-        entities_to_delete.to_delete.clear();
     }
 }

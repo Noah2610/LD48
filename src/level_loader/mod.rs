@@ -65,5 +65,7 @@ pub fn build_level(
 
     world.write_resource::<ZoneHeight>().height += level_size.h;
 
+    world.maintain();
+
     Ok(())
 }
