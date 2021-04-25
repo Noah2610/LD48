@@ -33,7 +33,7 @@ impl<'a> System<'a> for UpdateOnLane {
         )
             .join()
         {
-            let mut next_lane = on_lane.current;
+            let mut next_lane = on_lane.current.unwrap_or(0);
 
             for action in on_lane.drain_actions() {
                 match action {
@@ -49,7 +49,10 @@ impl<'a> System<'a> for UpdateOnLane {
             let pos_x = transform.translation().x;
             let target_lane_x = lanes.lanes[next_lane].x;
 
-            let should_switch_lane = next_lane != on_lane.current;
+            let should_switch_lane = on_lane
+                .current
+                .map(|current| next_lane != current)
+                .unwrap_or(true);
             if should_switch_lane {
                 let pos_diff = target_lane_x - pos_x;
                 let is_moving_right = pos_diff > 0.0;
@@ -60,7 +63,7 @@ impl<'a> System<'a> for UpdateOnLane {
                     Dir::Left
                 };
 
-                on_lane.current = next_lane;
+                on_lane.current = Some(next_lane);
                 on_lane.moving_dir = Some(moving_dir);
 
                 velocity.x = on_lane.switch_speed * pos_diff.signum();
