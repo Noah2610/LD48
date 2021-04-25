@@ -1,4 +1,5 @@
 pub mod prelude {
+    pub use super::audio_settings::AudioSettings;
     pub use super::camera_settings::CameraSettings;
     pub use super::lanes_settings::LanesSettings;
     pub use super::objects_settings::{ObjectSettings, ObjectsSettings};
@@ -7,6 +8,7 @@ pub mod prelude {
     pub use super::Settings;
 }
 
+pub mod audio_settings;
 pub mod camera_settings;
 pub mod entity_components;
 pub mod hitbox_config;
@@ -29,6 +31,7 @@ pub struct Settings {
     pub objects: ObjectsSettings,
     pub lanes:   LanesSettings,
     pub zones:   ZonesSettings,
+    pub audio:   AudioSettings,
 }
 
 impl Settings {
@@ -39,6 +42,7 @@ impl Settings {
             player:  load_settings("settings/player.ron")?,
             objects: load_settings("settings/objects.ron")?,
             zones:   load_settings_dir("settings/zones")?,
+            audio:   load_settings("settings/audio.ron")?,
         })
     }
 }
