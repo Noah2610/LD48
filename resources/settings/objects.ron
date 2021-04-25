@@ -9,4 +9,19 @@
             Solid(Solid),
         ],
     ),
+
+    Portal: (
+        spritesheet: "player.png",
+        components: [
+            Hitbox(Custom([
+                (
+                    top:    8.0,
+                    bottom: -8.0,
+                    left:   -48.0,
+                    right:  48.0,
+                ),
+            ])),
+            Collidable(Portal),
+        ],
+    ),
 }

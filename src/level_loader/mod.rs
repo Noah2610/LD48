@@ -21,6 +21,7 @@ pub enum TileType {
 pub enum ObjectType {
     Player,
     Solid,
+    Portal,
     Custom(String),
 }
 
