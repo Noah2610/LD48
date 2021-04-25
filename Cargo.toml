@@ -18,7 +18,6 @@ features = [
     "animation",
     "audio",
     "physics",
-    "vulkan",
 ]
 
 [dependencies.serde]
