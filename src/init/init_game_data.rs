@@ -121,8 +121,8 @@ pub(super) fn build_game_data<'a, 'b>(
         )?
         .with(
             DispatcherId::Ingame,
-            HandleZoneSwitch::default(),
-            "handle_zone_switch",
+            ConfineCameraToFinalSegment::default(),
+            "confine_camera_to_final_segment_system",
             &[],
         )?;
 

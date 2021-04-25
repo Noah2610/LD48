@@ -4,8 +4,8 @@
 (
     components: [
         Size((
-            w: 32.0,
-            h: 32.0,
+            w: 16.0,
+            h: 16.0,
         )),
         Hitbox(Size),
         Collider(Player),

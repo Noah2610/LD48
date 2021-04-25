@@ -2,9 +2,9 @@ use super::system_prelude::*;
 use deathframe::core::geo::prelude::Rect;
 
 #[derive(Default)]
-pub struct HandleZoneSwitch;
+pub struct ConfineCameraToFinalSegment;
 
-impl<'a> System<'a> for HandleZoneSwitch {
+impl<'a> System<'a> for ConfineCameraToFinalSegment {
     type SystemData = (
         Entities<'a>,
         WriteExpect<'a, ZonesManager>,

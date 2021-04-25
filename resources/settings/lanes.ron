@@ -3,5 +3,5 @@
 #![enable(implicit_some)]
 (
     count: 5,
-    spacing: 32.0,
+    spacing: 16.0,
 )
