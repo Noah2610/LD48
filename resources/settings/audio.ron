@@ -1,0 +1,12 @@
+#![enable(implicit_some)]
+(
+    volume: 1.0,
+
+    bgm: {
+        Well: (
+            file: "LD481.2.wav",
+        ),
+    },
+
+    sfx: {},
+)
