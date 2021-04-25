@@ -3,8 +3,8 @@ pub mod objects;
 pub mod tiles;
 
 use crate::components::prelude::Size;
-use crate::resources::prelude::ZoneSize;
-use crate::settings::zones_settings::SegmentId;
+use crate::resources::prelude::{ZoneSize, ZonesManager};
+use crate::settings::zones_settings::{SegmentId, ZonesSettings};
 use amethyst::ecs::{World, WorldExt};
 use data::*;
 use deathframe::amethyst;
@@ -36,6 +36,22 @@ pub fn build_level(
 ) -> amethyst::Result<()> {
     let offset_y = world.read_resource::<ZoneSize>().height;
 
+    let is_final_segment = {
+        let zones_manager = world.read_resource::<ZonesManager>();
+        let zones_settings = world.read_resource::<ZonesSettings>();
+        if let Some(current_zone) = zones_manager.current_zone() {
+            zones_settings
+                .zones
+                .get(current_zone)
+                .map(|zone_settings| {
+                    zone_settings.final_segment.contains(&segment_id)
+                })
+                .unwrap_or(false)
+        } else {
+            false
+        }
+    };
+
     let level_size =
         Size::new(level_data.level.size.w, level_data.level.size.h);
     let tile_size =
@@ -45,6 +61,7 @@ pub fn build_level(
         world,
         level_size.clone(),
         segment_id.clone(),
+        is_final_segment,
         offset_y,
     );
 

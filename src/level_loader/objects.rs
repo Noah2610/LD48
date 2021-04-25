@@ -164,13 +164,17 @@ pub fn build_segment_collision(
     world: &mut World,
     size: Size,
     segment_id: SegmentId,
+    is_final_segment: bool,
     offset_y: f32,
 ) -> Entity {
     let mut transform = Transform::default();
     transform.set_translation_xyz(0.0, 0.0 - offset_y, 0.0);
     world
         .create_entity()
-        .with(Segment(segment_id))
+        .with(Segment {
+            id: segment_id,
+            is_final_segment,
+        })
         .with(transform)
         .with(size)
         .build()

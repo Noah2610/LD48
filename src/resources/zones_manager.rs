@@ -32,6 +32,10 @@ impl From<ZoneId> for ZoneState {
 }
 
 impl ZonesManager {
+    pub fn current_zone(&self) -> Option<&ZoneId> {
+        self.current_zone.as_ref().map(|current| &current.id)
+    }
+
     pub fn set_zone(&mut self, zone_id: ZoneId) {
         self.current_zone = Some(zone_id.into());
     }
