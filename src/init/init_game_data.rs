@@ -121,8 +121,8 @@ pub(super) fn build_game_data<'a, 'b>(
         )?
         .with(
             DispatcherId::Ingame,
-            DeleteSegmentEntities::default(),
-            "delete_segment_entities_system",
+            DeleteEntities::default(),
+            "delete_entities_system",
             &[],
         )?;
 

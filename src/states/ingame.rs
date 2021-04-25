@@ -45,6 +45,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
                 )| {
                     zones_manager.set_zone("dev_0".to_string());
                     zones_manager.stage_next_segment(&settings);
+                    zones_manager.stage_next_segment(&settings);
                 },
             );
         }

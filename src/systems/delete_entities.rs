@@ -1,25 +1,25 @@
 use super::system_prelude::*;
 
 #[derive(Default)]
-pub struct DeleteSegmentEntities;
+pub struct DeleteEntities;
 
-impl<'a> System<'a> for DeleteSegmentEntities {
+impl<'a> System<'a> for DeleteEntities {
     type SystemData = (
         Entities<'a>,
-        Write<'a, SegmentsToDelete>,
+        Write<'a, EntitiesToDelete>,
         ReadStorage<'a, Segment>,
     );
 
     fn run(
         &mut self,
-        (entities, mut segments_to_delete, segment_store): Self::SystemData,
+        (entities, mut entities_to_delete, segment_store): Self::SystemData,
     ) {
         for (entity, segment) in (&entities, &segment_store).join() {
-            if segments_to_delete.to_delete.contains(&segment.0) {
+            if entities_to_delete.to_delete.contains(&entity) {
                 let _ = entities.delete(entity);
             }
         }
 
-        segments_to_delete.to_delete.clear();
+        entities_to_delete.to_delete.clear();
     }
 }

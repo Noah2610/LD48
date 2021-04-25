@@ -8,7 +8,7 @@ impl<'a> System<'a> for UpdateZonesManager {
         Entities<'a>,
         WriteExpect<'a, ZonesManager>,
         ReadExpect<'a, ZonesSettings>,
-        Write<'a, SegmentsToDelete>,
+        Write<'a, EntitiesToDelete>,
         ReadStorage<'a, Camera>,
         ReadStorage<'a, Collider<CollisionTag>>,
         ReadStorage<'a, Segment>,
@@ -20,7 +20,7 @@ impl<'a> System<'a> for UpdateZonesManager {
             entities,
             mut zones_manager,
             zones_settings,
-            mut segments_to_delete,
+            mut entities_to_delete,
             camera_store,
             collider_store,
             segment_store,
@@ -41,13 +41,9 @@ impl<'a> System<'a> for UpdateZonesManager {
                     .map(|data| data.id)
             };
 
-            if let Some(segment_id) = segment_leave_id_opt {
+            if let Some(entity_id) = segment_leave_id_opt {
                 zones_manager.stage_next_segment(&zones_settings);
-                if let Some(segment) =
-                    segment_store.get(entities.entity(segment_id))
-                {
-                    segments_to_delete.stage(segment.0.clone());
-                }
+                entities_to_delete.stage(entities.entity(entity_id));
             }
         }
     }
