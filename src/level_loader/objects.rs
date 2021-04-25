@@ -168,7 +168,11 @@ pub fn build_camera(
 
     world
         .create_entity()
-        .with(Follow::new(player).with_only_axis(Axis::Y))
+        .with(
+            Follow::new(player)
+                .with_only_axis(Axis::Y)
+                .with_offset(settings.follow_offset),
+        )
         // .with(Confined::from(Rect {
         //     top:    level_size.h,
         //     bottom: 0.0,
