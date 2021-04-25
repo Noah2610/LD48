@@ -1,6 +1,6 @@
 #![enable(implicit_some)]
 (
-    volume: 1.0,
+    volume: 0.1,
 
     bgm: {
         Well: (
