@@ -13,7 +13,6 @@
         Solid(Player),
         Velocity((x: 0.0, y: -100.0)),
         OnLane((
-            current: 0,
             switch_speed: 500.0,
         ))
     ],

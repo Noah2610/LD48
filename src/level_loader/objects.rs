@@ -8,7 +8,7 @@ use crate::settings::prelude::*;
 use crate::settings::zones_settings::SegmentId;
 use amethyst::ecs::{Builder, Entity, World, WorldExt};
 use deathframe::amethyst;
-use deathframe::core::geo::prelude::Rect;
+use deathframe::core::geo::prelude::{Axis, Rect};
 use deathframe::resources::SpriteSheetHandles;
 use std::path::PathBuf;
 
@@ -143,7 +143,7 @@ pub fn build_camera(
 
     world
         .create_entity()
-        .with(Follow::new(player))
+        .with(Follow::new(player).with_only_axis(Axis::Y))
         // .with(Confined::from(Rect {
         //     top:    level_size.h,
         //     bottom: 0.0,
@@ -164,13 +164,17 @@ pub fn build_segment_collision(
     world: &mut World,
     size: Size,
     segment_id: SegmentId,
+    is_final_segment: bool,
     offset_y: f32,
 ) -> Entity {
     let mut transform = Transform::default();
     transform.set_translation_xyz(0.0, 0.0 - offset_y, 0.0);
     world
         .create_entity()
-        .with(Segment(segment_id))
+        .with(Segment {
+            id: segment_id,
+            is_final_segment,
+        })
         .with(transform)
         .with(size)
         .build()

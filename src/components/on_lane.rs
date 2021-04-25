@@ -4,8 +4,9 @@ use super::component_prelude::*;
 #[storage(VecStorage)]
 #[serde(deny_unknown_fields)]
 pub struct OnLane {
-    pub current:      usize,
     pub switch_speed: f32,
+    #[serde(skip)]
+    pub current:      Option<usize>,
     #[serde(skip)]
     pub moving_dir:   Option<Dir>,
     #[serde(skip)]
@@ -16,16 +17,6 @@ pub struct OnLane {
 pub enum Dir {
     Left,
     Right,
-}
-
-impl OnLane {
-    pub fn next_lane(&mut self) {
-        self.actions.push(OnLaneAction::NextLane);
-    }
-
-    pub fn prev_lane(&mut self) {
-        self.actions.push(OnLaneAction::PrevLane);
-    }
 }
 
 #[derive(Clone)]

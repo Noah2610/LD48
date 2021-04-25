@@ -9,15 +9,39 @@ const KEEP_COUNT_SEGMENTS_LOADED: usize = 2;
 
 #[derive(Default)]
 pub struct ZonesManager {
-    current_zone:        Option<ZoneId>,
-    last_staged_segment: Option<SegmentId>,
-    staged_segments:     Vec<SegmentId>,
-    levels:              HashMap<SegmentId, DataLevel>,
+    current_zone:           Option<ZoneState>,
+    last_staged_segment:    Option<SegmentId>,
+    staged_segments:        Vec<SegmentId>,
+    levels:                 HashMap<SegmentId, DataLevel>,
+    segment_loading_locked: bool,
+}
+
+#[derive(Debug)]
+struct ZoneState {
+    pub id:                    ZoneId,
+    pub total_segments_loaded: usize,
+}
+
+impl From<ZoneId> for ZoneState {
+    fn from(id: ZoneId) -> Self {
+        Self {
+            id,
+            total_segments_loaded: 0,
+        }
+    }
 }
 
 impl ZonesManager {
+    pub fn current_zone(&self) -> Option<&ZoneId> {
+        self.current_zone.as_ref().map(|current| &current.id)
+    }
+
     pub fn set_zone(&mut self, zone_id: ZoneId) {
-        self.current_zone = Some(zone_id);
+        self.current_zone = Some(zone_id.into());
+    }
+
+    pub fn lock_segment_loading(&mut self) {
+        self.segment_loading_locked = true;
     }
 
     pub fn levels_to_load(&mut self) -> Vec<(SegmentId, DataLevel)> {
@@ -52,6 +76,12 @@ impl ZonesManager {
 
     pub fn stage_next_segment(&mut self, settings: &ZonesSettings) {
         if let Some(next_segment) = self.get_next_segment(settings) {
+            self.current_zone
+                .as_mut()
+                .expect(
+                    "Should have current zone, if next segment could be found",
+                )
+                .total_segments_loaded += 1;
             self.last_staged_segment = Some(next_segment.clone());
             self.staged_segments.push(next_segment);
         } else {
@@ -65,20 +95,59 @@ impl ZonesManager {
     }
 
     fn get_next_segment(&self, settings: &ZonesSettings) -> Option<SegmentId> {
+        if self.segment_loading_locked {
+            return None;
+        }
+
         let mut rng = rand::thread_rng();
         self.current_zone
             .as_ref()
-            .and_then(|current_zone| settings.zones.get(current_zone))
-            .map(|zone_settings| {
-                self.last_staged_segment
-                    .as_ref()
-                    .and_then(|current_segment| {
-                        zone_settings.segments.get(current_segment)
+            .and_then(|current_zone| {
+                settings
+                    .zones
+                    .get(&current_zone.id)
+                    .map(|settings| (current_zone, settings))
+            })
+            .map(|(current_zone, zone_settings)| {
+                let should_load_final_segment = zone_settings
+                    .total_segments
+                    .map(|total_segments| {
+                        current_zone.total_segments_loaded >= total_segments
                     })
-                    .unwrap_or(&zone_settings.first_segment)
+                    .unwrap_or(false);
+                if should_load_final_segment {
+                    &zone_settings.final_segment
+                } else {
+                    self.last_staged_segment
+                        .as_ref()
+                        .and_then(|current_segment| {
+                            zone_settings.segments.get(current_segment)
+                        })
+                        .unwrap_or(&zone_settings.first_segment)
+                }
             })
             .and_then(|possible_segments| {
                 possible_segments.choose(&mut rng).map(ToString::to_string)
             })
+    }
+
+    pub fn is_final_segment_loaded(&self, settings: &ZonesSettings) -> bool {
+        self.current_zone
+            .as_ref()
+            .and_then(|current_zone| {
+                settings
+                    .zones
+                    .get(&current_zone.id)
+                    .map(|zone_settings| (current_zone, zone_settings))
+            })
+            .map(|(current_zone, zone_settings)| {
+                zone_settings
+                    .total_segments
+                    .map(|total_segments| {
+                        current_zone.total_segments_loaded > total_segments
+                    })
+                    .unwrap_or(false)
+            })
+            .unwrap_or(true)
     }
 }

@@ -3,4 +3,7 @@ use crate::settings::zones_settings::SegmentId;
 
 #[derive(Component)]
 #[storage(VecStorage)]
-pub struct Segment(pub SegmentId);
+pub struct Segment {
+    pub id:               SegmentId,
+    pub is_final_segment: bool,
+}

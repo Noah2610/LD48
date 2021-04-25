@@ -1,11 +1,13 @@
 mod control_player;
+mod handle_segment_loading;
+mod handle_zone_switch;
 mod update_on_lane;
-mod update_zones_manager;
 
 pub mod prelude {
     pub use super::control_player::ControlPlayer;
+    pub use super::handle_segment_loading::HandleSegmentLoading;
+    pub use super::handle_zone_switch::HandleZoneSwitch;
     pub use super::update_on_lane::UpdateOnLane;
-    pub use super::update_zones_manager::UpdateZonesManager;
     pub use deathframe::systems::prelude::*;
 }
 
