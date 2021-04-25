@@ -2,6 +2,7 @@ pub mod belongs_to_segment;
 pub mod camera;
 pub mod object;
 pub mod on_lane;
+pub mod parent_delete;
 pub mod player;
 pub mod portal;
 pub mod segment;
@@ -12,6 +13,7 @@ pub mod prelude {
     pub use super::camera::Camera;
     pub use super::object::Object;
     pub use super::on_lane::OnLane;
+    pub use super::parent_delete::ParentDelete;
     pub use super::player::Player;
     pub use super::portal::Portal;
     pub use super::segment::Segment;

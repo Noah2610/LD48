@@ -32,10 +32,12 @@ impl<'a> System<'a> for HandleSegmentLoading {
             let camera_top =
                 camera_transform.translation().y + camera_size.h * 0.5;
 
-            for (segment_entity, _, segment_transform) in
-                (&entities, &segment_store, &transform_store).join()
+            for (segment_entity, _, segment_transform, segment_size) in
+                (&entities, &segment_store, &transform_store, &size_store)
+                    .join()
             {
-                let segment_bot = segment_transform.translation().y;
+                let segment_bot =
+                    segment_transform.translation().y - segment_size.h * 0.5;
 
                 if segment_bot > camera_top {
                     zones_manager.stage_next_segment(&zones_settings);

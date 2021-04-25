@@ -22,6 +22,19 @@ impl ZoneTransition {
 impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for ZoneTransition {
     fn on_start(&mut self, mut data: StateData<GameData<'a, 'b>>) {
         self.start(&mut data);
+
+        {
+            use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
+
+            data.world.exec(
+                |(mut zones_manager, zones_settings): (
+                    WriteExpect<ZonesManager>,
+                    ReadExpect<ZonesSettings>,
+                )| {
+                    zones_manager.stage_next_zone(&zones_settings);
+                },
+            )
+        }
     }
 
     fn on_resume(&mut self, mut data: StateData<GameData<'a, 'b>>) {
@@ -43,7 +56,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for ZoneTransition {
         data.data
             .update(data.world, DispatcherId::ZoneTransition)
             .unwrap();
-        Trans::None
+        Trans::Pop
     }
 
     fn fixed_update(
