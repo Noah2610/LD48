@@ -5,7 +5,9 @@
 (
     zones: {
         "dev_1": (
+            total_segments: 8,
             first_segment: ["dev_1/00.json"],
+            final_segment: ["dev_1/final.json"],
             segments: {
                 "dev_1/00.json": [
                     "dev_1/01.json",
