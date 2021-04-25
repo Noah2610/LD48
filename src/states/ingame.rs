@@ -16,7 +16,7 @@ impl Ingame {
 
         {
             let mut transform = Transform::default();
-            transform.set_translation_xyz(0.0, 0.0, 2.0);
+            transform.set_translation_xyz(0.0, 64.0, 2.0);
             let size = Size::new(32.0, 32.0);
             let player = build_player(world, transform, size);
             let _ = build_camera(world, player, SEGMENT_WIDTH);
