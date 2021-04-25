@@ -19,15 +19,23 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Startup {
 }
 
 fn insert_resources(world: &mut World) {
-    use crate::components::prelude::{BelongsToSegment, Object, Segment, Tile};
+    use crate::components::prelude::{
+        BelongsToSegment,
+        Object,
+        Portal,
+        Segment,
+        Tile,
+    };
 
     world.register::<Tile>();
     world.register::<Object>();
     world.register::<BelongsToSegment>();
     world.register::<Segment>();
+    world.register::<Portal>();
 
     let sprite_sheet_handles = SpriteSheetHandles::<PathBuf>::default();
     world.insert(sprite_sheet_handles);
     world.insert(ZonesManager::default());
     world.insert(ZoneSize::default());
+    world.insert(ShouldLoadNextZone::default());
 }

@@ -16,6 +16,7 @@ pub struct ObjectsSettings {
 #[serde(deny_unknown_fields)]
 pub struct ObjectSettings {
     pub components:  EntityComponents,
+    #[serde(default)]
     pub spritesheet: Option<String>,
 }
 

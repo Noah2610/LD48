@@ -14,9 +14,9 @@ use std::path::PathBuf;
 pub fn build_objects(
     world: &mut World,
     objects: Vec<DataObject>,
-    level_size: Size,
     segment_id: SegmentId,
     segment_entity: Entity,
+    offset_y: f32,
 ) -> amethyst::Result<()> {
     let objects_settings = (*world.read_resource::<ObjectsSettings>()).clone();
 
@@ -24,7 +24,7 @@ pub fn build_objects(
         let transform = {
             let mut transform = Transform::default();
             transform.set_translation_x(object.pos.x);
-            transform.set_translation_y(object.pos.y);
+            transform.set_translation_y(-offset_y + object.pos.y);
             if let Some(z) = object.props.get("z").and_then(|val| val.as_f64())
             {
                 transform.set_translation_z(z as f32);
@@ -35,8 +35,14 @@ pub fn build_objects(
 
         match &object.object_type {
             ObjectType::Player => {
-                let player_entity = build_player(world, transform, size);
-                let _ = build_camera(world, player_entity, level_size.clone());
+                eprintln!(
+                    "[WARNING]\n    A `Player` object is placed in the \
+                     level!\n    The player is loaded automatically by the \
+                     game, don't place them in the levels.\n    The placed \
+                     player object will not be loaded."
+                );
+                // let player_entity = build_player(world, transform, size);
+                // let _ = build_camera(world, player_entity);
             }
 
             object_type => {
@@ -71,7 +77,7 @@ pub fn build_objects(
                         .with(size.clone())
                         .with(Object::from(object_type.clone()))
                         .with(BelongsToSegment(segment_id.clone()))
-                        .with(Parent::new(segment_entity));
+                        .with(ParentDelete(segment_entity));
 
                     if let Some(sprite_render) = sprite_render_opt {
                         entity_builder = entity_builder.with(sprite_render);
@@ -126,7 +132,7 @@ pub fn build_player(
 
     entity_builder = add_components_to_entity(
         entity_builder,
-        settings.components.clone(),
+        settings.components,
         Some(size),
     );
 
@@ -136,7 +142,7 @@ pub fn build_player(
 pub fn build_camera(
     world: &mut World,
     player: Entity,
-    level_size: Size,
+    level_width: f32,
 ) -> amethyst::Result<()> {
     use amethyst::renderer::Camera as AmethystCamera;
     use amethyst::utils::ortho_camera::{
@@ -162,9 +168,8 @@ pub fn build_camera(
         far:    20.0,
     };
 
-    let level_center = level_size.half();
     let mut transform = Transform::default();
-    transform.set_translation_xyz(level_center.w, level_center.h, settings.z);
+    transform.set_translation_xyz(level_width * 0.5, 0.0, settings.z);
 
     world
         .create_entity()
@@ -197,7 +202,7 @@ pub fn build_segment_collision(
     offset_y: f32,
 ) -> Entity {
     let mut transform = Transform::default();
-    transform.set_translation_xyz(0.0, -size.h - offset_y, 0.0);
+    transform.set_translation_xyz(size.w * 0.5, -offset_y + size.h * 0.5, 0.0);
     world
         .create_entity()
         .with(Segment {

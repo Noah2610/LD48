@@ -3,6 +3,7 @@ use crate::level_loader::load_level;
 use crate::resource;
 use crate::settings::zones_settings::{SegmentId, ZoneId, ZonesSettings};
 use rand::prelude::SliceRandom;
+use replace_with::replace_with_or_abort;
 use std::collections::HashMap;
 
 const KEEP_COUNT_SEGMENTS_LOADED: usize = 2;
@@ -19,13 +20,15 @@ pub struct ZonesManager {
 #[derive(Debug)]
 struct ZoneState {
     pub id:                    ZoneId,
+    pub order_idx:             usize,
     pub total_segments_loaded: usize,
 }
 
-impl From<ZoneId> for ZoneState {
-    fn from(id: ZoneId) -> Self {
+impl ZoneState {
+    pub fn new(id: ZoneId, order_idx: usize) -> Self {
         Self {
             id,
+            order_idx,
             total_segments_loaded: 0,
         }
     }
@@ -36,8 +39,9 @@ impl ZonesManager {
         self.current_zone.as_ref().map(|current| &current.id)
     }
 
+    #[deprecated]
     pub fn set_zone(&mut self, zone_id: ZoneId) {
-        self.current_zone = Some(zone_id.into());
+        self.current_zone = Some(ZoneState::new(zone_id, 0));
     }
 
     pub fn lock_segment_loading(&mut self) {
@@ -72,6 +76,49 @@ impl ZonesManager {
                 }
             },
         )
+    }
+
+    pub fn stage_next_zone(&mut self, settings: &ZonesSettings) {
+        if let Some((next_zone, next_order_idx)) = self.get_next_zone(settings)
+        {
+            self.reset();
+            self.current_zone = Some(ZoneState::new(next_zone, next_order_idx));
+        } else {
+            eprintln!("[WARNING]\n    There is no next zone to load!");
+        }
+    }
+
+    fn get_next_zone(
+        &self,
+        settings: &ZonesSettings,
+    ) -> Option<(ZoneId, usize)> {
+        if let Some(current_zone) = self.current_zone.as_ref() {
+            let order_idx = current_zone.order_idx + 1;
+            settings
+                .config
+                .zone_order
+                .get(order_idx)
+                .map(|next| (next, order_idx))
+        } else {
+            settings.config.zone_order.first().map(|first| (first, 0))
+        }
+        .map(|(next, order_idx)| (next.clone(), order_idx))
+    }
+
+    fn reset(&mut self) {
+        replace_with_or_abort(self, |_| ZonesManager {
+            current_zone:           None,
+            last_staged_segment:    None,
+            staged_segments:        Vec::new(),
+            levels:                 HashMap::new(),
+            segment_loading_locked: false,
+        });
+    }
+
+    pub fn stage_initial_segments(&mut self, settings: &ZonesSettings) {
+        for _ in 0 .. KEEP_COUNT_SEGMENTS_LOADED {
+            self.stage_next_segment(settings);
+        }
     }
 
     pub fn stage_next_segment(&mut self, settings: &ZonesSettings) {
