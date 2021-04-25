@@ -5,7 +5,7 @@ use crate::states::aliases::{CustomData, GameDataBuilder};
 use deathframe::amethyst;
 
 pub(super) fn build_game_data<'a, 'b>(
-    _settings: &Settings,
+    settings: &Settings,
 ) -> amethyst::Result<GameDataBuilder<'a, 'b>> {
     use crate::input::prelude::*;
     use crate::systems::prelude::*;
@@ -25,7 +25,8 @@ pub(super) fn build_game_data<'a, 'b>(
         )
         .with_plugin(RenderUi::default())
         .with_plugin(RenderFlat2D::default());
-    let audio_bundle = AudioBundle::<SoundKey, SongKey>::default();
+    let audio_bundle = AudioBundle::<SoundKey, SongKey>::default()
+        .with_sounds_default_volume(settings.audio.volume);
     let menu_input_bundle = MenuBindings::bundle()?;
     let ingame_input_bundle = IngameBindings::bundle()?;
     let physics_bundle =

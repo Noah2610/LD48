@@ -26,11 +26,18 @@ impl Ingame {
             use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
 
             world.exec(
-                |(mut zones_manager, settings): (
+                |(mut zones_manager, settings, mut songs): (
                     WriteExpect<ZonesManager>,
                     ReadExpect<ZonesSettings>,
+                    WriteExpect<Songs<SongKey>>,
                 )| {
                     zones_manager.stage_initial_segments(&settings);
+                    songs.stop_all();
+                    if let Some(song_key) =
+                        zones_manager.get_current_song(&settings)
+                    {
+                        songs.play(song_key);
+                    }
                 },
             );
         }

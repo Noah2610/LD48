@@ -1,0 +1,18 @@
+#![enable(implicit_some)]
+(
+    volume: 1.0,
+
+    bgm: {
+        Well: (
+            file: "LD481.2.wav",
+        ),
+        Green: (
+            file: "LD482.2.wav",
+        ),
+        Red: (
+            file: "LD483.2.wav",
+        ),
+    },
+
+    sfx: {},
+)

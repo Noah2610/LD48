@@ -21,6 +21,7 @@ pub fn run() -> amethyst::Result<()> {
         objects: objects_settings,
         lanes: lanes_settings,
         zones: zones_settings,
+        audio: audio_settings,
     } = settings;
 
     let mut game: amethyst::CoreApplication<GameData> =
@@ -31,6 +32,7 @@ pub fn run() -> amethyst::Result<()> {
             .with_resource(objects_settings)
             .with_resource(lanes_settings)
             .with_resource(zones_settings)
+            .with_resource(audio_settings)
             .build(game_data)?;
 
     game.run();

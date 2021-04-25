@@ -1,5 +1,6 @@
 // resources/settings/zones
 
+use crate::resources::prelude::SongKey;
 use deathframe::core::components::prelude::Merge;
 use replace_with::replace_with_or_abort;
 use std::collections::HashMap;
@@ -25,6 +26,8 @@ pub struct ZonesConfig {
 #[derive(Deserialize, Debug)]
 #[serde(deny_unknown_fields)]
 pub struct ZoneSettings {
+    #[serde(default)]
+    pub song:           Option<SongKey>,
     pub total_segments: Option<usize>,
     pub first_segment:  Vec<SegmentId>,
     pub final_segment:  Vec<SegmentId>,
@@ -66,14 +69,18 @@ impl Merge for ZonesConfig {
         let ZonesConfig {
             zone_order: mut other_zone_order,
         } = other;
-        if !other_zone_order.is_empty() {
-            eprintln!(
-                "[WARNING]\n    Careful, you have `config.zone_order` arrays \
-                 configured in multiple zone configs.\n    This will merge \
-                 multiple `config.zone_order` arrays together.\n    This is \
-                 probably not intended."
-            );
-            self.zone_order.append(&mut other_zone_order);
+        if self.zone_order.is_empty() {
+            self.zone_order = other_zone_order;
+        } else {
+            if !other_zone_order.is_empty() {
+                eprintln!(
+                    "[WARNING]\n    Careful, you have `config.zone_order` \
+                     arrays configured in multiple zone configs.\n    This \
+                     will merge multiple `config.zone_order` arrays \
+                     together.\n    This is probably not intended."
+                );
+                self.zone_order.append(&mut other_zone_order);
+            }
         }
     }
 }
@@ -81,6 +88,7 @@ impl Merge for ZonesConfig {
 impl Merge for ZoneSettings {
     fn merge(&mut self, other: Self) {
         let ZoneSettings {
+            song: other_song,
             total_segments: _,
             first_segment: _,
             final_segment: _,
@@ -92,5 +100,8 @@ impl Merge for ZoneSettings {
              them together.\n    You should probably find and fix the \
              duplicate configurations."
         );
+        if self.song.is_none() {
+            self.song = other_song;
+        }
     }
 }
