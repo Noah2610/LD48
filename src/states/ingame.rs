@@ -46,6 +46,11 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         //     Size::new(level_data.level.size.w, level_data.level.size.h);
         // build_level(data.world, level_data).unwrap();
 
+        data.world.insert(ZonesManager::default());
+        data.world.insert(ZoneSize::default());
+        data.world.insert(ShouldLoadNextZone::default());
+        data.world.insert(GameOver::default());
+
         {
             let lanes = Lanes::from((
                 &*data.world.read_resource::<LanesSettings>(),
@@ -93,11 +98,21 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
             build_level(data.world, level, segment_id).unwrap();
         }
 
-        let mut should_load_next_zone =
-            data.world.write_resource::<ShouldLoadNextZone>();
-        if should_load_next_zone.0 {
-            should_load_next_zone.0 = false;
-            return Trans::Push(Box::new(ZoneTransition::default()));
+        {
+            let mut should_load_next_zone =
+                data.world.write_resource::<ShouldLoadNextZone>();
+            if should_load_next_zone.0 {
+                should_load_next_zone.0 = false;
+                return Trans::Push(Box::new(ZoneTransition::default()));
+            }
+        }
+
+        {
+            let mut game_over = data.world.write_resource::<GameOver>();
+            if game_over.0 {
+                game_over.0 = false;
+                return Trans::Pop;
+            }
         }
 
         Trans::None

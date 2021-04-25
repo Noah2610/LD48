@@ -40,7 +40,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for MainMenu {
         data.data
             .update(data.world, DispatcherId::MainMenu)
             .unwrap();
-        Trans::None
+        Trans::Push(Box::new(Ingame::default()))
     }
 
     fn fixed_update(

@@ -14,7 +14,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Startup {
         data: StateData<GameData<'a, 'b>>,
     ) -> Trans<GameData<'a, 'b>, StateEvent> {
         data.data.update_core(data.world);
-        Trans::Switch(Box::new(Ingame::default()))
+        Trans::Switch(Box::new(MainMenu::default()))
     }
 }
 
@@ -37,8 +37,4 @@ fn insert_resources(world: &mut World) {
 
     let sprite_sheet_handles = SpriteSheetHandles::<PathBuf>::default();
     world.insert(sprite_sheet_handles);
-    world.insert(ZonesManager::default());
-    world.insert(ZoneSize::default());
-    world.insert(ShouldLoadNextZone::default());
-    world.insert(GameOver::default());
 }
