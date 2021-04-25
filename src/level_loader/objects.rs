@@ -193,7 +193,7 @@ pub fn build_segment_collision(
     offset_y: f32,
 ) -> Entity {
     let mut transform = Transform::default();
-    transform.set_translation_xyz(0.0, 0.0 - offset_y, 0.0);
+    transform.set_translation_xyz(0.0, -size.h - offset_y, 0.0);
     world
         .create_entity()
         .with(Segment {
