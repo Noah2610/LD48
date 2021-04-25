@@ -22,6 +22,7 @@ pub enum ObjectType {
     Player,
     Solid,
     Portal,
+    Obstacle,
     Custom(String),
 }
 

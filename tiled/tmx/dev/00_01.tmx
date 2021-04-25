@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="5" nextobjectid="10">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="13">
  <editorsettings>
   <export target="../../../resources/levels/zones/dev_0/01.json" format="ld48-export"/>
  </editorsettings>
@@ -32,6 +32,14 @@
 </data>
  </layer>
  <objectgroup id="2" name="solid"/>
+ <objectgroup id="5" name="obstacle">
+  <properties>
+   <property name="z" type="float" value="1"/>
+  </properties>
+  <object id="10" name="Obstacle" type="Obstacle" x="16" y="80" width="8" height="8"/>
+  <object id="11" name="Obstacle" type="Obstacle" x="72" y="80" width="8" height="8"/>
+  <object id="12" name="Obstacle" type="Obstacle" x="44" y="128" width="8" height="8"/>
+ </objectgroup>
  <objectgroup id="3" name="player">
   <properties>
    <property name="z" type="float" value="2"/>

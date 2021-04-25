@@ -2,6 +2,7 @@ pub mod prelude {
     pub use super::animation_key::AnimationKey;
     pub use super::collision_tag::{CollisionTag, SolidTag};
     pub use super::dispatcher_id::DispatcherId;
+    pub use super::game_over::GameOver;
     pub use super::lanes::{Lane, Lanes};
     pub use super::should_load_next_zone::ShouldLoadNextZone;
     pub use super::song_key::SongKey;
@@ -14,6 +15,7 @@ pub mod prelude {
 mod animation_key;
 mod collision_tag;
 mod dispatcher_id;
+mod game_over;
 mod lanes;
 mod should_load_next_zone;
 mod song_key;

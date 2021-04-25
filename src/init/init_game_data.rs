@@ -137,6 +137,12 @@ pub(super) fn build_game_data<'a, 'b>(
             HandleParentDelete::default(),
             "handle_parent_delete_system",
             &[],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            HandleObstacle::default(),
+            "handle_obstacle_system",
+            &[],
         )?;
 
     Ok(custom_game_data)

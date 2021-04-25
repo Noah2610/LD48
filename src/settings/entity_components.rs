@@ -22,6 +22,7 @@ pub enum EntityComponent {
     SolidPushable(SolidPushable),
     OnLane(OnLane),
     Portal(Portal),
+    Obstacle(Obstacle),
 }
 
 pub fn add_components_to_entity(
@@ -56,5 +57,6 @@ pub fn add_components_to_entity(
             Comp::SolidPushable(solid_pushable) => builder.with(solid_pushable),
             Comp::OnLane(on_lane) => builder.with(on_lane),
             Comp::Portal(portal) => builder.with(portal),
+            Comp::Obstacle(obstacle) => builder.with(obstacle),
         })
 }

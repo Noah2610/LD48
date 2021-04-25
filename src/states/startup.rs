@@ -22,6 +22,7 @@ fn insert_resources(world: &mut World) {
     use crate::components::prelude::{
         BelongsToSegment,
         Object,
+        Obstacle,
         Portal,
         Segment,
         Tile,
@@ -32,10 +33,12 @@ fn insert_resources(world: &mut World) {
     world.register::<BelongsToSegment>();
     world.register::<Segment>();
     world.register::<Portal>();
+    world.register::<Obstacle>();
 
     let sprite_sheet_handles = SpriteSheetHandles::<PathBuf>::default();
     world.insert(sprite_sheet_handles);
     world.insert(ZonesManager::default());
     world.insert(ZoneSize::default());
     world.insert(ShouldLoadNextZone::default());
+    world.insert(GameOver::default());
 }
