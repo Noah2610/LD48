@@ -29,5 +29,5 @@ fn insert_resources(world: &mut World) {
     let sprite_sheet_handles = SpriteSheetHandles::<PathBuf>::default();
     world.insert(sprite_sheet_handles);
     world.insert(ZonesManager::default());
-    world.insert(ZoneHeight::default());
+    world.insert(ZoneSize::default());
 }

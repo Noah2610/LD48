@@ -118,6 +118,12 @@ pub(super) fn build_game_data<'a, 'b>(
             HandleSegmentLoading::default(),
             "handle_segment_loading_system",
             &[],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            HandleZoneSwitch::default(),
+            "handle_zone_switch",
+            &[],
         )?;
 
     Ok(custom_game_data)

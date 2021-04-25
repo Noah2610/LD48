@@ -5,7 +5,7 @@ pub mod prelude {
     pub use super::lanes::{Lane, Lanes};
     pub use super::song_key::SongKey;
     pub use super::sound_key::SoundKey;
-    pub use super::zone_height::ZoneHeight;
+    pub use super::zone_size::ZoneSize;
     pub use super::zones_manager::ZonesManager;
     pub use deathframe::resources::prelude::*;
 }
@@ -16,5 +16,5 @@ mod dispatcher_id;
 mod lanes;
 mod song_key;
 mod sound_key;
-mod zone_height;
+mod zone_size;
 mod zones_manager;

@@ -3,7 +3,7 @@ pub mod objects;
 pub mod tiles;
 
 use crate::components::prelude::Size;
-use crate::resources::prelude::ZoneHeight;
+use crate::resources::prelude::ZoneSize;
 use crate::settings::zones_settings::SegmentId;
 use amethyst::ecs::{World, WorldExt};
 use data::*;
@@ -34,7 +34,7 @@ pub fn build_level(
     level_data: DataLevel,
     segment_id: SegmentId,
 ) -> amethyst::Result<()> {
-    let offset_y = world.read_resource::<ZoneHeight>().height;
+    let offset_y = world.read_resource::<ZoneSize>().height;
 
     let level_size =
         Size::new(level_data.level.size.w, level_data.level.size.h);
@@ -63,7 +63,11 @@ pub fn build_level(
         segment_entity,
     )?;
 
-    world.write_resource::<ZoneHeight>().height += level_size.h;
+    {
+        let mut zone_size = world.write_resource::<ZoneSize>();
+        zone_size.width = level_size.w;
+        zone_size.height += level_size.h;
+    }
 
     world.maintain();
 

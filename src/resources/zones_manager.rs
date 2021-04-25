@@ -9,10 +9,11 @@ const KEEP_COUNT_SEGMENTS_LOADED: usize = 2;
 
 #[derive(Default)]
 pub struct ZonesManager {
-    current_zone:        Option<ZoneState>,
-    last_staged_segment: Option<SegmentId>,
-    staged_segments:     Vec<SegmentId>,
-    levels:              HashMap<SegmentId, DataLevel>,
+    current_zone:           Option<ZoneState>,
+    last_staged_segment:    Option<SegmentId>,
+    staged_segments:        Vec<SegmentId>,
+    levels:                 HashMap<SegmentId, DataLevel>,
+    segment_loading_locked: bool,
 }
 
 #[derive(Debug)]
@@ -33,6 +34,10 @@ impl From<ZoneId> for ZoneState {
 impl ZonesManager {
     pub fn set_zone(&mut self, zone_id: ZoneId) {
         self.current_zone = Some(zone_id.into());
+    }
+
+    pub fn lock_segment_loading(&mut self) {
+        self.segment_loading_locked = true;
     }
 
     pub fn levels_to_load(&mut self) -> Vec<(SegmentId, DataLevel)> {
@@ -86,6 +91,10 @@ impl ZonesManager {
     }
 
     fn get_next_segment(&self, settings: &ZonesSettings) -> Option<SegmentId> {
+        if self.segment_loading_locked {
+            return None;
+        }
+
         let mut rng = rand::thread_rng();
         self.current_zone
             .as_ref()
@@ -116,5 +125,25 @@ impl ZonesManager {
             .and_then(|possible_segments| {
                 possible_segments.choose(&mut rng).map(ToString::to_string)
             })
+    }
+
+    pub fn is_final_segment_loaded(&self, settings: &ZonesSettings) -> bool {
+        self.current_zone
+            .as_ref()
+            .and_then(|current_zone| {
+                settings
+                    .zones
+                    .get(&current_zone.id)
+                    .map(|zone_settings| (current_zone, zone_settings))
+            })
+            .map(|(current_zone, zone_settings)| {
+                zone_settings
+                    .total_segments
+                    .map(|total_segments| {
+                        current_zone.total_segments_loaded > total_segments
+                    })
+                    .unwrap_or(false)
+            })
+            .unwrap_or(true)
     }
 }
