@@ -7,14 +7,22 @@ pub struct HandleObstacle;
 
 impl<'a> System<'a> for HandleObstacle {
     type SystemData = (
+        Entities<'a>,
         WriteExpect<'a, GameOver>,
         ReadStorage<'a, Player>,
+        ReadStorage<'a, Obstacle>,
         ReadStorage<'a, Collider<CollisionTag>>,
     );
 
     fn run(
         &mut self,
-        (mut game_over, player_store, collider_store): Self::SystemData,
+        (
+            entities,
+            mut game_over,
+            player_store,
+            obstacle_store,
+            collider_store,
+        ): Self::SystemData,
     ) {
         if !game_over.0 {
             let is_game_over =
@@ -28,11 +36,19 @@ impl<'a> System<'a> for HandleObstacle {
                                 IsTag(CollisionTag::Obstacle),
                             ])
                         };
-                        collider
+                        let collision = collider
                             .query::<FindQuery<CollisionTag>>()
                             .exp(&query_exp)
-                            .run()
-                            .is_some()
+                            .run();
+                        if let Some(collision) = collision {
+                            (&entities, &obstacle_store).join().any(
+                                |(obstacle_entity, _)| {
+                                    obstacle_entity.id() == collision.id
+                                },
+                            )
+                        } else {
+                            false
+                        }
                     });
 
             if is_game_over {
