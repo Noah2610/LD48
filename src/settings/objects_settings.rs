@@ -2,11 +2,12 @@
 
 use super::entity_components::EntityComponents;
 use crate::level_loader::ObjectType;
+use deathframe::components::prelude::Merge;
 use std::collections::HashMap;
 
 type ObjectsSettingsMap = HashMap<ObjectType, ObjectSettings>;
 
-#[derive(Deserialize, Clone)]
+#[derive(Deserialize, Clone, Default)]
 #[serde(deny_unknown_fields, from = "ObjectsSettingsMap")]
 pub struct ObjectsSettings {
     pub objects: ObjectsSettingsMap,
@@ -23,5 +24,11 @@ pub struct ObjectSettings {
 impl From<ObjectsSettingsMap> for ObjectsSettings {
     fn from(objects: ObjectsSettingsMap) -> Self {
         Self { objects }
+    }
+}
+
+impl Merge for ObjectsSettings {
+    fn merge(&mut self, mut other: Self) {
+        self.objects.extend(&mut other.objects.into_iter())
     }
 }

@@ -40,7 +40,7 @@ impl Settings {
             lanes:   load_settings("settings/lanes.ron")?,
             camera:  load_settings("settings/camera.ron")?,
             player:  load_settings("settings/player.ron")?,
-            objects: load_settings("settings/objects.ron")?,
+            objects: load_settings_dir("settings/objects")?,
             zones:   load_settings_dir("settings/zones")?,
             audio:   load_settings("settings/audio.ron")?,
         })

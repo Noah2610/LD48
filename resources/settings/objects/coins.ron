@@ -1,0 +1,74 @@
+#![enable(implicit_some)]
+{
+    Coin("red"): (
+        spritesheet: "coins/coin_red.png",
+        components: [
+            Hitbox(Size),
+            Collidable(Coin),
+            Coin(()),
+            Animation([
+                (0, 50),
+                (1, 50),
+                (2, 50),
+                (3, 50),
+                (4, 50),
+                (5, 50),
+                (6, 50),
+                (7, 50),
+                (8, 50),
+                (9, 50),
+                (10, 50),
+                (11, 50),
+                (12, 50),
+            ]),
+        ],
+    ),
+
+    Coin("blue"): (
+        spritesheet: "coins/coin_blue.png",
+        components: [
+            Hitbox(Size),
+            Collidable(Coin),
+            Coin(()),
+            Animation([
+                (0, 50),
+                (1, 50),
+                (2, 50),
+                (3, 50),
+                (4, 50),
+                (5, 50),
+                (6, 50),
+                (7, 50),
+                (8, 50),
+                (9, 50),
+                (10, 50),
+                (11, 50),
+                (12, 50),
+            ]),
+        ],
+    ),
+
+    Coin("green"): (
+        spritesheet: "coins/coin_green.png",
+        components: [
+            Hitbox(Size),
+            Collidable(Coin),
+            Coin(()),
+            Animation([
+                (0, 50),
+                (1, 50),
+                (2, 50),
+                (3, 50),
+                (4, 50),
+                (5, 50),
+                (6, 50),
+                (7, 50),
+                (8, 50),
+                (9, 50),
+                (10, 50),
+                (11, 50),
+                (12, 50),
+            ]),
+        ],
+    ),
+}
