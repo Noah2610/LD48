@@ -17,8 +17,8 @@ Container(
         Label(
             transform: (
                 id:             "cutscene_skip_text",
-                x:              0.0,
-                y:              0.0,
+                x:              16.0,
+                y:              16.0,
                 z:              0.0,
                 width:          512.0,
                 height:         512.0,

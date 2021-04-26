@@ -1,5 +1,6 @@
 use super::menu_prelude::*;
 use super::state_prelude::*;
+use crate::input::prelude::{MenuAction, MenuBindings};
 
 #[derive(Default)]
 pub struct MainMenu {
@@ -13,6 +14,19 @@ impl MainMenu {
 
     fn stop<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
         self.delete_ui(data);
+    }
+
+    fn handle_input<'a, 'b>(
+        &mut self,
+        input_manager: &InputManager<MenuBindings>,
+    ) -> Option<Trans<GameData<'a, 'b>, StateEvent>> {
+        if input_manager.is_down(MenuAction::Start) {
+            return Some(Trans::Push(Box::new(Ingame::default())));
+        }
+        if input_manager.is_down(MenuAction::Quit) {
+            return Some(Trans::Quit);
+        }
+        None
     }
 }
 
@@ -40,7 +54,14 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for MainMenu {
         data.data
             .update(data.world, DispatcherId::MainMenu)
             .unwrap();
-        Trans::Push(Box::new(Ingame::default()))
+
+        if let Some(trans) = self.handle_input(
+            &*data.world.read_resource::<InputManager<MenuBindings>>(),
+        ) {
+            return trans;
+        }
+
+        Trans::None
     }
 
     fn fixed_update(

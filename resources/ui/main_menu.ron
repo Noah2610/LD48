@@ -13,5 +13,53 @@ Container(
         opaque:         false,
     ),
 
-    children: [],
+    children: [
+        Label(
+            transform: (
+                id:             "main_menu_title",
+                x:              0.0,
+                y:              64.0,
+                z:              0.0,
+                width:          512.0,
+                height:         512.0,
+                anchor:         Middle,
+                pivot:          Middle,
+                mouse_reactive: false,
+                percent:        false,
+                opaque:         false,
+            ),
+            text: (
+                text:      "MASKWELL",
+                font_size: 64.0,
+                color:     (0.9, 0.9, 0.9, 1.0),
+                font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
+                align:     Middle,
+                line_mode: Wrap,
+            ),
+        ),
+
+        Label(
+            transform: (
+                id:             "main_menu_play_text",
+                x:              0.0,
+                y:              -64.0,
+                z:              0.0,
+                width:          512.0,
+                height:         512.0,
+                anchor:         Middle,
+                pivot:          Middle,
+                mouse_reactive: false,
+                percent:        false,
+                opaque:         false,
+            ),
+            text: (
+                text:      "Press SPACE to fall",
+                font_size: 24.0,
+                color:     (0.9, 0.9, 0.9, 1.0),
+                font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
+                align:     Middle,
+                line_mode: Wrap,
+            ),
+        ),
+    ],
 )
