@@ -1,3 +1,4 @@
+use super::menu_prelude::*;
 use super::state_prelude::*;
 use crate::components::prelude::{Size, Transform};
 use crate::level_loader::build_level;
@@ -6,26 +7,30 @@ use crate::level_loader::objects::{build_camera, build_player};
 const SEGMENT_WIDTH: f32 = 96.0;
 
 #[derive(Default)]
-pub struct Ingame;
+pub struct Ingame {
+    ui_data: UiData,
+}
 
 impl Ingame {
-    fn start(&mut self, world: &mut World) {
-        world.delete_all();
+    fn start<'a, 'b>(&mut self, mut data: &mut StateData<GameData<'a, 'b>>) {
+        data.world.delete_all();
 
-        world.write_resource::<ZoneSize>().reset();
+        self.create_ui(&mut data, resource("ui/ingame.ron").to_str().unwrap());
+
+        data.world.write_resource::<ZoneSize>().reset();
 
         {
             let mut transform = Transform::default();
             transform.set_translation_xyz(0.0, 64.0, 2.0);
             let size = Size::new(32.0, 32.0);
-            let player = build_player(world, transform, size);
-            let _ = build_camera(world, player, SEGMENT_WIDTH);
+            let player = build_player(data.world, transform, size);
+            let _ = build_camera(data.world, player, SEGMENT_WIDTH);
         }
 
         {
             use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
 
-            world.exec(
+            data.world.exec(
                 |(mut zones_manager, settings, mut songs): (
                     WriteExpect<ZonesManager>,
                     ReadExpect<ZonesSettings>,
@@ -42,17 +47,14 @@ impl Ingame {
             );
         }
     }
+
+    fn stop<'a, 'b>(&mut self, mut data: &mut StateData<GameData<'a, 'b>>) {
+        self.delete_ui(&mut data);
+    }
 }
 
 impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
-    fn on_start(&mut self, data: StateData<GameData<'a, 'b>>) {
-        // TODO!!!
-        // let level_data =
-        //     load_level(resource("levels/zones/dev_0/00.json")).unwrap();
-        // let level_size =
-        //     Size::new(level_data.level.size.w, level_data.level.size.h);
-        // build_level(data.world, level_data).unwrap();
-
+    fn on_start(&mut self, mut data: StateData<GameData<'a, 'b>>) {
         data.world.insert(ZonesManager::default());
         data.world.insert(ZoneSize::default());
         data.world.insert(ShouldLoadNextZone::default());
@@ -80,11 +82,19 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
             );
         }
 
-        self.start(data.world);
+        self.start(&mut data);
     }
 
-    fn on_resume(&mut self, data: StateData<GameData<'a, 'b>>) {
-        self.start(data.world);
+    fn on_resume(&mut self, mut data: StateData<GameData<'a, 'b>>) {
+        self.start(&mut data);
+    }
+
+    fn on_stop(&mut self, mut data: StateData<GameData<'a, 'b>>) {
+        self.stop(&mut data);
+    }
+
+    fn on_pause(&mut self, mut data: StateData<GameData<'a, 'b>>) {
+        self.stop(&mut data);
     }
 
     fn update(
@@ -124,5 +134,30 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         }
 
         Trans::None
+    }
+}
+
+impl<'a, 'b> Menu<GameData<'a, 'b>, StateEvent> for Ingame {
+    fn event_triggered(
+        &mut self,
+        _data: &mut StateData<GameData<'a, 'b>>,
+        event_name: String,
+        event: UiEvent,
+    ) -> Option<Trans<GameData<'a, 'b>, StateEvent>> {
+        if let UiEventType::ClickStop = event.event_type {
+            match event_name.as_str() {
+                _ => None,
+            }
+        } else {
+            None
+        }
+    }
+
+    fn ui_data(&self) -> &UiData {
+        &self.ui_data
+    }
+
+    fn ui_data_mut(&mut self) -> &mut UiData {
+        &mut self.ui_data
     }
 }
