@@ -2,7 +2,7 @@ use super::menu_prelude::*;
 use super::state_prelude::*;
 use crate::components::prelude::{Size, Transform};
 use crate::level_loader::build_level;
-use crate::level_loader::objects::{build_camera, build_player};
+use crate::level_loader::objects::{build_camera, build_object, build_player};
 
 const SEGMENT_WIDTH: f32 = 96.0;
 
@@ -17,6 +17,7 @@ impl Ingame {
 
         self.create_ui(&mut data, resource("ui/ingame.ron").to_str().unwrap());
 
+        data.world.insert(ObjectSpawner::default());
         data.world.write_resource::<ZoneSize>().reset();
 
         {
@@ -130,6 +131,34 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
             if game_over.0 {
                 game_over.0 = false;
                 return Trans::Pop;
+            }
+        }
+
+        {
+            let objects_to_spawn = data
+                .world
+                .write_resource::<ObjectSpawner>()
+                .objects_to_spawn();
+            if !objects_to_spawn.is_empty() {
+                let offset_y = data.world.read_resource::<ZoneSize>().height;
+                for object in objects_to_spawn {
+                    let transform = {
+                        let mut transform = Transform::default();
+                        transform.set_translation_xyz(
+                            object.pos.0,
+                            -offset_y + object.pos.1,
+                            object.pos.2,
+                        );
+                        transform
+                    };
+                    build_object(
+                        data.world,
+                        object.object_type,
+                        transform,
+                        object.size.map(Into::into),
+                    )
+                    .map(|builder| builder.build());
+                }
             }
         }
 

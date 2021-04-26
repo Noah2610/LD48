@@ -5,11 +5,87 @@ use crate::resource;
 use crate::settings::entity_components::add_components_to_entity;
 use crate::settings::prelude::*;
 use crate::settings::zones_settings::SegmentId;
-use amethyst::ecs::{Builder, Entity, World, WorldExt};
+use amethyst::ecs::{Builder, Entity, EntityBuilder, World, WorldExt};
 use deathframe::amethyst;
 use deathframe::core::geo::prelude::Axis;
 use deathframe::resources::SpriteSheetHandles;
 use std::path::PathBuf;
+
+pub fn build_object<'a>(
+    world: &'a mut World,
+    object_type: ObjectType,
+    transform: Transform,
+    size_opt: Option<Size>,
+) -> Option<EntityBuilder<'a>> {
+    match &object_type {
+        ObjectType::Player => {
+            eprintln!(
+                    "[WARNING]\n    A `Player` object is placed in the \
+                     level!\n    The player is loaded automatically by the \
+                     game, don't place them in the levels.\n    The placed \
+                     player object will not be loaded."
+                );
+            // let player_entity = build_player(world, transform, size);
+            // let _ = build_camera(world, player_entity);
+        }
+
+        object_type => {
+            let object_settings = {
+                let settings = world.read_resource::<ObjectsSettings>();
+                settings.objects.get(object_type).map(|s| s.clone())
+            };
+
+            if let Some(object_settings) = object_settings {
+                let sprite_render_opt = if let Some(spritesheet) =
+                    object_settings.spritesheet.as_ref()
+                {
+                    let sprite_sheet = world
+                        .write_resource::<SpriteSheetHandles<PathBuf>>()
+                        .get_or_load(
+                            resource(format!("spritesheets/{}", spritesheet)),
+                            world,
+                        );
+                    Some({
+                        SpriteRender {
+                            sprite_sheet,
+                            sprite_number: 0,
+                        }
+                    })
+                } else {
+                    None
+                };
+
+                let mut entity_builder = world
+                    .create_entity()
+                    .with(transform)
+                    .with(Object::from(object_type.clone()));
+
+                if let Some(size) = size_opt.clone() {
+                    entity_builder = entity_builder.with(size);
+                }
+
+                if let Some(sprite_render) = sprite_render_opt {
+                    entity_builder = entity_builder.with(sprite_render);
+                }
+
+                entity_builder = add_components_to_entity(
+                    entity_builder,
+                    object_settings.components.clone(),
+                    size_opt,
+                );
+
+                entity_builder.build();
+            } else {
+                eprintln!(
+                    "[WARNING]\n    No settings for object: {:?}",
+                    object_type
+                );
+            }
+        }
+    }
+
+    unimplemented!()
+}
 
 pub fn build_objects(
     world: &mut World,
@@ -18,8 +94,6 @@ pub fn build_objects(
     segment_entity: Entity,
     offset_y: f32,
 ) -> amethyst::Result<()> {
-    let objects_settings = (*world.read_resource::<ObjectsSettings>()).clone();
-
     for object in objects {
         let transform = {
             let mut transform = Transform::default();
@@ -46,55 +120,16 @@ pub fn build_objects(
             }
 
             object_type => {
-                if let Some(object_settings) =
-                    objects_settings.objects.get(object_type)
-                {
-                    let sprite_render_opt = if let Some(spritesheet) =
-                        object_settings.spritesheet.as_ref()
-                    {
-                        let sprite_sheet = world
-                            .write_resource::<SpriteSheetHandles<PathBuf>>()
-                            .get_or_load(
-                                resource(format!(
-                                    "spritesheets/{}",
-                                    spritesheet
-                                )),
-                                world,
-                            );
-                        Some({
-                            SpriteRender {
-                                sprite_sheet,
-                                sprite_number: 0,
-                            }
-                        })
-                    } else {
-                        None
-                    };
-
-                    let mut entity_builder = world
-                        .create_entity()
-                        .with(transform)
-                        .with(size.clone())
-                        .with(Object::from(object_type.clone()))
+                if let Some(entity_builder) = build_object(
+                    world,
+                    object_type.clone(),
+                    transform,
+                    Some(size),
+                ) {
+                    entity_builder
                         .with(BelongsToSegment(segment_id.clone()))
-                        .with(ParentDelete(segment_entity));
-
-                    if let Some(sprite_render) = sprite_render_opt {
-                        entity_builder = entity_builder.with(sprite_render);
-                    }
-
-                    entity_builder = add_components_to_entity(
-                        entity_builder,
-                        object_settings.components.clone(),
-                        Some(size),
-                    );
-
-                    entity_builder.build();
-                } else {
-                    eprintln!(
-                        "[WARNING]\n    No settings for object: {:?}",
-                        object_type
-                    );
+                        .with(ParentDelete(segment_entity))
+                        .build();
                 }
             }
         }
