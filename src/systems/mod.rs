@@ -6,6 +6,7 @@ mod handle_parent_delete;
 mod handle_segment_loading;
 mod handle_zone_switch;
 mod update_on_lane;
+mod update_score_ui;
 
 pub mod prelude {
     pub use super::confine_camera_to_final_segment::ConfineCameraToFinalSegment;
@@ -16,6 +17,7 @@ pub mod prelude {
     pub use super::handle_segment_loading::HandleSegmentLoading;
     pub use super::handle_zone_switch::HandleZoneSwitch;
     pub use super::update_on_lane::UpdateOnLane;
+    pub use super::update_score_ui::UpdateScoreUi;
     pub use deathframe::systems::prelude::*;
 }
 

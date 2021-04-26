@@ -150,6 +150,12 @@ pub(super) fn build_game_data<'a, 'b>(
             HandleCoinCollection::default(),
             "handle_coin_collection_system",
             &[],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            UpdateScoreUi::default(),
+            "update_score_ui_system",
+            &[],
         )?;
 
     Ok(custom_game_data)
