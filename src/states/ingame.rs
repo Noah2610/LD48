@@ -7,61 +7,73 @@ use crate::level_loader::objects::{build_camera, build_object, build_player};
 
 const SEGMENT_WIDTH: f32 = 128.0;
 
-#[derive(Default)]
 pub struct Ingame {
-    ui_data: UiData,
+    load_new_zone_on_resume: bool,
+    ui_data:                 UiData,
+}
+
+impl Default for Ingame {
+    fn default() -> Self {
+        Self {
+            load_new_zone_on_resume: true,
+            ui_data:                 Default::default(),
+        }
+    }
 }
 
 impl Ingame {
     fn start<'a, 'b>(&mut self, mut data: &mut StateData<GameData<'a, 'b>>) {
-        data.world.delete_all();
+        if self.load_new_zone_on_resume {
+            self.load_new_zone_on_resume = false;
 
-        self.create_ui(&mut data, resource("ui/ingame.ron").to_str().unwrap());
+            data.world.delete_all();
 
-        data.world.insert(ObjectSpawner::default());
-        data.world.write_resource::<ZoneSize>().reset();
-
-        let mut player_speed_opt = None;
-
-        {
-            use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
-
-            data.world.exec(
-                |(mut zones_manager, settings, mut songs): (
-                    WriteExpect<ZonesManager>,
-                    ReadExpect<ZonesSettings>,
-                    WriteExpect<Songs<SongKey>>,
-                )| {
-                    zones_manager.stage_initial_segments(&settings);
-                    player_speed_opt =
-                        zones_manager.get_current_player_speed(&settings);
-                    songs.stop_all();
-                    if let Some(song_key) =
-                        zones_manager.get_current_song(&settings)
-                    {
-                        songs.play(song_key);
-                    }
-                },
+            self.create_ui(
+                &mut data,
+                resource("ui/ingame.ron").to_str().unwrap(),
             );
-        }
 
-        if let Some(player_speed) = player_speed_opt {
-            let mut transform = Transform::default();
-            transform.set_translation_xyz(0.0, 64.0, 2.0);
-            let size = Size::new(32.0, 32.0);
-            let player =
-                build_player(data.world, transform, size, player_speed);
-            let _ = build_camera(data.world, player, SEGMENT_WIDTH);
-        } else {
-            eprintln!(
-                "[WARNING]\n    No `player_speed` configured for current \
-                 zone.\n    Player will NOT be spawned."
-            );
-        }
-    }
+            data.world.insert(ObjectSpawner::default());
+            data.world.write_resource::<ZoneSize>().reset();
 
-    fn stop<'a, 'b>(&mut self, mut data: &mut StateData<GameData<'a, 'b>>) {
-        self.delete_ui(&mut data);
+            let mut player_speed_opt = None;
+
+            {
+                use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
+
+                data.world.exec(
+                    |(mut zones_manager, settings, mut songs): (
+                        WriteExpect<ZonesManager>,
+                        ReadExpect<ZonesSettings>,
+                        WriteExpect<Songs<SongKey>>,
+                    )| {
+                        zones_manager.stage_initial_segments(&settings);
+                        player_speed_opt =
+                            zones_manager.get_current_player_speed(&settings);
+                        songs.stop_all();
+                        if let Some(song_key) =
+                            zones_manager.get_current_song(&settings)
+                        {
+                            songs.play(song_key);
+                        }
+                    },
+                );
+            }
+
+            if let Some(player_speed) = player_speed_opt {
+                let mut transform = Transform::default();
+                transform.set_translation_xyz(0.0, 64.0, 2.0);
+                let size = Size::new(32.0, 32.0);
+                let player =
+                    build_player(data.world, transform, size, player_speed);
+                let _ = build_camera(data.world, player, SEGMENT_WIDTH);
+            } else {
+                eprintln!(
+                    "[WARNING]\n    No `player_speed` configured for current \
+                     zone.\n    Player will NOT be spawned."
+                );
+            }
+        }
     }
 
     fn handle_input<'a, 'b>(
@@ -116,11 +128,13 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
     }
 
     fn on_stop(&mut self, mut data: StateData<GameData<'a, 'b>>) {
-        self.stop(&mut data);
+        self.delete_ui(&mut data);
     }
 
     fn on_pause(&mut self, mut data: StateData<GameData<'a, 'b>>) {
-        self.stop(&mut data);
+        if self.load_new_zone_on_resume {
+            self.delete_ui(&mut data);
+        }
     }
 
     fn update(
@@ -152,6 +166,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
             let mut should_load_next_zone =
                 data.world.write_resource::<ShouldLoadNextZone>();
             if should_load_next_zone.0 {
+                self.load_new_zone_on_resume = true;
                 should_load_next_zone.0 = false;
                 return Trans::Push(Box::new(ZoneTransition::default()));
             }
