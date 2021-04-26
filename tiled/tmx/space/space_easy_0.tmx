@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="42" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="43">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="42" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="74">
  <editorsettings>
-  <export target="." format="ld48-export"/>
+  <export target="../../../resources/levels/zones/space/space_easy_0.json" format="ld48-export"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tsx/tiles_red.tsx"/>
  <tileset firstgid="593" source="../../tsx/tiles_green.tsx"/>
@@ -14,7 +14,19 @@
   <object id="28" name="BG" type="Custom(BgSpace)" x="0" y="192" width="128" height="144"/>
  </objectgroup>
  <objectgroup id="3" name="pickups"/>
- <objectgroup id="5" name="obstacles"/>
+ <objectgroup id="5" name="obstacles">
+  <object id="63" name="Asteroid" type="Custom(Asteroid0)" x="24" y="48" width="16" height="16"/>
+  <object id="64" name="Asteroid" type="Custom(Asteroid1)" x="56" y="72" width="16" height="16"/>
+  <object id="65" name="Asteroid" type="Custom(Asteroid2)" x="72" y="8" width="16" height="16"/>
+  <object id="66" name="Asteroid" type="Custom(Asteroid3)" x="104" y="40" width="16" height="16"/>
+  <object id="67" name="Asteroid" type="Custom(Asteroid2)" x="40" y="128" width="16" height="16"/>
+  <object id="68" name="Asteroid" type="Custom(Asteroid2)" x="88" y="160" width="16" height="16"/>
+  <object id="69" name="Asteroid" type="Custom(Asteroid2)" x="72" y="240" width="16" height="16"/>
+  <object id="70" name="Asteroid" type="Custom(Asteroid3)" x="40" y="216" width="16" height="16"/>
+  <object id="71" name="Asteroid" type="Custom(Asteroid2)" x="40" y="272" width="16" height="16"/>
+  <object id="72" name="Asteroid" type="Custom(Asteroid1)" x="104" y="280" width="16" height="16"/>
+  <object id="73" name="Asteroid" type="Custom(Asteroid0)" x="8" y="304" width="16" height="16"/>
+ </objectgroup>
  <layer id="4" name="border" width="16" height="42">
   <data encoding="csv">
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
