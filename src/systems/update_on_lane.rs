@@ -33,7 +33,8 @@ impl<'a> System<'a> for UpdateOnLane {
         )
             .join()
         {
-            let mut next_lane = on_lane.current.unwrap_or(0);
+            let mut next_lane =
+                on_lane.current.unwrap_or_else(|| lanes.lanes.len() / 2);
 
             for action in on_lane.drain_actions() {
                 match action {
