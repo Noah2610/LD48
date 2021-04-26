@@ -1,4 +1,4 @@
-mod confine_camera_to_final_segment;
+mod confine_camera_to_first_and_final_segment;
 mod control_player;
 mod handle_coin_collection;
 mod handle_delete_delay;
@@ -11,7 +11,7 @@ mod update_on_lane;
 mod update_score_ui;
 
 pub mod prelude {
-    pub use super::confine_camera_to_final_segment::ConfineCameraToFinalSegment;
+    pub use super::confine_camera_to_first_and_final_segment::ConfineCameraToFirstAndFinalSegment;
     pub use super::control_player::ControlPlayer;
     pub use super::handle_coin_collection::HandleCoinCollection;
     pub use super::handle_delete_delay::HandleDeleteDelay;

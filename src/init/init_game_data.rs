@@ -124,8 +124,8 @@ pub(super) fn build_game_data<'a, 'b>(
         )?
         .with(
             DispatcherId::Ingame,
-            ConfineCameraToFinalSegment::default(),
-            "confine_camera_to_final_segment_system",
+            ConfineCameraToFirstAndFinalSegment::default(),
+            "confine_camera_to_first_and_final_segment",
             &[],
         )?
         .with(

@@ -38,7 +38,7 @@ pub fn build_level(
     level_data: DataLevel,
     segment_id: SegmentId,
 ) -> amethyst::Result<()> {
-    let is_final_segment = {
+    let is_first_is_final_segment = {
         let zones_manager = world.read_resource::<ZonesManager>();
         let zones_settings = world.read_resource::<ZonesSettings>();
         if let Some(current_zone) = zones_manager.current_zone() {
@@ -46,11 +46,14 @@ pub fn build_level(
                 .zones
                 .get(current_zone)
                 .map(|zone_settings| {
-                    zone_settings.final_segment.contains(&segment_id)
+                    (
+                        zone_settings.first_segment.contains(&segment_id),
+                        zone_settings.final_segment.contains(&segment_id),
+                    )
                 })
-                .unwrap_or(false)
+                .unwrap_or((false, false))
         } else {
-            false
+            (false, false)
         }
     };
 
@@ -70,7 +73,7 @@ pub fn build_level(
         world,
         level_size.clone(),
         segment_id.clone(),
-        is_final_segment,
+        is_first_is_final_segment,
         offset_y,
     );
 

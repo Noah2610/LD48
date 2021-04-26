@@ -5,5 +5,6 @@ use crate::settings::zones_settings::SegmentId;
 #[storage(VecStorage)]
 pub struct Segment {
     pub id:               SegmentId,
+    pub is_first_segment: bool,
     pub is_final_segment: bool,
 }

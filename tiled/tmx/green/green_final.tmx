@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="44" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="71">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="44" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="84">
  <editorsettings>
   <export target="../../../resources/levels/zones/green/green_final.json" format="ld48-export"/>
  </editorsettings>
@@ -9,25 +9,27 @@
   <properties>
    <property name="z" type="float" value="-1"/>
   </properties>
-  <object id="68" name="BG" type="Custom(BgGreen)" x="0" y="0" width="96" height="144"/>
-  <object id="69" name="BG" type="Custom(BgGreen)" x="0" y="144" width="96" height="144"/>
-  <object id="70" name="BG" type="Custom(BgGreen)" x="0" y="288" width="96" height="144"/>
+  <object id="68" name="BG" type="Custom(BgGreen)" x="0" y="0" width="128" height="144"/>
+  <object id="69" name="BG" type="Custom(BgGreen)" x="0" y="144" width="128" height="144"/>
+  <object id="70" name="BG" type="Custom(BgGreen)" x="0" y="208" width="128" height="144"/>
  </objectgroup>
- <objectgroup id="3" name="pickups"/>
- <objectgroup id="5" name="obstacles">
-  <object id="50" name="pickup" type="Coin(green)" x="40" y="40" width="16" height="16"/>
-  <object id="51" name="pickup" type="Coin(green)" x="40" y="56" width="16" height="16"/>
-  <object id="52" name="pickup" type="Coin(green)" x="40" y="72" width="16" height="16"/>
-  <object id="53" name="pickup" type="Coin(green)" x="56" y="136" width="16" height="16"/>
-  <object id="54" name="pickup" type="Coin(green)" x="56" y="120" width="16" height="16"/>
-  <object id="55" name="pickup" type="Coin(green)" x="56" y="104" width="16" height="16"/>
-  <object id="56" name="pickup" type="Coin(green)" x="8" y="200" width="16" height="16"/>
-  <object id="57" name="pickup" type="Coin(green)" x="8" y="184" width="16" height="16"/>
-  <object id="58" name="pickup" type="Coin(green)" x="8" y="168" width="16" height="16"/>
-  <object id="59" name="pickup" type="Coin(green)" x="40" y="256" width="16" height="16"/>
-  <object id="60" name="pickup" type="Coin(green)" x="40" y="240" width="16" height="16"/>
-  <object id="61" name="pickup" type="Coin(green)" x="40" y="224" width="16" height="16"/>
-  <object id="67" type="Portal" x="8" y="304" width="80" height="16"/>
+ <objectgroup id="3" name="pickups">
+  <object id="72" name="pickup" type="Coin(green)" x="56" y="40" width="16" height="16"/>
+  <object id="73" name="pickup" type="Coin(green)" x="56" y="56" width="16" height="16"/>
+  <object id="74" name="pickup" type="Coin(green)" x="56" y="72" width="16" height="16"/>
+  <object id="75" name="pickup" type="Coin(green)" x="72" y="136" width="16" height="16"/>
+  <object id="76" name="pickup" type="Coin(green)" x="72" y="120" width="16" height="16"/>
+  <object id="77" name="pickup" type="Coin(green)" x="72" y="104" width="16" height="16"/>
+  <object id="78" name="pickup" type="Coin(green)" x="24" y="200" width="16" height="16"/>
+  <object id="79" name="pickup" type="Coin(green)" x="24" y="184" width="16" height="16"/>
+  <object id="80" name="pickup" type="Coin(green)" x="24" y="168" width="16" height="16"/>
+  <object id="81" name="pickup" type="Coin(green)" x="56" y="256" width="16" height="16"/>
+  <object id="82" name="pickup" type="Coin(green)" x="56" y="240" width="16" height="16"/>
+  <object id="83" name="pickup" type="Coin(green)" x="56" y="224" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="5" name="obstacles"/>
+ <objectgroup id="6" name="portal">
+  <object id="71" type="Portal" x="8" y="304" width="112" height="16"/>
  </objectgroup>
  <layer id="4" name="border" width="16" height="44">
   <data encoding="csv">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="36" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="51">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="40" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="64">
  <editorsettings>
   <export target="../../../resources/levels/zones/green/green_medium_1.json" format="ld48-export"/>
  </editorsettings>
@@ -9,36 +9,36 @@
   <properties>
    <property name="z" type="float" value="-1"/>
   </properties>
-  <object id="49" name="BG" type="Custom(BgGreen)" x="0" y="0" width="96" height="144"/>
-  <object id="50" name="BG" type="Custom(BgGreen)" x="0" y="144" width="96" height="144"/>
+  <object id="49" name="BG" type="Custom(BgGreen)" x="0" y="0" width="128" height="144"/>
+  <object id="50" name="BG" type="Custom(BgGreen)" x="0" y="144" width="128" height="144"/>
+  <object id="63" name="BG" type="Custom(BgGreen)" x="0" y="176" width="128" height="144"/>
  </objectgroup>
  <objectgroup id="3" name="pickups">
-  <object id="13" name="pickup" type="Coin(green)" x="72" y="72" width="16" height="16"/>
-  <object id="23" name="pickup" type="Coin(green)" x="72" y="56" width="16" height="16"/>
-  <object id="35" name="pickup" type="Coin(green)" x="72" y="40" width="16" height="16"/>
-  <object id="36" name="pickup" type="Coin(green)" x="72" y="72" width="16" height="16"/>
-  <object id="37" name="pickup" type="Coin(green)" x="72" y="56" width="16" height="16"/>
-  <object id="38" name="pickup" type="Coin(green)" x="72" y="40" width="16" height="16"/>
-  <object id="39" name="pickup" type="Coin(green)" x="8" y="136" width="16" height="16"/>
-  <object id="40" name="pickup" type="Coin(green)" x="8" y="120" width="16" height="16"/>
-  <object id="41" name="pickup" type="Coin(green)" x="8" y="104" width="16" height="16"/>
-  <object id="43" name="pickup" type="Coin(green)" x="40" y="240" width="16" height="16"/>
-  <object id="44" name="pickup" type="Coin(green)" x="40" y="224" width="16" height="16"/>
+  <object id="44" name="pickup" type="Coin(green)" x="56" y="24" width="16" height="16"/>
+  <object id="53" name="pickup" type="Coin(green)" x="56" y="8" width="16" height="16"/>
+  <object id="54" name="pickup" type="Coin(green)" x="24" y="8" width="16" height="16"/>
+  <object id="55" name="pickup" type="Coin(green)" x="24" y="24" width="16" height="16"/>
+  <object id="56" name="pickup" type="Coin(green)" x="104" y="200" width="16" height="16"/>
+  <object id="57" name="pickup" type="Coin(green)" x="104" y="216" width="16" height="16"/>
+  <object id="58" name="pickup" type="Coin(green)" x="104" y="232" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="obstacles">
   <object id="16" name="obstacle" type="Obstacle" x="24" y="200" width="48" height="16"/>
-  <object id="26" name="obstacle" type="Obstacle" x="88" y="0" width="8" height="288"/>
-  <object id="27" name="obstacle" type="Obstacle" x="0" y="0" width="8" height="288"/>
   <object id="29" name="obstacle" type="Obstacle" x="56" y="152" width="32" height="16"/>
   <object id="30" name="obstacle" type="Obstacle" x="24" y="40" width="48" height="16"/>
-  <object id="31" name="obstacle" type="Obstacle" x="24" y="104" width="32" height="16"/>
+  <object id="31" name="obstacle" type="Obstacle" x="24" y="88" width="32" height="16"/>
   <object id="42" name="obstacle" type="Obstacle" x="8" y="152" width="32" height="16"/>
-  <object id="45" name="obstacle" type="Obstacle" x="72" y="240" width="16" height="16"/>
+  <object id="45" name="obstacle" type="Obstacle" x="88" y="200" width="16" height="48"/>
   <object id="46" name="obstacle" type="Obstacle" x="40" y="256" width="16" height="16"/>
   <object id="47" name="obstacle" type="Obstacle" x="8" y="240" width="16" height="16"/>
-  <object id="48" name="obstacle" type="Obstacle" x="72" y="88" width="16" height="16"/>
+  <object id="51" name="obstacle" type="Obstacle" x="88" y="40" width="32" height="16"/>
+  <object id="52" name="obstacle" type="Obstacle" x="72" y="88" width="48" height="16"/>
+  <object id="59" name="obstacle" type="Obstacle" x="56" y="288" width="32" height="16"/>
+  <object id="60" name="obstacle" type="Obstacle" x="104" y="288" width="16" height="16"/>
+  <object id="61" name="obstacle" type="Obstacle" x="104" y="152" width="16" height="16"/>
+  <object id="62" name="obstacle" type="Obstacle" x="40" y="8" width="16" height="32"/>
  </objectgroup>
- <layer id="4" name="border" width="16" height="36">
+ <layer id="4" name="border" width="16" height="40">
   <data encoding="csv">
 692,0,0,0,0,0,0,0,0,0,0,0,0,0,0,611,
 616,0,0,0,0,0,0,0,0,0,0,0,0,0,0,629,
@@ -75,48 +75,56 @@
 634,0,0,0,0,0,0,0,0,0,0,0,0,0,0,665,
 652,0,0,0,0,0,0,0,0,0,0,0,0,0,0,611,
 616,0,0,0,0,0,0,0,0,0,0,0,0,0,0,629,
-634,0,0,0,0,0,0,0,0,0,0,0,0,0,0,647
+634,0,0,0,0,0,0,0,0,0,0,0,0,0,0,647,
+652,0,0,0,0,0,0,0,0,0,0,0,0,0,0,665,
+616,0,0,0,0,0,0,0,0,0,0,0,0,0,0,611,
+634,0,0,0,0,0,0,0,0,0,0,0,0,0,0,629,
+652,0,0,0,0,0,0,0,0,0,0,0,0,0,0,647
 </data>
  </layer>
- <layer id="1" name="Tile Layer 1" width="16" height="36">
+ <layer id="1" name="Tile Layer 1" width="16" height="40">
   <properties>
    <property name="z" type="float" value="5"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,593,594,595,596,595,682,0,0,0,0,0,0,0,
-0,0,0,767,768,613,614,613,772,0,0,0,0,0,0,0,
+0,0,0,0,0,673,674,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,691,692,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,633,634,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,651,652,0,0,0,0,0,0,0,0,0,
+0,0,0,593,594,669,666,595,682,0,0,605,596,607,596,669,
+0,0,0,767,768,613,614,613,772,0,0,623,686,625,686,615,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,631,632,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,601,596,669,0,0,0,0,
-0,0,0,0,0,649,650,0,0,619,686,615,0,0,0,0,
-0,0,0,593,595,667,608,0,0,0,0,0,0,0,0,0,
-0,0,0,683,684,685,626,0,0,0,0,0,0,0,0,0,
+0,0,0,593,595,667,608,0,0,601,596,607,596,607,596,669,
+0,0,0,683,684,685,626,0,0,619,686,625,686,625,686,615,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-732,679,680,607,608,0,0,605,606,607,596,669,0,0,0,0,
-696,697,698,625,626,0,0,623,624,625,686,615,0,0,0,0,
+0,0,0,0,0,0,0,601,602,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,647,648,0,0,0,0,0,0,0,
+732,679,680,607,608,0,0,665,666,607,598,0,0,593,596,669,
+696,697,698,625,626,0,0,683,684,625,688,0,0,683,686,615,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,605,606,595,596,607,608,0,0,0,0,0,0,0,
-0,0,0,623,624,613,614,625,626,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-732,607,608,0,0,0,0,0,0,601,596,669,0,0,0,0,
-696,625,626,0,0,0,0,0,0,619,686,615,0,0,0,0,
+0,0,0,605,606,595,596,607,608,0,0,673,674,0,0,0,
+0,0,0,623,624,613,614,625,626,0,0,691,692,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,709,710,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,709,710,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,691,692,0,0,0,
+732,607,608,0,0,0,0,0,0,0,0,619,620,0,0,0,
+696,625,626,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,601,602,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,619,620,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,605,606,607,608,0,0,605,606,669,
+0,0,0,0,0,0,0,623,624,625,626,0,0,623,624,615,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
