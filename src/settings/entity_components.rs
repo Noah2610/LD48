@@ -45,7 +45,10 @@ pub fn add_components_to_entity(
                 animation.play_cycle();
                 builder.with(animation)
             }
-            Comp::Animations(animations) => builder.with(animations),
+            Comp::Animations(mut animations) => {
+                let _ = animations.play(AnimationKey::Idle);
+                builder.with(animations)
+            }
             Comp::BaseFriction(base_friction) => builder.with(base_friction),
             Comp::Hitbox(hitbox) => {
                 hitbox.add_hitbox_to_entity(builder, size_opt.as_ref())

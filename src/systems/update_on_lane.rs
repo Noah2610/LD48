@@ -69,10 +69,12 @@ impl<'a> System<'a> for UpdateOnLane {
                 velocity.x = on_lane.switch_speed * pos_diff.signum();
 
                 if let Some(animations) = animations_opt {
+                    let _ = animations.push(AnimationKey::LaneSwitch);
+                    let scale = transform.scale_mut();
                     if is_moving_right {
-                        let _ = animations.push(AnimationKey::NextLane);
+                        scale.x = scale.x.abs();
                     } else {
-                        let _ = animations.push(AnimationKey::PrevLane);
+                        scale.x = scale.x.abs() * -1.0;
                     }
                 }
             }
