@@ -29,7 +29,7 @@ impl<'a> System<'a> for HandleTurret {
                 let _ = timer.start();
                 let pos = {
                     let trans = turret_transform.translation();
-                    (trans.x, trans.y, trans.z)
+                    (trans.x, trans.y, trans.z + 1.0)
                 };
                 object_spawner.spawn(ObjectToSpawn {
                     object_type: turret.shot_object_type.clone(),

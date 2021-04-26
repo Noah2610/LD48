@@ -140,13 +140,12 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
                 .write_resource::<ObjectSpawner>()
                 .objects_to_spawn();
             if !objects_to_spawn.is_empty() {
-                let offset_y = data.world.read_resource::<ZoneSize>().height;
                 for object in objects_to_spawn {
                     let transform = {
                         let mut transform = Transform::default();
                         transform.set_translation_xyz(
                             object.pos.0,
-                            -offset_y + object.pos.1,
+                            object.pos.1,
                             object.pos.2,
                         );
                         transform
