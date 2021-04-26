@@ -4,7 +4,7 @@ use crate::components::prelude::{Size, Transform};
 use crate::level_loader::build_level;
 use crate::level_loader::objects::{build_camera, build_object, build_player};
 
-const SEGMENT_WIDTH: f32 = 96.0;
+const SEGMENT_WIDTH: f32 = 128.0;
 
 #[derive(Default)]
 pub struct Ingame {
