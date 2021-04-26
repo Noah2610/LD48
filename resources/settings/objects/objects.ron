@@ -50,7 +50,12 @@
     ),
 
     Custom("BgSpace"): (
-        spritesheet: "bg/bg_space_1.png",
+        spritesheet: "bg/bg_space_2.png",
+        components: [],
+    ),
+
+    Custom("BgWell"): (
+        spritesheet: "bg/bg_well_1.png",
         components: [],
     ),
 }

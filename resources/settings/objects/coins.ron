@@ -24,7 +24,7 @@
         ],
     ),
 
-    Coin("blue"): (
+    Coin("well"): (
         spritesheet: "coins/coin_blue.png",
         components: [
             Hitbox(Size),

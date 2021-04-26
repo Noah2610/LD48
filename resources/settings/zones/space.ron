@@ -6,8 +6,8 @@
     zones: {
         "space": (
             song: Well,
-            player_speed: -100.0,
-            total_segments: 8,
+            player_speed: -95.0,
+            total_segments: 14,
             first_segment: ["space/space_first.json"],
             final_segment: ["space/space_final.json"],
             segments: {
@@ -24,6 +24,7 @@
                     "space/space_easy_1.json",
                     "space/space_easy_2.json",
                     "space/space_medium_0.json",
+                    "space/space_medium_2.json",
                 ],
                 "space/space_easy_1.json": [
                     "space/space_easy_0.json",
@@ -39,14 +40,30 @@
                     "space/space_easy_1.json",
                 ],
                 "space/space_medium_0.json": [
-                    "space/space_easy_0.json",
                     "space/space_easy_2.json",
                     "space/space_medium_1.json",
+                    "space/space_medium_2.json",
                 ],
                 "space/space_medium_1.json": [
+                    "space/space_easy_1.json",
+                    "space/space_easy_1.json",
+                    "space/space_medium_0.json",
+                    "space/space_medium_2.json",
+                ],
+                "space/space_medium_2.json": [
+                    "space/space_easy_2.json",
+                    "space/space_easy_1.json",
+                    "space/space_easy_1.json",
+                    "space/space_medium_0.json",
+                ],
+                "space/space_medium_3.json": [
+                    "space/space_easy_1.json",
+                    "space/space_easy_2.json",
+                    "space/space_medium_0.json",
                     "space/space_easy_0.json",
                     "space/space_easy_1.json",
                     "space/space_medium_0.json",
+                    "space/space_medium_2.json",
                 ],
             }
         ),

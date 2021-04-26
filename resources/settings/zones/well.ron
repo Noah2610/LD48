@@ -1,0 +1,23 @@
+// src/settings/zones_settings.rs
+// ./zones.ron
+
+#![enable(implicit_some)]
+(
+    zones: {
+        "well": (
+            song: Well,
+            player_speed: -85.0,
+            total_segments: 3,
+            first_segment: ["well/well_first.json"],
+            final_segment: ["well/well_final.json"],
+            segments: {
+                "well/well_first.json": [
+                    "well/well_0.json",
+                ],
+                "well/well_0.json": [
+                    "well/well_1.json",
+                ],
+            }
+        ),
+    },
+)

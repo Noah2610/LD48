@@ -6,8 +6,8 @@
     zones: {
         "red": (
             song: Red,
-            player_speed: -100.0,
-            total_segments: 8,
+            player_speed: -95.0,
+            total_segments: 18,
             first_segment: ["red/red_first.json"],
             final_segment: ["red/red_final.json"],
             segments: {
@@ -27,9 +27,9 @@
                     "red/red_easy_2.json",
                     "red/red_easy_3.json",
 
-                //    "red/red_medium_1.json",
-                //    "red/red_medium_2.json",
-                //    "red/red_medium_3.json",
+                    "red/red_medium_1.json",
+                    "red/red_medium_2.json",
+                    "red/red_medium_3.json",
                 ],
                 "red/red_easy_1.json": [
                     "red/red_easy_0.json",
@@ -38,6 +38,9 @@
                     "red/red_easy_0.json",
                     "red/red_easy_2.json",
                     "red/red_easy_3.json",
+
+                    "red/red_medium_2.json",
+                    "red/red_medium_3.json",
                 ],
                 "red/red_easy_2.json": [
                     "red/red_easy_1.json",
@@ -47,7 +50,44 @@
                     "red/red_easy_0.json",
                     "red/red_easy_3.json",
 
-                    "red/red_final.json",
+                    "red/red_medium_1.json",
+                    "red/red_medium_3.json",
+                ],
+                "red/red_easy_3.json": [
+                    "red/red_easy_1.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_3.json",
+                    "red/red_easy_1.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_3.json",
+
+                    "red/red_medium_2.json",
+                    "red/red_medium_3.json",
+                ],
+                "red/red_medium_1.json": [
+                    "red/red_easy_0.json",
+                    "red/red_easy_1.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                    
+                    "red/red_medium_2.json",
+                    "red/red_medium_3.json",
+                    "red/red_medium_3.json",
+                ],
+                "red/red_medium_2.json": [
+                    "red/red_easy_2.json",
+                    "red/red_easy_2.json",
+                    
+                    "red/red_medium_1.json",
+                    "red/red_medium_2.json",
+                    "red/red_medium_2.json",
+                ],
+                "red/red_medium_3.json": [
+                    "red/red_easy_1.json",
+                    
+                    "red/red_medium_1.json",
+                    "red/red_medium_2.json",
+                    "red/red_medium_2.json",
                 ],
             }
         ),

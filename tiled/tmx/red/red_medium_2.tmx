@@ -63,8 +63,8 @@
 0,0,0,0,0,0,0,149,150,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,112,113,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,149,150,0,0,0,0,0,0,0,
-0,1,2,112,113,0,0,4,5,6,7,0,0,1,2,0,
-0,38,39,149,150,0,0,41,42,43,44,0,0,38,39,0,
+0,1,2,0,0,0,0,4,5,6,7,0,0,1,2,0,
+0,38,39,0,0,0,0,41,42,43,44,0,0,38,39,0,
 0,0,0,0,0,0,0,1,2,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,38,39,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,1,2,0,0,0,0,0,0,0,
@@ -92,7 +92,6 @@
   <object id="5" name="pickup" type="Coin(red)" x="8" y="216" width="16" height="16"/>
   <object id="15" name="pickup" type="Coin(red)" x="72" y="216" width="16" height="16"/>
   <object id="16" name="pickup" type="Coin(red)" x="56" y="32" width="16" height="16"/>
-  <object id="17" name="pickup" type="Coin(red)" x="24" y="80" width="16" height="16"/>
   <object id="18" name="pickup" type="Coin(red)" x="8" y="80" width="16" height="16"/>
   <object id="19" name="pickup" type="Coin(red)" x="40" y="128" width="16" height="16"/>
   <object id="20" name="pickup" type="Coin(red)" x="24" y="128" width="16" height="16"/>
@@ -107,7 +106,7 @@
   <object id="32" name="obstacle" type="Obstacle" x="72" y="192" width="16" height="16"/>
   <object id="34" name="obstacle" type="Obstacle" x="40" y="240" width="16" height="16"/>
   <object id="35" name="obstacle" type="Obstacle" x="8" y="240" width="16" height="16"/>
-  <object id="36" name="obstacle" type="Obstacle" x="8" y="96" width="32" height="16"/>
+  <object id="36" name="obstacle" type="Obstacle" x="8" y="96" width="16" height="16"/>
   <object id="37" name="obstacle" type="Obstacle" x="24" y="16" width="16" height="48"/>
   <object id="38" name="obstacle" type="Obstacle" x="56" y="48" width="16" height="112"/>
   <object id="39" name="obstacle" type="Obstacle" x="24" y="144" width="32" height="16"/>
