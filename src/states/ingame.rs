@@ -130,7 +130,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
             let mut game_over = data.world.write_resource::<GameOver>();
             if game_over.0 {
                 game_over.0 = false;
-                return Trans::Pop;
+                return Trans::Switch(Box::new(GameOverState::default()));
             }
         }
 

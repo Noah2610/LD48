@@ -39,6 +39,7 @@ pub(super) fn build_game_data<'a, 'b>(
         .dispatcher(DispatcherId::Ingame)?
         .dispatcher(DispatcherId::Paused)?
         .dispatcher(DispatcherId::ZoneTransition)?
+        .dispatcher(DispatcherId::GameOver)?
         .with_core_bundle(FpsCounterBundle)?
         .with_core_bundle(transform_bundle)?
         .with_core_bundle(rendering_bundle)?

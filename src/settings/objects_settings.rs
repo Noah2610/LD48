@@ -28,7 +28,7 @@ impl From<ObjectsSettingsMap> for ObjectsSettings {
 }
 
 impl Merge for ObjectsSettings {
-    fn merge(&mut self, mut other: Self) {
+    fn merge(&mut self, other: Self) {
         self.objects.extend(&mut other.objects.into_iter())
     }
 }

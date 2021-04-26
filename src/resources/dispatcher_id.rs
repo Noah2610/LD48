@@ -4,4 +4,5 @@ pub enum DispatcherId {
     Ingame,
     Paused,
     ZoneTransition,
+    GameOver,
 }
