@@ -4,9 +4,7 @@ use deathframe::amethyst::ui::{UiText, UiTransform};
 const UI_SCORE_ID: &str = "score";
 
 #[derive(Default)]
-pub struct UpdateScoreUi {
-    coins_cache: Option<usize>,
-}
+pub struct UpdateScoreUi;
 
 impl<'a> System<'a> for UpdateScoreUi {
     type SystemData = (
@@ -19,25 +17,17 @@ impl<'a> System<'a> for UpdateScoreUi {
         &mut self,
         (score, ui_transform_store, mut ui_text_store): Self::SystemData,
     ) {
-        let should_update = self
-            .coins_cache
-            .map(|cached| cached != score.coins)
-            .unwrap_or(true);
-
-        if should_update {
-            self.coins_cache = Some(score.coins);
-            if let Some(ui_text) = (&ui_transform_store, &mut ui_text_store)
-                .join()
-                .find_map(|(transform, text)| {
-                    if &transform.id == UI_SCORE_ID {
-                        Some(text)
-                    } else {
-                        None
-                    }
-                })
-            {
-                ui_text.text = format!("SCORE\n{}", score.coins);
-            }
+        for ui_text in (&ui_transform_store, &mut ui_text_store)
+            .join()
+            .filter_map(|(transform, text)| {
+                if &transform.id == UI_SCORE_ID {
+                    Some(text)
+                } else {
+                    None
+                }
+            })
+        {
+            ui_text.text = format!("SCORE\n{}", score.coins);
         }
     }
 }
