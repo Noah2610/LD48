@@ -188,4 +188,14 @@ impl ZonesManager {
             .and_then(|current_zone| settings.zones.get(&current_zone.id))
             .and_then(|zone_settings| zone_settings.song.as_ref())
     }
+
+    pub fn get_current_player_speed(
+        &self,
+        settings: &ZonesSettings,
+    ) -> Option<f32> {
+        self.current_zone
+            .as_ref()
+            .and_then(|current_zone| settings.zones.get(&current_zone.id))
+            .map(|zone_settings| zone_settings.player_speed)
+    }
 }

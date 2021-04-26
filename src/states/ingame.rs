@@ -20,13 +20,7 @@ impl Ingame {
         data.world.insert(ObjectSpawner::default());
         data.world.write_resource::<ZoneSize>().reset();
 
-        {
-            let mut transform = Transform::default();
-            transform.set_translation_xyz(0.0, 64.0, 2.0);
-            let size = Size::new(32.0, 32.0);
-            let player = build_player(data.world, transform, size);
-            let _ = build_camera(data.world, player, SEGMENT_WIDTH);
-        }
+        let mut player_speed_opt = None;
 
         {
             use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
@@ -38,6 +32,8 @@ impl Ingame {
                     WriteExpect<Songs<SongKey>>,
                 )| {
                     zones_manager.stage_initial_segments(&settings);
+                    player_speed_opt =
+                        zones_manager.get_current_player_speed(&settings);
                     songs.stop_all();
                     if let Some(song_key) =
                         zones_manager.get_current_song(&settings)
@@ -45,6 +41,20 @@ impl Ingame {
                         songs.play(song_key);
                     }
                 },
+            );
+        }
+
+        if let Some(player_speed) = player_speed_opt {
+            let mut transform = Transform::default();
+            transform.set_translation_xyz(0.0, 64.0, 2.0);
+            let size = Size::new(32.0, 32.0);
+            let player =
+                build_player(data.world, transform, size, player_speed);
+            let _ = build_camera(data.world, player, SEGMENT_WIDTH);
+        } else {
+            eprintln!(
+                "[WARNING]\n    No `player_speed` configured for current \
+                 zone.\n    Player will NOT be spawned."
             );
         }
     }

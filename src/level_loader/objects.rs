@@ -141,6 +141,7 @@ pub fn build_player(
     world: &mut World,
     transform: Transform,
     size: Size,
+    player_speed: f32,
 ) -> Entity {
     let sprite_render = {
         let sprite_sheet = world
@@ -162,7 +163,7 @@ pub fn build_player(
         .with(ScaleOnce::default())
         .with(Object::from(ObjectType::Player))
         .with(Player::default())
-        .with(Velocity::default())
+        .with(Velocity::new(0.0, player_speed))
         .with(sprite_render);
 
     entity_builder = add_components_to_entity(
