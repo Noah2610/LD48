@@ -20,6 +20,52 @@
         ],
     ),
 
+    Custom("TurretSpaceshipLeft"): (
+        spritesheet: "space/spaceship.png",
+        components: [
+            Animation([
+                (0, 1000),
+            ]),
+            Size((
+                w: 16.0,
+                h: 40.0,
+            )),
+            Hitbox(Size),
+            Collidable(Obstacle),
+            Obstacle(()),
+            Turret((
+                shot_object_type: Custom("TurretBullet"),
+                shot_interval_ms: 1000,
+                shot_initial_delay_ms: 500,
+                shot_offset: (-4.0, 16.0),
+            )),
+            Loadable(()),
+        ],
+    ),
+
+    Custom("TurretSpaceshipRight"): (
+        spritesheet: "space/spaceship.png",
+        components: [
+            Animation([
+                (1, 1000),
+            ]),
+            Size((
+                w: 16.0,
+                h: 40.0,
+            )),
+            Hitbox(Size),
+            Collidable(Obstacle),
+            Obstacle(()),
+            Turret((
+                shot_object_type: Custom("TurretBullet"),
+                shot_interval_ms: 1000,
+                shot_initial_delay_ms: 0,
+                shot_offset: (4.0, 16.0),
+            )),
+            Loadable(()),
+        ],
+    ),
+
     Custom("TurretBullet"): (
         spritesheet: "space/projectile.png",
         components: [
@@ -27,7 +73,12 @@
                 w: 16.0,
                 h: 16.0,
             )),
-            Hitbox(Size),
+            Hitbox(SizeOffset((
+                top:    -4.0,
+                bottom: 4.0,
+                left:   4.0,
+                right:  -4.0,
+            ))),
             Collidable(Obstacle),
             Obstacle(()),
             Velocity((
