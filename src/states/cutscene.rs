@@ -7,7 +7,9 @@ use crate::level_loader::{build_level, load_level};
 
 #[derive(Default)]
 pub struct Cutscene {
-    ui_data: UiData,
+    ui_data:           UiData,
+    did_load_level:    bool,
+    did_load_cutscene: bool,
 }
 
 impl Cutscene {
@@ -60,6 +62,9 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Cutscene {
             songs.stop_all();
             songs.play(&SongKey::Cutscene)
         }
+
+        data.world.maintain();
+        self.did_load_level = true;
     }
 
     fn on_resume(&mut self, mut data: StateData<GameData<'a, 'b>>) {
@@ -88,8 +93,59 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Cutscene {
         }
 
         {
-            use crate::components::prelude::{AnimationsContainer, Cutscene};
-            use deathframe::amethyst::ecs::{Join, ReadStorage};
+            use crate::components::prelude::{
+                AnimationsContainer,
+                Cutscene,
+                SpriteRender,
+            };
+            use deathframe::amethyst::assets::AssetStorage;
+            use deathframe::amethyst::ecs::{
+                Join,
+                Read,
+                ReadStorage,
+                WriteStorage,
+            };
+            use deathframe::amethyst::renderer::sprite::SpriteSheet;
+            use deathframe::amethyst::renderer::Texture;
+
+            if self.did_load_level && !self.did_load_cutscene {
+                data.world.exec(
+                    |(
+                        spritesheet_assets,
+                        texture_assets,
+                        cutscene_store,
+                        mut animations_store,
+                        sprite_render_store,
+                    ): (
+                        Read<AssetStorage<SpriteSheet>>,
+                        Read<AssetStorage<Texture>>,
+                        ReadStorage<Cutscene>,
+                        WriteStorage<AnimationsContainer<AnimationKey>>,
+                        ReadStorage<SpriteRender>,
+                    )| {
+                        for (_, animations, sprite_render) in (
+                            &cutscene_store,
+                            &mut animations_store,
+                            &sprite_render_store,
+                        )
+                            .join()
+                        {
+                            if let Some(spritesheet) = spritesheet_assets
+                                .get(&sprite_render.sprite_sheet)
+                            {
+                                if texture_assets
+                                    .get(&spritesheet.texture)
+                                    .is_some()
+                                {
+                                    self.did_load_cutscene = true;
+                                    let _ =
+                                        animations.play(AnimationKey::Cutscene);
+                                }
+                            }
+                        }
+                    },
+                );
+            }
 
             let is_cutscene_finished = data.world.exec(
                 |(cutscene_store, animations_store): (
