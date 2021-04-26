@@ -19,7 +19,7 @@ impl<'a> System<'a> for HandleCoinCollection {
     ) {
         let query_exp = {
             use query::exp::prelude_variants::*;
-            And(vec![IsState(Enter), IsTag(CollisionTag::Coin)])
+            And(vec![IsState(Steady), IsTag(CollisionTag::Coin)])
         };
 
         for (_, collider) in (&player_store, &collider_store).join() {
@@ -28,8 +28,9 @@ impl<'a> System<'a> for HandleCoinCollection {
                 .exp(&query_exp)
                 .run();
             for collision in collisions {
-                let _ = entities.delete(entities.entity(collision.id));
-                score.coins += 1;
+                if entities.delete(entities.entity(collision.id)).is_ok() {
+                    score.coins += 1;
+                }
             }
         }
     }
