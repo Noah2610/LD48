@@ -11,6 +11,7 @@ pub enum MenuAxis {}
 pub enum MenuAction {
     Start,
     Quit,
+    Pause,
 }
 
 impl BindingTypes for MenuBindings {

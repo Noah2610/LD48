@@ -2,6 +2,7 @@
     axes: {},
     actions: {
         Start: [[Key(Space)], [Key(Return)]],
-        Quit:  [[Key(Escape)], [Key(Q)]],
+        Quit:  [[Key(Shift), Key(Escape)], [Key(Q)]],
+        Pause: [[Key(Escape)], [Key(P)]],
     },
 )

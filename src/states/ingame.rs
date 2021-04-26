@@ -1,6 +1,7 @@
 use super::menu_prelude::*;
 use super::state_prelude::*;
 use crate::components::prelude::{Size, Transform};
+use crate::input::prelude::{MenuAction, MenuBindings};
 use crate::level_loader::build_level;
 use crate::level_loader::objects::{build_camera, build_object, build_player};
 
@@ -62,6 +63,20 @@ impl Ingame {
     fn stop<'a, 'b>(&mut self, mut data: &mut StateData<GameData<'a, 'b>>) {
         self.delete_ui(&mut data);
     }
+
+    fn handle_input<'a, 'b>(
+        &mut self,
+        input_manager: &InputManager<MenuBindings>,
+    ) -> Option<Trans<GameData<'a, 'b>, StateEvent>> {
+        if input_manager.is_down(MenuAction::Quit) {
+            return Some(Trans::Pop);
+        }
+        if input_manager.is_down(MenuAction::Pause) {
+            return Some(Trans::Push(Box::new(Pause::default())));
+        }
+
+        None
+    }
 }
 
 impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
@@ -113,6 +128,12 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         data: StateData<GameData<'a, 'b>>,
     ) -> Trans<GameData<'a, 'b>, StateEvent> {
         data.data.update(data.world, DispatcherId::Ingame).unwrap();
+
+        if let Some(trans) = self.handle_input(
+            &*data.world.read_resource::<InputManager<MenuBindings>>(),
+        ) {
+            return trans;
+        }
 
         Trans::None
     }
