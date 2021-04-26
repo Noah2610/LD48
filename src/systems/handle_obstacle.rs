@@ -24,7 +24,7 @@ impl<'a> System<'a> for HandleObstacle {
                         let query_exp = {
                             use query::exp::prelude_variants::*;
                             And(vec![
-                                IsState(Enter),
+                                IsState(Steady),
                                 IsTag(CollisionTag::Obstacle),
                             ])
                         };

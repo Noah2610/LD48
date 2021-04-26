@@ -28,14 +28,15 @@
 
     Obstacle: (
         components: [
-            Hitbox(Custom([
-                (
-                    top:    4.0,
-                    bottom: -4.0,
-                    left:   -4.0,
-                    right:  4.0,
-                ),
-            ])),
+            Hitbox(Size),
+            // Hitbox(Custom([
+            //     (
+            //         top:    4.0,
+            //         bottom: -4.0,
+            //         left:   -4.0,
+            //         right:  4.0,
+            //     ),
+            // ])),
             Collidable(Obstacle),
             Obstacle(()),
         ],
