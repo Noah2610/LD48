@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="24" tilewidth="8" tileheight="8" infinite="0" nextlayerid="5" nextobjectid="12">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="24" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="17">
  <editorsettings>
   <export target="../../../resources/levels/zones/red/red_medium_0.json" format="ld48-export"/>
  </editorsettings>
@@ -75,5 +75,12 @@
   <object id="9" name="pickup" type="Coin(red)" x="24" y="128" width="16" height="16"/>
   <object id="10" name="pickup" type="Coin(red)" x="40" y="176" width="16" height="16"/>
   <object id="11" name="pickup" type="Coin(red)" x="40" y="160" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="5" name="obstacle">
+  <object id="12" name="obstacle" type="Obstacle" x="72" y="128" width="16" height="32"/>
+  <object id="13" name="obstacle" type="Obstacle" x="8" y="128" width="16" height="32"/>
+  <object id="14" name="obstacle" type="Obstacle" x="24" y="72" width="48" height="32"/>
+  <object id="15" name="obstacle" type="Obstacle" x="8" y="32" width="16" height="16"/>
+  <object id="16" name="obstacle" type="Obstacle" x="72" y="32" width="16" height="16"/>
  </objectgroup>
 </map>
