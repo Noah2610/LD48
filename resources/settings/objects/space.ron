@@ -67,6 +67,9 @@
             ))),
             Collidable(Obstacle),
             Obstacle(()),
+            Rotate((
+                step: 1.0,
+            )),
         ],
     ),
 

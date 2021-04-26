@@ -8,6 +8,7 @@ pub mod on_lane;
 pub mod parent_delete;
 pub mod player;
 pub mod portal;
+pub mod rotate;
 pub mod segment;
 pub mod tile;
 pub mod turret;
@@ -23,6 +24,7 @@ pub mod prelude {
     pub use super::parent_delete::ParentDelete;
     pub use super::player::Player;
     pub use super::portal::Portal;
+    pub use super::rotate::Rotate;
     pub use super::segment::Segment;
     pub use super::tile::Tile;
     pub use super::turret::Turret;

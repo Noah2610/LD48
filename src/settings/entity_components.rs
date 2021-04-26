@@ -27,6 +27,7 @@ pub enum EntityComponent {
     Turret(Turret),
     Loadable(Loadable),
     DeleteDelay(DeleteDelay),
+    Rotate(Rotate),
 }
 
 pub fn add_components_to_entity(
@@ -71,5 +72,6 @@ pub fn add_components_to_entity(
                 builder.with(loadable).with(Unloaded::default())
             }
             Comp::DeleteDelay(delete_delay) => builder.with(delete_delay),
+            Comp::Rotate(rotate) => builder.with(rotate),
         })
 }

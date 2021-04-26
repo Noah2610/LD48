@@ -174,6 +174,18 @@ pub(super) fn build_game_data<'a, 'b>(
             HandleDeleteDelay::default(),
             "handle_delete_delay_system",
             &[],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            UpdateRotate::default(),
+            "update_rotate_system",
+            &[],
+        )?
+        .with(
+            DispatcherId::GameOver,
+            UpdateRotate::default(),
+            "game_over_update_rotate_system",
+            &[],
         )?;
 
     Ok(custom_game_data)

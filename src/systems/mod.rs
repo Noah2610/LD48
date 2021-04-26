@@ -8,6 +8,7 @@ mod handle_segment_loading;
 mod handle_turret;
 mod handle_zone_switch;
 mod update_on_lane;
+mod update_rotate;
 mod update_score_ui;
 
 pub mod prelude {
@@ -21,6 +22,7 @@ pub mod prelude {
     pub use super::handle_turret::HandleTurret;
     pub use super::handle_zone_switch::HandleZoneSwitch;
     pub use super::update_on_lane::UpdateOnLane;
+    pub use super::update_rotate::UpdateRotate;
     pub use super::update_score_ui::UpdateScoreUi;
     pub use deathframe::systems::prelude::*;
 }
