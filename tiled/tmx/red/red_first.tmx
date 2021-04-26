@@ -11,7 +11,7 @@
   <object id="21" name="BG" type="Custom(BgRed)" x="0" y="0" width="128" height="144"/>
   <object id="22" name="BG" type="Custom(BgRed)" x="0" y="144" width="128" height="144"/>
   <object id="23" name="BG" type="Custom(BgRed)" x="0" y="288" width="128" height="144"/>
-  <object id="24" name="BG" type="Custom(BgRed)" x="0" y="432" width="128" height="144"/>
+  <object id="24" name="BG" type="Custom(BgRed)" x="0" y="304" width="128" height="144"/>
  </objectgroup>
  <objectgroup id="3" name="pickups">
   <object id="1" name="pickup" type="Coin(red)" x="56" y="176" width="16" height="16"/>
