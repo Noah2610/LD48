@@ -1,0 +1,17 @@
+// src/settings/zones_settings.rs
+// ./zones.ron
+
+#![enable(implicit_some)]
+(
+    zones: {
+        "space": (
+            song: Space,
+            player_speed: -100.0,
+            total_segments: 8,
+            first_segment: ["space/space_first.json"],
+            final_segment: [],
+            segments: {
+            }
+        ),
+    },
+)

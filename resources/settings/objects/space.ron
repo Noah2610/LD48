@@ -1,0 +1,114 @@
+#![enable(implicit_some)]
+{
+    Custom("Asteroid0"): (
+        spritesheet: "space/asteroid_small_0.png",
+        components: [
+            Hitbox(SizeOffset((
+                top:    -2.0,
+                bottom: 2.0,
+                left:   2.0,
+                right:  -2.0,
+            ))),
+            Collidable(Obstacle),
+            Obstacle(()),
+        ],
+    ),
+
+    Custom("Asteroid1"): (
+        spritesheet: "space/asteroid_small_1.png",
+        components: [
+            Hitbox(SizeOffset((
+                top:    -2.0,
+                bottom: 2.0,
+                left:   2.0,
+                right:  -2.0,
+            ))),
+            Collidable(Obstacle),
+            Obstacle(()),
+        ],
+    ),
+
+    Custom("Asteroid2"): (
+        spritesheet: "space/asteroid_small_2.png",
+        components: [
+            Hitbox(SizeOffset((
+                top:    -2.0,
+                bottom: 2.0,
+                left:   2.0,
+                right:  -2.0,
+            ))),
+            Collidable(Obstacle),
+            Obstacle(()),
+        ],
+    ),
+
+    Custom("Asteroid3"): (
+        spritesheet: "space/asteroid_small_3.png",
+        components: [
+            Hitbox(SizeOffset((
+                top:    -2.0,
+                bottom: 2.0,
+                left:   2.0,
+                right:  -2.0,
+            ))),
+            Collidable(Obstacle),
+            Obstacle(()),
+        ],
+    ),
+
+    Custom("Star0"): (
+        spritesheet: "space/star_big_0.png",
+        components: [
+            Hitbox(SizeOffset((
+                top:    -2.0,
+                bottom: 2.0,
+                left:   2.0,
+                right:  -2.0,
+            ))),
+            Collidable(Obstacle),
+            Obstacle(()),
+        ],
+    ),
+
+    Custom("Star1"): (
+        spritesheet: "space/star_big_1.png",
+        components: [
+            Hitbox(SizeOffset((
+                top:    -2.0,
+                bottom: 2.0,
+                left:   2.0,
+                right:  -2.0,
+            ))),
+            Collidable(Obstacle),
+            Obstacle(()),
+        ],
+    ),
+
+    Custom("Star2"): (
+        spritesheet: "space/star_big_2.png",
+        components: [
+            Hitbox(SizeOffset((
+                top:    -2.0,
+                bottom: 2.0,
+                left:   2.0,
+                right:  -2.0,
+            ))),
+            Collidable(Obstacle),
+            Obstacle(()),
+        ],
+    ),
+
+    Custom("Star3"): (
+        spritesheet: "space/star_big_3.png",
+        components: [
+            Hitbox(SizeOffset((
+                top:    -2.0,
+                bottom: 2.0,
+                left:   2.0,
+                right:  -2.0,
+            ))),
+            Collidable(Obstacle),
+            Obstacle(()),
+        ],
+    ),
+}
