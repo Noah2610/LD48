@@ -1,5 +1,47 @@
 #![enable(implicit_some)]
 {
+    Custom("TurretNokia"): (
+        spritesheet: "space/nokia.png",
+        components: [
+            Size((
+                w: 16.0,
+                h: 32.0,
+            )),
+            Hitbox(Size),
+            Collidable(Obstacle),
+            Obstacle(()),
+            Turret((
+                shot_object_type: Custom("TurretBullet"),
+                shot_interval_ms: 1000,
+                shot_initial_delay_ms: 500,
+                shot_offset: (0.0, 16.0),
+            )),
+            Loadable(()),
+        ],
+    ),
+
+    Custom("TurretBullet"): (
+        spritesheet: "space/projectile.png",
+        components: [
+            Size((
+                w: 16.0,
+                h: 16.0,
+            )),
+            Hitbox(Size),
+            Collidable(Obstacle),
+            Obstacle(()),
+            Velocity((
+                x: 0.0,
+                y: 25.0,
+            )),
+            DeleteDelay((
+                delete_after_ms: 5000,
+            )),
+        ],
+    ),
+
+    // TODO: CLEANUP
+
     Custom("TurretA"): (
         spritesheet: "player.png",
         components: [
@@ -34,26 +76,6 @@
                 shot_initial_delay_ms: 500,
             )),
             Loadable(()),
-        ],
-    ),
-
-    Custom("TurretBullet"): (
-        spritesheet: "player.png",
-        components: [
-            Size((
-                w: 8.0,
-                h: 8.0,
-            )),
-            Hitbox(Size),
-            Collidable(Obstacle),
-            Obstacle(()),
-            Velocity((
-                x: 0.0,
-                y: 50.0,
-            )),
-            DeleteDelay((
-                delete_after_ms: 1000,
-            )),
         ],
     ),
 }

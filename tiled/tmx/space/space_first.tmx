@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="56" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="58">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="56" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="59">
  <editorsettings>
   <export target="../../../resources/levels/zones/space/space_first.json" format="ld48-export"/>
  </editorsettings>
@@ -31,6 +31,7 @@
   <object id="54" name="Asteroid" type="Custom(Asteroid1)" x="72" y="384" width="16" height="16"/>
   <object id="55" name="Asteroid" type="Custom(Asteroid0)" x="56" y="424" width="16" height="16"/>
   <object id="57" name="Asteroid" type="Custom(Asteroid2)" x="24" y="408" width="16" height="16"/>
+  <object id="58" name="Nokia" type="Custom(TurretNokia)" x="24" y="176" width="16" height="16"/>
  </objectgroup>
  <layer id="4" name="border" width="16" height="56">
   <data encoding="csv">

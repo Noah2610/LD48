@@ -10,6 +10,8 @@ pub struct Turret {
     pub shot_interval_ms:      u64,
     #[serde(default)]
     pub shot_initial_delay_ms: u64,
+    #[serde(default)]
+    pub shot_offset:           (f32, f32),
     #[serde(skip)]
     shot_timer:                Option<Timer>,
 }

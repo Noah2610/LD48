@@ -28,10 +28,15 @@ impl<'a> System<'a> for HandleTurret {
             let timer = turret.get_timer();
             let _ = timer.update();
             if timer.state.is_finished() {
+                timer.clear_start_time();
                 let _ = timer.start();
                 let pos = {
                     let trans = turret_transform.translation();
-                    (trans.x, trans.y, trans.z + 1.0)
+                    (
+                        trans.x + turret.shot_offset.0,
+                        trans.y + turret.shot_offset.1,
+                        trans.z + 1.0,
+                    )
                 };
                 object_spawner.spawn(ObjectToSpawn {
                     object_type: turret.shot_object_type.clone(),
