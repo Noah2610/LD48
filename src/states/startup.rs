@@ -27,6 +27,7 @@ fn setup(world: &mut World) {
         Portal,
         Segment,
         Tile,
+        Turret,
     };
 
     world.register::<Tile>();
@@ -36,6 +37,7 @@ fn setup(world: &mut World) {
     world.register::<Portal>();
     world.register::<Obstacle>();
     world.register::<Coin>();
+    world.register::<Turret>();
 
     let sprite_sheet_handles = SpriteSheetHandles::<PathBuf>::default();
     world.insert(sprite_sheet_handles);

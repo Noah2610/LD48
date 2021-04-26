@@ -9,6 +9,7 @@ pub mod player;
 pub mod portal;
 pub mod segment;
 pub mod tile;
+pub mod turret;
 
 pub mod prelude {
     pub use super::belongs_to_segment::BelongsToSegment;
@@ -22,6 +23,7 @@ pub mod prelude {
     pub use super::portal::Portal;
     pub use super::segment::Segment;
     pub use super::tile::Tile;
+    pub use super::turret::Turret;
     pub use deathframe::amethyst::core::transform::Parent;
     pub use deathframe::components::prelude::*;
 }

@@ -7,6 +7,7 @@ pub enum CollisionTag {
     Portal,
     Obstacle,
     Coin,
+    Turret,
 }
 
 impl CTag for CollisionTag {
