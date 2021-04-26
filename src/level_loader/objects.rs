@@ -151,6 +151,8 @@ pub fn build_camera(
         CameraOrthoWorldCoordinates,
     };
 
+    const LOADING_DISTANCE_PADDING: (f32, f32) = (0.0, 16.0);
+
     let settings = (*world.read_resource::<CameraSettings>()).clone();
 
     let size = settings.size;
@@ -171,6 +173,11 @@ pub fn build_camera(
     let mut transform = Transform::default();
     transform.set_translation_xyz(level_width * 0.5, 0.0, settings.z);
 
+    let loading_distance = (
+        size.w * 0.5 + LOADING_DISTANCE_PADDING.0,
+        size.h * 0.5 + LOADING_DISTANCE_PADDING.1,
+    );
+
     world
         .create_entity()
         .with(
@@ -189,6 +196,7 @@ pub fn build_camera(
         .with(camera)
         .with(camera_ortho)
         .with(Camera::default())
+        .with(Loader::from(loading_distance))
         .build();
 
     Ok(())

@@ -4,7 +4,7 @@ pub mod tiles;
 
 use crate::components::prelude::Size;
 use crate::resources::prelude::{ZoneSize, ZonesManager};
-use crate::settings::zones_settings::{SegmentId, ZonesSettings, ZoneId};
+use crate::settings::zones_settings::{SegmentId, ZoneId, ZonesSettings};
 use amethyst::ecs::{World, WorldExt};
 use data::*;
 use deathframe::amethyst;
@@ -24,6 +24,7 @@ pub enum ObjectType {
     Portal,
     Obstacle,
     Coin(ZoneId),
+    Turret,
     Custom(String),
 }
 

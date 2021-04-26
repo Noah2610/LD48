@@ -39,6 +39,24 @@
         ],
     ),
 
+    Turret: (
+        components: [
+            Hitbox(SizeOffset((
+                top:    -2.0,
+                bottom: 2.0,
+                left:   2.0,
+                right:  -2.0,
+            ))),
+            Collidable(Obstacle),
+            Obstacle(()),
+            Turret((
+                shot_speed: 50.0,
+                shot_interval_ms: 1000.0,
+            )),
+            Loadable(()),
+        ],
+    ),
+
     Coin("red"): (
         spritesheet: "coins/coin_red.png",
         components: [
