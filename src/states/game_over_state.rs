@@ -40,7 +40,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for GameOverState {
         data.data
             .update(data.world, DispatcherId::GameOver)
             .unwrap();
-        Trans::Pop
+        Trans::None
     }
 
     fn fixed_update(
