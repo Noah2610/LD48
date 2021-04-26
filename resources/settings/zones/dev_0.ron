@@ -13,9 +13,6 @@
             ],
             final_segment: ["dev_0/final.json"],
             segments: {
-                "dev_0/00.json": [
-                    "dev_0/01.json",
-                ],
                 "dev_0/01.json": [
                     "dev_0/00.json",
                     // "dev_0/01.json",

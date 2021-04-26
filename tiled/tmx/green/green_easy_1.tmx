@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="36" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="38">
+ <editorsettings>
+  <export target="../../../resources/levels/zones/green/green_easy_1.json" format="ld48-export"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tsx/tiles_red.tsx"/>
+ <tileset firstgid="593" source="../../tsx/tiles_green.tsx"/>
+ <objectgroup id="2" name="bg_base">
+  <properties>
+   <property name="z" type="float" value="-1"/>
+  </properties>
+ </objectgroup>
+ <objectgroup id="3" name="pickups">
+  <object id="1" name="pickup" type="Coin(green)" x="72" y="208" width="16" height="16"/>
+  <object id="2" name="pickup" type="Coin(green)" x="72" y="176" width="16" height="16"/>
+  <object id="3" name="pickup" type="Coin(green)" x="72" y="192" width="16" height="16"/>
+  <object id="32" name="pickup" type="Coin(green)" x="72" y="8" width="16" height="16"/>
+  <object id="33" name="pickup" type="Coin(green)" x="56" y="8" width="16" height="16"/>
+  <object id="34" name="pickup" type="Coin(green)" x="40" y="8" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="5" name="obstacles">
+  <object id="16" name="obstacle" type="Obstacle" x="8" y="256" width="48" height="16"/>
+  <object id="24" name="obstacle" type="Obstacle" x="56" y="152" width="32" height="16"/>
+  <object id="25" name="obstacle" type="Obstacle" x="40" y="192" width="32" height="32"/>
+  <object id="26" name="obstacle" type="Obstacle" x="24" y="136" width="16" height="16"/>
+  <object id="27" name="obstacle" type="Obstacle" x="56" y="136" width="16" height="16"/>
+  <object id="28" name="obstacle" type="Obstacle" x="72" y="88" width="16" height="16"/>
+  <object id="29" name="obstacle" type="Obstacle" x="8" y="32" width="16" height="16"/>
+  <object id="30" name="obstacle" type="Obstacle" x="40" y="32" width="48" height="16"/>
+  <object id="31" name="obstacle" type="Obstacle" x="8" y="88" width="48" height="16"/>
+  <object id="36" name="obstacle" type="Obstacle" x="0" y="0" width="8" height="288"/>
+  <object id="37" name="obstacle" type="Obstacle" x="88" y="0" width="8" height="288"/>
+ </objectgroup>
+ <layer id="4" name="border" width="12" height="36">
+  <data encoding="csv">
+692,0,0,0,0,0,0,0,0,0,0,611,
+616,0,0,0,0,0,0,0,0,0,0,629,
+634,0,0,0,0,0,0,0,0,0,0,647,
+652,0,0,0,0,0,0,0,0,0,0,665,
+616,0,0,0,0,0,0,0,0,0,0,611,
+634,0,0,0,0,0,0,0,0,0,0,629,
+652,0,0,0,0,0,0,0,0,0,0,647,
+616,0,0,0,0,0,0,0,0,0,0,665,
+634,0,0,0,0,0,0,0,0,0,0,611,
+652,0,0,0,0,0,0,0,0,0,0,629,
+616,0,0,0,0,0,0,0,0,0,0,647,
+634,0,0,0,0,0,0,0,0,0,0,665,
+652,0,0,0,0,0,0,0,0,0,0,665,
+616,0,0,0,0,0,0,0,0,0,0,611,
+634,0,0,0,0,0,0,0,0,0,0,629,
+692,0,0,0,0,0,0,0,0,0,0,647,
+616,0,0,0,0,0,0,0,0,0,0,665,
+634,0,0,0,0,0,0,0,0,0,0,611,
+652,0,0,0,0,0,0,0,0,0,0,629,
+616,0,0,0,0,0,0,0,0,0,0,647,
+634,0,0,0,0,0,0,0,0,0,0,665,
+652,0,0,0,0,0,0,0,0,0,0,611,
+616,0,0,0,0,0,0,0,0,0,0,629,
+634,0,0,0,0,0,0,0,0,0,0,647,
+652,0,0,0,0,0,0,0,0,0,0,665,
+616,0,0,0,0,0,0,0,0,0,0,611,
+692,0,0,0,0,0,0,0,0,0,0,629,
+710,0,0,0,0,0,0,0,0,0,0,647,
+616,0,0,0,0,0,0,0,0,0,0,665,
+634,0,0,0,0,0,0,0,0,0,0,611,
+692,0,0,0,0,0,0,0,0,0,0,629,
+616,0,0,0,0,0,0,0,0,0,0,647,
+634,0,0,0,0,0,0,0,0,0,0,665,
+652,0,0,0,0,0,0,0,0,0,0,611,
+616,0,0,0,0,0,0,0,0,0,0,629,
+634,0,0,0,0,0,0,0,0,0,0,647
+</data>
+ </layer>
+ <layer id="1" name="Tile Layer 1" width="12" height="36">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+750,607,608,0,0,605,606,607,595,595,596,669,
+696,625,626,0,0,623,624,625,613,613,614,615,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+732,679,680,679,680,607,608,0,0,605,606,753,
+696,697,698,697,698,625,626,0,0,623,624,699,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,601,602,0,0,601,602,0,0,0,
+0,0,0,619,620,0,0,611,634,0,0,651,
+0,0,0,0,0,0,0,629,750,595,596,669,
+0,0,0,0,0,0,0,767,768,613,614,615,
+0,0,0,0,0,0,0,0,0,0,0,633,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,673,679,680,674,0,0,0,
+0,0,0,0,0,691,612,699,692,0,0,0,
+0,0,0,0,0,709,666,669,710,0,0,0,
+0,0,0,0,0,727,685,686,728,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+732,679,680,679,680,607,608,0,0,0,0,0,
+696,697,698,697,698,625,626,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>

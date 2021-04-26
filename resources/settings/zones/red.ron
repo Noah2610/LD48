@@ -1,0 +1,53 @@
+// src/settings/zones_settings.rs
+// ./zones.ron
+
+#![enable(implicit_some)]
+(
+    zones: {
+        "red": (
+            total_segments: 8,
+            first_segment: ["red/red_first.json"],
+            final_segment: ["red/red_final.json"],
+            segments: {
+                "red/red_first.json": [
+                    "red/red_easy_0.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_1.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                ],
+                "red/red_easy_0.json": [
+                    "red/red_easy_1.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                    "red/red_easy_1.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+
+                //    "red/red_medium_1.json",
+                //    "red/red_medium_2.json",
+                //    "red/red_medium_3.json",
+                ],
+                "red/red_easy_1.json": [
+                    "red/red_easy_0.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                ],
+                "red/red_easy_2.json": [
+                    "red/red_easy_1.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_3.json",
+                    "red/red_easy_1.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_3.json",
+
+                    "red/red_final.json",
+                ],
+            }
+        ),
+    },
+)

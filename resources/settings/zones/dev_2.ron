@@ -10,7 +10,7 @@
             first_segment: [
                 "dev_2/test_0.json",
             ],
-            final_segment: ["dev_2/test_1.json"],
+            final_segment: ["dev_2/test_0.json"],
             segments: {
                 "dev_2/test_0.json": [
                     "dev_2/test_1.json",
