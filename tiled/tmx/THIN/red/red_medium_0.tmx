@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="24" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="19">
+ <editorsettings>
+  <export target="../../../resources/levels/zones/red/red_medium_0.json" format="ld48-export"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tsx/tiles_red.tsx"/>
+ <objectgroup id="4" name="bg_base">
+  <properties>
+   <property name="z" type="float" value="-1"/>
+  </properties>
+  <object id="17" name="BG" type="Custom(BgRed)" x="0" y="0" width="96" height="144"/>
+  <object id="18" name="BG" type="Custom(BgRed)" x="0" y="48" width="96" height="144"/>
+ </objectgroup>
+ <layer id="1" name="border" width="12" height="24">
+  <data encoding="csv">
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109,
+109,0,0,0,0,0,0,0,0,0,0,109
+</data>
+ </layer>
+ <layer id="2" name="Tile Layer 1" width="12" height="24">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,112,113,0,0,0,0,0,0,112,113,0,
+0,149,150,0,0,0,0,0,0,149,150,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,9,10,9,10,9,10,0,0,0,
+0,0,0,46,47,46,47,46,47,0,0,0,
+0,0,0,83,84,83,84,83,84,0,0,0,
+0,0,0,120,121,120,121,120,121,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,9,10,0,0,9,10,0,0,9,10,0,
+0,46,47,0,0,46,47,0,0,46,47,0,
+0,83,84,0,0,83,84,0,0,83,84,0,
+0,120,121,0,0,120,121,0,0,120,121,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="pickups">
+  <object id="1" name="pickup" type="Coin(red)" x="40" y="32" width="16" height="16"/>
+  <object id="2" name="pickup" type="Coin(red)" x="40" y="48" width="16" height="16"/>
+  <object id="5" name="pickup" type="Coin(red)" x="40" y="16" width="16" height="16"/>
+  <object id="6" name="pickup" type="Coin(red)" x="56" y="144" width="16" height="16"/>
+  <object id="7" name="pickup" type="Coin(red)" x="56" y="128" width="16" height="16"/>
+  <object id="8" name="pickup" type="Coin(red)" x="24" y="144" width="16" height="16"/>
+  <object id="9" name="pickup" type="Coin(red)" x="24" y="128" width="16" height="16"/>
+  <object id="10" name="pickup" type="Coin(red)" x="40" y="176" width="16" height="16"/>
+  <object id="11" name="pickup" type="Coin(red)" x="40" y="160" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="5" name="obstacle">
+  <object id="12" name="obstacle" type="Obstacle" x="72" y="128" width="16" height="32"/>
+  <object id="13" name="obstacle" type="Obstacle" x="8" y="128" width="16" height="32"/>
+  <object id="14" name="obstacle" type="Obstacle" x="24" y="72" width="48" height="32"/>
+  <object id="15" name="obstacle" type="Obstacle" x="8" y="32" width="16" height="16"/>
+  <object id="16" name="obstacle" type="Obstacle" x="72" y="32" width="16" height="16"/>
+ </objectgroup>
+</map>
