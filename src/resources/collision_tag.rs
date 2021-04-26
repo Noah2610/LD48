@@ -6,6 +6,7 @@ pub enum CollisionTag {
     Solid,
     Portal,
     Obstacle,
+    Coin,
 }
 
 impl CTag for CollisionTag {
@@ -14,6 +15,7 @@ impl CTag for CollisionTag {
             (CollisionTag::Player, CollisionTag::Solid) => true,
             (CollisionTag::Player, CollisionTag::Portal) => true,
             (CollisionTag::Player, CollisionTag::Obstacle) => true,
+            (CollisionTag::Player, CollisionTag::Coin) => true,
             _ => false,
         }
     }

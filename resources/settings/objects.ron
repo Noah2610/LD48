@@ -41,4 +41,28 @@
             Obstacle(()),
         ],
     ),
+
+    Coin("red"): (
+        spritesheet: "coins/coin_red.png",
+        components: [
+            Hitbox(Size),
+            Collidable(Coin),
+        ],
+    ),
+
+    Coin("blue"): (
+        spritesheet: "coins/coin_blue.png",
+        components: [
+            Hitbox(Size),
+            Collidable(Coin),
+        ],
+    ),
+
+    Coin("green"): (
+        spritesheet: "coins/coin_green.png",
+        components: [
+            Hitbox(Size),
+            Collidable(Coin),
+        ],
+    ),
 }
