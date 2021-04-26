@@ -50,14 +50,13 @@ pub(super) fn build_game_data<'a, 'b>(
         .with_core(PrintFpsSystem::default(), "print_fps_system", &[])?
         .with_core(CameraOrthoSystem::default(), "camera_ortho_system", &[])?
         .with_core(ScaleSpritesSystem::default(), "scale_sprites_system", &[])?
-        .with_bundle(DispatcherId::Ingame, ingame_input_bundle)?
-        .with_bundle(DispatcherId::Ingame, physics_bundle)?
-        .with(
-            DispatcherId::MainMenu,
+        .with_core(
             InputManagerSystem::<MenuBindings>::default(),
-            "main_menu_input_manager_system",
+            "menu_input_manager_system",
             &[],
         )?
+        .with_bundle(DispatcherId::Ingame, ingame_input_bundle)?
+        .with_bundle(DispatcherId::Ingame, physics_bundle)?
         .with(
             DispatcherId::Ingame,
             InputManagerSystem::<IngameBindings>::default(),

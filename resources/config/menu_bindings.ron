@@ -1,4 +1,7 @@
 (
     axes: {},
-    actions: {},
+    actions: {
+        Start: [[Key(Space)], [Key(Return)]],
+        Quit:  [[Key(Escape)], [Key(Q)]],
+    },
 )
