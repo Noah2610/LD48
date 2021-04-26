@@ -8,12 +8,12 @@
   <properties>
    <property name="z" type="float" value="-1"/>
   </properties>
-  <object id="21" name="B" type="Custom(BgRed)" x="0" y="0" width="96" height="144"/>
-  <object id="22" name="B" type="Custom(BgRed)" x="0" y="144" width="96" height="144"/>
-  <object id="23" name="B" type="Custom(BgRed)" x="0" y="288" width="96" height="144"/>
-  <object id="24" name="B" type="Custom(BgRed)" x="0" y="432" width="96" height="144"/>
+  <object id="21" name="BG" type="Custom(BgRed)" x="0" y="0" width="96" height="144"/>
+  <object id="22" name="BG" type="Custom(BgRed)" x="0" y="144" width="96" height="144"/>
+  <object id="23" name="BG" type="Custom(BgRed)" x="0" y="288" width="96" height="144"/>
+  <object id="24" name="BG" type="Custom(BgRed)" x="0" y="432" width="96" height="144"/>
  </objectgroup>
- <objectgroup id="3" name="pickups">
+ <objectgroup id="3" name="pickups" visible="0">
   <object id="1" name="pickup" type="Coin(red)" x="40" y="152" width="16" height="16"/>
   <object id="2" name="pickup" type="Coin(red)" x="40" y="168" width="16" height="16"/>
   <object id="3" name="pickup" type="Coin(red)" x="40" y="184" width="16" height="16"/>
@@ -30,7 +30,7 @@
   <object id="14" name="pickup" type="Coin(red)" x="72" y="368" width="16" height="16"/>
   <object id="15" name="pickup" type="Coin(red)" x="8" y="368" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="5" name="obstacles">
+ <objectgroup id="5" name="obstacles" visible="0">
   <object id="16" name="obstacle" type="Obstacle" x="24" y="240" width="48" height="16"/>
   <object id="17" name="obstacle" type="Obstacle" x="24" y="368" width="48" height="48"/>
   <object id="18" name="obstacle" type="Obstacle" x="8" y="288" width="16" height="16"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="34" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="26">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="34" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="29">
  <editorsettings>
   <export target="../../../resources/levels/zones/red/red_easy_1.json" format="ld48-export"/>
  </editorsettings>
@@ -8,6 +8,8 @@
   <properties>
    <property name="z" type="float" value="-1"/>
   </properties>
+  <object id="26" name="BG" type="Custom(BgRed)" x="0" y="0" width="96" height="144"/>
+  <object id="27" name="BG" type="Custom(BgRed)" x="0" y="128" width="96" height="144"/>
  </objectgroup>
  <layer id="1" name="border" width="12" height="34">
   <data encoding="csv">
@@ -85,13 +87,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="pickups">
+ <objectgroup id="3" name="pickups" visible="0">
   <object id="1" name="pickup" type="Coin(red)" x="40" y="32" width="16" height="16"/>
   <object id="5" name="pickup" type="Coin(red)" x="72" y="80" width="16" height="16"/>
   <object id="7" name="pickup" type="Coin(red)" x="72" y="184" width="16" height="16"/>
   <object id="12" name="pickup" type="Coin(red)" x="72" y="200" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="5" name="obstacles">
+ <objectgroup id="5" name="obstacles" visible="0">
   <object id="14" name="obstacle" type="Obstacle" x="8" y="184" width="32" height="32"/>
   <object id="15" name="obstacle" type="Obstacle" x="56" y="144" width="32" height="32"/>
   <object id="16" name="obstacle" type="Obstacle" x="56" y="224" width="32" height="32"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="36" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="35">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="36" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="38">
  <editorsettings>
   <export target="../../../resources/levels/zones/red/red_easy_3.json" format="ld48-export"/>
  </editorsettings>
@@ -8,6 +8,8 @@
   <properties>
    <property name="z" type="float" value="-1"/>
   </properties>
+  <object id="35" name="BG" type="Custom(BgRed)" x="0" y="0" width="96" height="144"/>
+  <object id="37" name="BG" type="Custom(BgRed)" x="0" y="144" width="96" height="144"/>
  </objectgroup>
  <layer id="1" name="border" width="12" height="36">
   <data encoding="csv">
