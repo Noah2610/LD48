@@ -27,6 +27,7 @@ pub fn build_object<'a>(
                 );
             // let player_entity = build_player(world, transform, size);
             // let _ = build_camera(world, player_entity);
+            None
         }
 
         object_type => {
@@ -74,17 +75,16 @@ pub fn build_object<'a>(
                     size_opt,
                 );
 
-                entity_builder.build();
+                Some(entity_builder)
             } else {
                 eprintln!(
                     "[WARNING]\n    No settings for object: {:?}",
                     object_type
                 );
+                None
             }
         }
     }
-
-    unimplemented!()
 }
 
 pub fn build_objects(

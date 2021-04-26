@@ -4,7 +4,7 @@ pub mod prelude {
     pub use super::dispatcher_id::DispatcherId;
     pub use super::game_over::GameOver;
     pub use super::lanes::{Lane, Lanes};
-    pub use super::object_spawner::ObjectSpawner;
+    pub use super::object_spawner::{ObjectSpawner, ObjectToSpawn};
     pub use super::score::Score;
     pub use super::should_load_next_zone::ShouldLoadNextZone;
     pub use super::song_key::SongKey;

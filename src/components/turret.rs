@@ -1,11 +1,12 @@
 use super::component_prelude::*;
+use crate::level_loader::ObjectType;
 use climer::Timer;
 use std::time::Duration;
 
 #[derive(Component, Clone, Deserialize)]
 #[storage(VecStorage)]
 pub struct Turret {
-    pub shot_speed:       f32,
+    pub shot_object_type: ObjectType,
     pub shot_interval_ms: u64,
     #[serde(skip)]
     pub shot_timer:       Option<Timer>,
