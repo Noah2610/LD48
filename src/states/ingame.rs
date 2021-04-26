@@ -57,6 +57,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         data.world.insert(ZoneSize::default());
         data.world.insert(ShouldLoadNextZone::default());
         data.world.insert(GameOver::default());
+        data.world.insert(Score::default());
 
         {
             let lanes = Lanes::from((

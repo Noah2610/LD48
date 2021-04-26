@@ -144,6 +144,12 @@ pub(super) fn build_game_data<'a, 'b>(
             HandleObstacle::default(),
             "handle_obstacle_system",
             &[],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            HandleCoinCollection::default(),
+            "handle_coin_collection_system",
+            &[],
         )?;
 
     Ok(custom_game_data)

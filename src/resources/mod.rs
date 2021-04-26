@@ -4,6 +4,7 @@ pub mod prelude {
     pub use super::dispatcher_id::DispatcherId;
     pub use super::game_over::GameOver;
     pub use super::lanes::{Lane, Lanes};
+    pub use super::score::Score;
     pub use super::should_load_next_zone::ShouldLoadNextZone;
     pub use super::song_key::SongKey;
     pub use super::sound_key::SoundKey;
@@ -17,6 +18,7 @@ mod collision_tag;
 mod dispatcher_id;
 mod game_over;
 mod lanes;
+mod score;
 mod should_load_next_zone;
 mod song_key;
 mod sound_key;
