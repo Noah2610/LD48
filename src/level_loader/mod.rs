@@ -24,7 +24,6 @@ pub enum ObjectType {
     Portal,
     Obstacle,
     Coin(ZoneId),
-    Turret,
     Custom(String),
 }
 

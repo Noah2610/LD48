@@ -39,21 +39,57 @@
         ],
     ),
 
-    Turret: (
+    Custom("TurretA"): (
+        spritesheet: "player.png",
         components: [
-            Hitbox(SizeOffset((
-                top:    -2.0,
-                bottom: 2.0,
-                left:   2.0,
-                right:  -2.0,
-            ))),
+            Size((
+                w: 16.0,
+                h: 16.0,
+            )),
+            Hitbox(Size),
             Collidable(Obstacle),
             Obstacle(()),
             Turret((
-                shot_speed: 50.0,
-                shot_interval_ms: 1000.0,
+                shot_object_type: Custom("TurretBullet"),
+                shot_interval_ms: 1000,
             )),
             Loadable(()),
+        ],
+    ),
+
+    Custom("TurretB"): (
+        spritesheet: "player.png",
+        components: [
+            Size((
+                w: 16.0,
+                h: 16.0,
+            )),
+            Hitbox(Size),
+            Collidable(Obstacle),
+            Obstacle(()),
+            Turret((
+                shot_object_type: Custom("TurretBullet"),
+                shot_interval_ms: 1000,
+                shot_initial_delay_ms: 500,
+            )),
+            Loadable(()),
+        ],
+    ),
+
+    Custom("TurretBullet"): (
+        spritesheet: "player.png",
+        components: [
+            Size((
+                w: 8.0,
+                h: 8.0,
+            )),
+            Hitbox(Size),
+            Collidable(Obstacle),
+            Obstacle(()),
+            Velocity((
+                x: 0.0,
+                y: 50.0,
+            )),
         ],
     ),
 
