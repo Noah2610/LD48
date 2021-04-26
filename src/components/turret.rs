@@ -4,14 +4,14 @@ use climer::Timer;
 use std::time::Duration;
 
 #[derive(Component, Clone, Deserialize)]
-#[storage(VecStorage)]
+#[storage(DenseVecStorage)]
 pub struct Turret {
     pub shot_object_type:      ObjectType,
     pub shot_interval_ms:      u64,
     #[serde(default)]
     pub shot_initial_delay_ms: u64,
     #[serde(skip)]
-    pub shot_timer:            Option<Timer>,
+    shot_timer:                Option<Timer>,
 }
 
 impl Turret {

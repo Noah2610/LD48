@@ -150,13 +150,14 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
                         );
                         transform
                     };
-                    build_object(
+                    if let Some(entity_builder) = build_object(
                         data.world,
                         object.object_type,
                         transform,
                         object.size.map(Into::into),
-                    )
-                    .map(|builder| builder.build());
+                    ) {
+                        entity_builder.build();
+                    }
                 }
             }
         }

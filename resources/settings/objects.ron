@@ -90,6 +90,9 @@
                 x: 0.0,
                 y: 50.0,
             )),
+            DeleteDelay((
+                delete_after_ms: 500,
+            )),
         ],
     ),
 

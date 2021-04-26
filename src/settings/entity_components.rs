@@ -26,6 +26,7 @@ pub enum EntityComponent {
     Coin(Coin),
     Turret(Turret),
     Loadable(Loadable),
+    DeleteDelay(DeleteDelay),
 }
 
 pub fn add_components_to_entity(
@@ -69,5 +70,6 @@ pub fn add_components_to_entity(
             Comp::Loadable(loadable) => {
                 builder.with(loadable).with(Unloaded::default())
             }
+            Comp::DeleteDelay(delete_delay) => builder.with(delete_delay),
         })
 }

@@ -162,6 +162,12 @@ pub(super) fn build_game_data<'a, 'b>(
             HandleTurret::default(),
             "handle_turret_system",
             &[],
+        )?
+        .with(
+            DispatcherId::Ingame,
+            HandleDeleteDelay::default(),
+            "handle_delete_delay_system",
+            &[],
         )?;
 
     Ok(custom_game_data)
