@@ -9,6 +9,7 @@ impl<'a> System<'a> for HandleCoinCollection {
     type SystemData = (
         Entities<'a>,
         WriteExpect<'a, Score>,
+        WriteExpect<'a, SoundPlayer<SoundKey>>,
         ReadStorage<'a, Player>,
         ReadStorage<'a, Coin>,
         ReadStorage<'a, Collider<CollisionTag>>,
@@ -19,6 +20,7 @@ impl<'a> System<'a> for HandleCoinCollection {
         (
             entities,
             mut score,
+            mut sound_player,
             player_store,
             coin_store,
             collider_store,
@@ -45,6 +47,7 @@ impl<'a> System<'a> for HandleCoinCollection {
             if collected_coin_ids.contains(&coin_entity.id()) {
                 let _ = entities.delete(coin_entity);
                 score.coins += 1;
+                sound_player.add_action(SoundAction::Play(SoundKey::Coin));
             }
         }
     }

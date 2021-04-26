@@ -6,6 +6,7 @@ pub struct HandleTurret;
 impl<'a> System<'a> for HandleTurret {
     type SystemData = (
         WriteExpect<'a, ObjectSpawner>,
+        WriteExpect<'a, SoundPlayer<SoundKey>>,
         WriteStorage<'a, Turret>,
         ReadStorage<'a, Transform>,
         ReadStorage<'a, Unloaded>,
@@ -15,6 +16,7 @@ impl<'a> System<'a> for HandleTurret {
         &mut self,
         (
             mut object_spawner,
+            mut sound_player,
             mut turret_store,
             transform_store,
             unloaded_store,
@@ -36,6 +38,7 @@ impl<'a> System<'a> for HandleTurret {
                     pos,
                     size: None,
                 });
+                sound_player.add_action(SoundAction::Play(SoundKey::Shoot));
             }
         }
     }

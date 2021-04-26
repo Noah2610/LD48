@@ -14,5 +14,18 @@
         ),
     },
 
-    sfx: {},
+    sfx: {
+        Coin: (
+            file: "coin2.wav",
+        ),
+        LaneSwitch: (
+            file: "dash.wav",
+        ),
+        GameOver: (
+            file: "death.wav",
+        ),
+        Shoot: (
+            file: "shoot.wav",
+        ),
+    },
 )

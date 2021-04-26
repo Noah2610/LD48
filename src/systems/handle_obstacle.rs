@@ -9,6 +9,7 @@ impl<'a> System<'a> for HandleObstacle {
     type SystemData = (
         Entities<'a>,
         WriteExpect<'a, GameOver>,
+        WriteExpect<'a, SoundPlayer<SoundKey>>,
         ReadStorage<'a, Player>,
         ReadStorage<'a, Obstacle>,
         ReadStorage<'a, Collider<CollisionTag>>,
@@ -20,6 +21,7 @@ impl<'a> System<'a> for HandleObstacle {
         (
             entities,
             mut game_over,
+            mut sound_player,
             player_store,
             obstacle_store,
             collider_store,
@@ -58,9 +60,10 @@ impl<'a> System<'a> for HandleObstacle {
                         }
                     });
 
-            if let Some(mut animations) = did_player_get_hit {
+            if let Some(animations) = did_player_get_hit {
                 game_over.0 = true;
                 let _ = animations.play(AnimationKey::GameOver);
+                sound_player.add_action(SoundAction::Play(SoundKey::GameOver));
             }
         }
     }

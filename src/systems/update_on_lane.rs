@@ -7,6 +7,7 @@ pub struct UpdateOnLane;
 impl<'a> System<'a> for UpdateOnLane {
     type SystemData = (
         ReadExpect<'a, Lanes>,
+        WriteExpect<'a, SoundPlayer<SoundKey>>,
         WriteStorage<'a, OnLane>,
         WriteStorage<'a, Transform>,
         WriteStorage<'a, Velocity>,
@@ -17,6 +18,7 @@ impl<'a> System<'a> for UpdateOnLane {
         &mut self,
         (
             lanes,
+            mut sound_player,
             mut on_lane_store,
             mut transform_store,
             mut velocity_store,
@@ -78,6 +80,9 @@ impl<'a> System<'a> for UpdateOnLane {
                         scale.x = scale.x.abs() * -1.0;
                     }
                 }
+
+                sound_player
+                    .add_action(SoundAction::Play(SoundKey::LaneSwitch));
             }
 
             if let Some(moving_dir) = &on_lane.moving_dir {
