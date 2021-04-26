@@ -1,7 +1,7 @@
 #![enable(implicit_some)]
 Container(
     transform: (
-        id:             "main_menu",
+        id:             "pause",
         x:              0.0,
         y:              0.0,
         z:              0.0,
@@ -13,5 +13,29 @@ Container(
         opaque:         false,
     ),
 
-    children: [],
+    children: [
+        Label(
+            transform: (
+                id:             "pause_text",
+                x:              0.0,
+                y:              0.0,
+                z:              0.0,
+                width:          512.0,
+                height:         512.0,
+                anchor:         Middle,
+                pivot:          Middle,
+                mouse_reactive: false,
+                percent:        false,
+                opaque:         false,
+            ),
+            text: (
+                text:      "PAUSED",
+                font_size: 64.0,
+                color:     (0.9, 0.9, 0.9, 1.0),
+                font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
+                align:     Middle,
+                line_mode: Wrap,
+            ),
+        ),
+    ],
 )
