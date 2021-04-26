@@ -21,6 +21,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Startup {
 fn setup(world: &mut World) {
     use crate::components::prelude::{
         BelongsToSegment,
+        Coin,
         Object,
         Obstacle,
         Portal,
@@ -34,6 +35,7 @@ fn setup(world: &mut World) {
     world.register::<Segment>();
     world.register::<Portal>();
     world.register::<Obstacle>();
+    world.register::<Coin>();
 
     let sprite_sheet_handles = SpriteSheetHandles::<PathBuf>::default();
     world.insert(sprite_sheet_handles);

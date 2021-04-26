@@ -29,14 +29,6 @@
     Obstacle: (
         components: [
             Hitbox(Size),
-            // Hitbox(Custom([
-            //     (
-            //         top:    4.0,
-            //         bottom: -4.0,
-            //         left:   -4.0,
-            //         right:  4.0,
-            //     ),
-            // ])),
             Collidable(Obstacle),
             Obstacle(()),
         ],
@@ -47,6 +39,7 @@
         components: [
             Hitbox(Size),
             Collidable(Coin),
+            Coin(()),
         ],
     ),
 
@@ -55,6 +48,7 @@
         components: [
             Hitbox(Size),
             Collidable(Coin),
+            Coin(()),
         ],
     ),
 
@@ -63,6 +57,7 @@
         components: [
             Hitbox(Size),
             Collidable(Coin),
+            Coin(()),
         ],
     ),
 

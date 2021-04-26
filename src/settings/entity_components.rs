@@ -23,6 +23,7 @@ pub enum EntityComponent {
     OnLane(OnLane),
     Portal(Portal),
     Obstacle(Obstacle),
+    Coin(Coin),
 }
 
 pub fn add_components_to_entity(
@@ -61,5 +62,6 @@ pub fn add_components_to_entity(
             Comp::OnLane(on_lane) => builder.with(on_lane),
             Comp::Portal(portal) => builder.with(portal),
             Comp::Obstacle(obstacle) => builder.with(obstacle),
+            Comp::Coin(coin) => builder.with(coin),
         })
 }
