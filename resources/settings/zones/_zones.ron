@@ -6,8 +6,8 @@
 (
     config: (
         zone_order: [
-            "green",
             "red",
+            "green",
         ],
     ),
 )
