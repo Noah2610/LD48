@@ -5,6 +5,7 @@
 (
     zones: {
         "dev_1": (
+            player_speed: -100.0,
             total_segments: 8,
             first_segment: ["dev_1/00.json"],
             final_segment: ["dev_1/final.json"],

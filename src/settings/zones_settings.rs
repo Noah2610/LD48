@@ -28,6 +28,7 @@ pub struct ZonesConfig {
 pub struct ZoneSettings {
     #[serde(default)]
     pub song:           Option<SongKey>,
+    pub player_speed:   f32,
     pub total_segments: Option<usize>,
     pub first_segment:  Vec<SegmentId>,
     pub final_segment:  Vec<SegmentId>,
@@ -89,6 +90,7 @@ impl Merge for ZoneSettings {
     fn merge(&mut self, other: Self) {
         let ZoneSettings {
             song: other_song,
+            player_speed: _,
             total_segments: _,
             first_segment: _,
             final_segment: _,

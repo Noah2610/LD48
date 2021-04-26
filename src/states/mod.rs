@@ -1,9 +1,11 @@
+mod game_over_state;
 mod ingame;
 mod main_menu;
 mod startup;
 mod zone_transition;
 
 pub mod prelude {
+    pub use super::game_over_state::GameOverState;
     pub use super::ingame::Ingame;
     pub use super::main_menu::MainMenu;
     pub use super::startup::Startup;

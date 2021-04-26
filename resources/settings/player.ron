@@ -31,7 +31,6 @@
         Collider(Player),
         Collidable(Player),
         Solid(Player),
-        Velocity((x: 0.0, y: -100.0)),
         OnLane((
             switch_speed: 300.0,
         )),

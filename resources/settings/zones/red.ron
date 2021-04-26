@@ -5,6 +5,8 @@
 (
     zones: {
         "red": (
+            song: Red,
+            player_speed: -100.0,
             total_segments: 8,
             first_segment: ["red/red_first.json"],
             final_segment: ["red/red_final.json"],
