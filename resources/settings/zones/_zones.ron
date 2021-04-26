@@ -6,8 +6,7 @@
 (
     config: (
         zone_order: [
-            "dev_0",
-            "dev_2",
+            "red",
         ],
     ),
 )
