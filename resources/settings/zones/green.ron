@@ -5,7 +5,7 @@
 (
     zones: {
         "green": (
-            total_segments: 8,
+            total_segments: 2,
             first_segment: ["green/green_first.json"],
             final_segment: ["green/green_final.json"],
             segments: {
