@@ -48,4 +48,9 @@
         spritesheet: "bg/bg_red.png",
         components: [],
     ),
+
+    Custom("BgSpace"): (
+        spritesheet: "bg/bg_space_1.png",
+        components: [],
+    ),
 }

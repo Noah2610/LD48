@@ -5,14 +5,14 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tsx/tiles_red.tsx"/>
  <tileset firstgid="593" source="../../tsx/tiles_green.tsx"/>
- <objectgroup id="2" name="bg_base" visible="0">
+ <objectgroup id="2" name="bg_base">
   <properties>
    <property name="z" type="float" value="-1"/>
   </properties>
   <object id="25" name="BG" type="Custom(BgGreen)" x="0" y="0" width="128" height="144"/>
   <object id="27" name="BG" type="Custom(BgGreen)" x="0" y="144" width="128" height="144"/>
   <object id="28" name="BG" type="Custom(BgGreen)" x="0" y="288" width="128" height="144"/>
-  <object id="29" name="BG" type="Custom(BgGreen)" x="0" y="432" width="128" height="144"/>
+  <object id="29" name="BG" type="Custom(BgGreen)" x="0" y="304" width="128" height="144"/>
  </objectgroup>
  <objectgroup id="6" name="debug">
   <properties>
