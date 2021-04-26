@@ -12,6 +12,7 @@ pub enum MenuAction {
     Start,
     Quit,
     Pause,
+    SkipZone,
 }
 
 impl BindingTypes for MenuBindings {

@@ -198,4 +198,14 @@ impl ZonesManager {
             .and_then(|current_zone| settings.zones.get(&current_zone.id))
             .map(|zone_settings| zone_settings.player_speed)
     }
+
+    pub fn is_current_zone_skippable(
+        &self,
+        settings: &ZonesSettings,
+    ) -> Option<bool> {
+        self.current_zone
+            .as_ref()
+            .and_then(|current_zone| settings.zones.get(&current_zone.id))
+            .map(|zone_settings| zone_settings.is_skippable)
+    }
 }

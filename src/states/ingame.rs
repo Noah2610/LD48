@@ -6,10 +6,12 @@ use crate::level_loader::build_segment;
 use crate::level_loader::objects::{build_camera, build_object, build_player};
 
 const SEGMENT_WIDTH: f32 = 128.0;
+const UI_SKIP_TEXT_ID: &str = "skip_zone_text";
 
 pub struct Ingame {
     load_new_zone_on_resume: bool,
     ui_data:                 UiData,
+    is_zone_skippable:       bool,
 }
 
 impl Default for Ingame {
@@ -17,6 +19,7 @@ impl Default for Ingame {
         Self {
             load_new_zone_on_resume: true,
             ui_data:                 Default::default(),
+            is_zone_skippable:       false,
         }
     }
 }
@@ -39,10 +42,20 @@ impl Ingame {
             let mut player_speed_opt = None;
 
             {
-                use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
+                use deathframe::amethyst::core::HiddenPropagate;
+                use deathframe::amethyst::ecs::{
+                    Entities,
+                    Join,
+                    ReadExpect,
+                    ReadStorage,
+                    WriteExpect,
+                    WriteStorage,
+                };
+                use deathframe::amethyst::ui::UiTransform;
 
                 data.world.exec(
-                    |(mut zones_manager, settings, mut songs): (
+                    |(entities, mut zones_manager, settings, mut songs): (
+                        Entities,
                         WriteExpect<ZonesManager>,
                         ReadExpect<ZonesSettings>,
                         WriteExpect<Songs<SongKey>>,
@@ -50,6 +63,11 @@ impl Ingame {
                         zones_manager.stage_initial_segments(&settings);
                         player_speed_opt =
                             zones_manager.get_current_player_speed(&settings);
+                        if let Some(is_skippable) =
+                            zones_manager.is_current_zone_skippable(&settings)
+                        {
+                            self.is_zone_skippable = is_skippable;
+                        }
                         songs.stop_all();
                         if let Some(song_key) =
                             zones_manager.get_current_song(&settings)
@@ -90,6 +108,11 @@ impl Ingame {
         }
         if input_manager.is_down(MenuAction::Pause) {
             return Some(Trans::Push(Box::new(Pause::default())));
+        }
+        if self.is_zone_skippable && input_manager.is_down(MenuAction::SkipZone)
+        {
+            self.load_new_zone_on_resume = true;
+            return Some(Trans::Push(Box::new(ZoneTransition::default())));
         }
 
         None
@@ -211,6 +234,33 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
                     }
                 }
             }
+        }
+
+        if self.is_zone_skippable {
+            use deathframe::amethyst::core::HiddenPropagate;
+            use deathframe::amethyst::ecs::{
+                Entities,
+                Join,
+                ReadStorage,
+                WriteStorage,
+            };
+            use deathframe::amethyst::ui::UiTransform;
+
+            data.world.exec(
+                |(entities, ui_transform_store, mut hidden_propagate_store): (
+                    Entities,
+                    ReadStorage<UiTransform>,
+                    WriteStorage<HiddenPropagate>,
+                )| {
+                    for (entity, ui_transform) in
+                        (&entities, &ui_transform_store).join()
+                    {
+                        if &ui_transform.id == UI_SKIP_TEXT_ID {
+                            let _ = hidden_propagate_store.remove(entity);
+                        }
+                    }
+                },
+            )
         }
 
         Trans::None
