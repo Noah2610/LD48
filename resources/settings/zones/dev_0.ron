@@ -6,6 +6,7 @@
     zones: {
         "dev_0": (
             song: Well,
+            player_speed: 300.0,
             total_segments: 4,
             first_segment: [
                 "dev_0/00.json",
