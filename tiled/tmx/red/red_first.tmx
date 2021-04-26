@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="56" tilewidth="8" tileheight="8" infinite="0" nextlayerid="5" nextobjectid="16">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="12" height="56" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="25">
  <editorsettings>
   <export target="../../../resources/levels/zones/red/red_first.json" format="ld48-export"/>
  </editorsettings>
@@ -8,6 +8,10 @@
   <properties>
    <property name="z" type="float" value="-1"/>
   </properties>
+  <object id="21" name="B" type="Custom(BgRed)" x="0" y="0" width="96" height="144"/>
+  <object id="22" name="B" type="Custom(BgRed)" x="0" y="144" width="96" height="144"/>
+  <object id="23" name="B" type="Custom(BgRed)" x="0" y="288" width="96" height="144"/>
+  <object id="24" name="B" type="Custom(BgRed)" x="0" y="432" width="96" height="144"/>
  </objectgroup>
  <objectgroup id="3" name="pickups">
   <object id="1" name="pickup" type="Coin(red)" x="40" y="152" width="16" height="16"/>
@@ -25,6 +29,13 @@
   <object id="13" name="pickup" type="Coin(red)" x="40" y="152" width="16" height="16"/>
   <object id="14" name="pickup" type="Coin(red)" x="72" y="368" width="16" height="16"/>
   <object id="15" name="pickup" type="Coin(red)" x="8" y="368" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="5" name="obstacles">
+  <object id="16" name="obstacle" type="Obstacle" x="24" y="240" width="48" height="16"/>
+  <object id="17" name="obstacle" type="Obstacle" x="24" y="368" width="48" height="48"/>
+  <object id="18" name="obstacle" type="Obstacle" x="8" y="288" width="16" height="16"/>
+  <object id="19" name="obstacle" type="Obstacle" x="72" y="288" width="16" height="16"/>
+  <object id="20" name="obstacle" type="Obstacle" x="40" y="352" width="16" height="16"/>
  </objectgroup>
  <layer id="4" name="border" width="12" height="56">
   <data encoding="csv">

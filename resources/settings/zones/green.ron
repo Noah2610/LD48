@@ -1,0 +1,29 @@
+// src/settings/zones_settings.rs
+// ./zones.ron
+
+#![enable(implicit_some)]
+(
+    zones: {
+        "green": (
+            total_segments: 8,
+            first_segment: ["green/green_first.json"],
+            final_segment: ["green/green_final.json"],
+            segments: {
+                "green/green_first.json": [
+                    "green/green_easy_1.json",
+                    "green/green_easy_1.json",
+                    "green/green_easy_1.json",
+                    "green/green_easy_0.json",
+                    "green/green_easy_0.json",
+                    "green/green_easy_0.json",
+                ],
+                "green/green_0.json": [
+                    "green/green_easy_1.json",
+                ],
+                "green/green_1.json": [
+                    "green/green_easy_0.json",
+                ],
+            }
+        ),
+    },
+)

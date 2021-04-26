@@ -27,7 +27,6 @@
     ),
 
     Obstacle: (
-        spritesheet: "player.png",
         components: [
             Hitbox(Custom([
                 (
@@ -65,4 +64,15 @@
             Collidable(Coin),
         ],
     ),
+
+    Custom("BgGreen"): (
+        spritesheet: "bg/bg_green.png",
+        components: [],
+    ),
+
+    Custom("BgRed"): (
+        spritesheet: "bg/bg_red.png",
+        components: [],
+    ),
+
 }
