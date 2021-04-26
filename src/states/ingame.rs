@@ -2,7 +2,7 @@ use super::menu_prelude::*;
 use super::state_prelude::*;
 use crate::components::prelude::{Size, Transform};
 use crate::input::prelude::{MenuAction, MenuBindings};
-use crate::level_loader::build_level;
+use crate::level_loader::build_segment;
 use crate::level_loader::objects::{build_camera, build_object, build_player};
 
 const SEGMENT_WIDTH: f32 = 128.0;
@@ -66,7 +66,12 @@ impl Ingame {
                 let size = Size::new(32.0, 32.0);
                 let player =
                     build_player(data.world, transform, size, player_speed);
-                let _ = build_camera(data.world, player, SEGMENT_WIDTH);
+                let _ = build_camera(
+                    data.world,
+                    Some(player),
+                    Size::new(SEGMENT_WIDTH, 0.0),
+                    None,
+                );
             } else {
                 eprintln!(
                     "[WARNING]\n    No `player_speed` configured for current \
@@ -159,7 +164,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         let levels_to_load =
             data.world.write_resource::<ZonesManager>().levels_to_load();
         for (segment_id, level) in levels_to_load {
-            build_level(data.world, level, segment_id).unwrap();
+            build_segment(data.world, level, segment_id).unwrap();
         }
 
         {

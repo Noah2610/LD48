@@ -77,7 +77,7 @@ Container(
                 opaque:         false,
             ),
             text: (
-                text:      "Press 'Enter' to continue",
+                text:      "Press SPACE to continue",
                 font_size: 24.0,
                 color:     (0.9, 0.9, 0.9, 1.0),
                 font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),

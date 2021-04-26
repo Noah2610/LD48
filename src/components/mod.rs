@@ -1,6 +1,7 @@
 pub mod belongs_to_segment;
 pub mod camera;
 pub mod coin;
+pub mod cutscene;
 pub mod delete_delay;
 pub mod object;
 pub mod obstacle;
@@ -17,6 +18,7 @@ pub mod prelude {
     pub use super::belongs_to_segment::BelongsToSegment;
     pub use super::camera::Camera;
     pub use super::coin::Coin;
+    pub use super::cutscene::Cutscene;
     pub use super::delete_delay::DeleteDelay;
     pub use super::object::Object;
     pub use super::obstacle::Obstacle;

@@ -33,7 +33,7 @@ pub fn load_level(filepath: PathBuf) -> amethyst::Result<DataLevel> {
     Ok(level_data)
 }
 
-pub fn build_level(
+pub fn build_segment(
     world: &mut World,
     level_data: DataLevel,
     segment_id: SegmentId,
@@ -81,23 +81,30 @@ pub fn build_level(
         world,
         level_data.tiles,
         tile_size,
-        segment_id.clone(),
-        segment_entity,
+        Some((segment_id.clone(), segment_entity)),
         offset_y,
     )?;
     objects::build_objects(
         world,
         level_data.objects,
-        segment_id,
-        segment_entity,
+        Some((segment_id, segment_entity)),
         offset_y,
     )?;
 
-    // {
-    //     let mut zone_size = world.write_resource::<ZoneSize>();
-    //     zone_size.width = level_size.w;
-    //     zone_size.height += level_size.h;
-    // }
+    world.maintain();
+
+    Ok(())
+}
+
+pub fn build_level(
+    world: &mut World,
+    level_data: DataLevel,
+) -> amethyst::Result<()> {
+    let tile_size =
+        Size::new(level_data.level.tile_size.w, level_data.level.tile_size.h);
+
+    tiles::build_tiles(world, level_data.tiles, tile_size, None, 0.0)?;
+    objects::build_objects(world, level_data.objects, None, 0.0)?;
 
     world.maintain();
 

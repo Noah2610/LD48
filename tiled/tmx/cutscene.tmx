@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="160" height="90" tilewidth="8" tileheight="8" infinite="0" nextlayerid="3" nextobjectid="3">
+ <editorsettings>
+  <export target="../../resources/levels/cutscene.json" format="ld48-export"/>
+ </editorsettings>
+ <objectgroup id="2" name="cutscene">
+  <object id="1" type="Custom(Cutscene)" x="0" y="0" width="1280" height="720"/>
+ </objectgroup>
+</map>

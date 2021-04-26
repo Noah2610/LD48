@@ -90,8 +90,7 @@ pub fn build_object<'a>(
 pub fn build_objects(
     world: &mut World,
     objects: Vec<DataObject>,
-    segment_id: SegmentId,
-    segment_entity: Entity,
+    segment: Option<(SegmentId, Entity)>,
     offset_y: f32,
 ) -> amethyst::Result<()> {
     for object in objects {
@@ -120,16 +119,19 @@ pub fn build_objects(
             }
 
             object_type => {
-                if let Some(entity_builder) = build_object(
+                if let Some(mut entity_builder) = build_object(
                     world,
                     object_type.clone(),
                     transform,
                     Some(size),
                 ) {
-                    entity_builder
-                        .with(BelongsToSegment(segment_id.clone()))
-                        .with(ParentDelete(segment_entity))
-                        .build();
+                    if let Some((segment_id, segment_entity)) = segment.as_ref()
+                    {
+                        entity_builder = entity_builder
+                            .with(BelongsToSegment(segment_id.clone()))
+                            .with(ParentDelete(*segment_entity));
+                    }
+                    entity_builder.build();
                 }
             }
         }
@@ -179,8 +181,9 @@ pub fn build_player(
 
 pub fn build_camera(
     world: &mut World,
-    player: Entity,
-    level_width: f32,
+    player: Option<Entity>,
+    level_size: Size,
+    camera_size: Option<Size>,
 ) -> amethyst::Result<()> {
     use amethyst::renderer::Camera as AmethystCamera;
     use amethyst::utils::ortho_camera::{
@@ -193,7 +196,7 @@ pub fn build_camera(
 
     let settings = (*world.read_resource::<CameraSettings>()).clone();
 
-    let size = settings.size;
+    let size = camera_size.unwrap_or(settings.size);
 
     let camera = AmethystCamera::standard_2d(size.w, size.h);
     let mut camera_ortho =
@@ -209,20 +212,19 @@ pub fn build_camera(
     };
 
     let mut transform = Transform::default();
-    transform.set_translation_xyz(level_width * 0.5, 0.0, settings.z);
+    transform.set_translation_xyz(
+        level_size.w * 0.5,
+        level_size.h * 0.5,
+        settings.z,
+    );
 
     let loading_distance = (
         size.w * 0.5 + LOADING_DISTANCE_PADDING.0,
         size.h * 0.5 + LOADING_DISTANCE_PADDING.1,
     );
 
-    world
+    let mut entity_builder = world
         .create_entity()
-        .with(
-            Follow::new(player)
-                .with_only_axis(Axis::Y)
-                .with_offset(settings.follow_offset),
-        )
         // .with(Confined::from(Rect {
         //     top:    level_size.h,
         //     bottom: 0.0,
@@ -234,8 +236,17 @@ pub fn build_camera(
         .with(camera)
         .with(camera_ortho)
         .with(Camera::default())
-        .with(Loader::from(loading_distance))
-        .build();
+        .with(Loader::from(loading_distance));
+
+    if let Some(player) = player {
+        entity_builder = entity_builder.with(
+            Follow::new(player)
+                .with_only_axis(Axis::Y)
+                .with_offset(settings.follow_offset),
+        );
+    }
+
+    entity_builder.build();
 
     Ok(())
 }

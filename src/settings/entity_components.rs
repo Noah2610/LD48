@@ -20,6 +20,7 @@ pub enum EntityComponent {
     Solid(Solid<SolidTag>),
     SolidPusher(SolidPusher),
     SolidPushable(SolidPushable),
+    ScaleOnce(ScaleOnce),
     OnLane(OnLane),
     Portal(Portal),
     Obstacle(Obstacle),
@@ -28,6 +29,7 @@ pub enum EntityComponent {
     Loadable(Loadable),
     DeleteDelay(DeleteDelay),
     Rotate(Rotate),
+    Cutscene(Cutscene),
 }
 
 pub fn add_components_to_entity(
@@ -63,6 +65,7 @@ pub fn add_components_to_entity(
             Comp::Solid(solid) => builder.with(solid),
             Comp::SolidPusher(solid_pusher) => builder.with(solid_pusher),
             Comp::SolidPushable(solid_pushable) => builder.with(solid_pushable),
+            Comp::ScaleOnce(scale_once) => builder.with(scale_once),
             Comp::OnLane(on_lane) => builder.with(on_lane),
             Comp::Portal(portal) => builder.with(portal),
             Comp::Obstacle(obstacle) => builder.with(obstacle),
@@ -73,5 +76,6 @@ pub fn add_components_to_entity(
             }
             Comp::DeleteDelay(delete_delay) => builder.with(delete_delay),
             Comp::Rotate(rotate) => builder.with(rotate),
+            Comp::Cutscene(cutscene) => builder.with(cutscene),
         })
 }

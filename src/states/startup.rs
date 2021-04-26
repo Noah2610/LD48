@@ -14,7 +14,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Startup {
         data: StateData<GameData<'a, 'b>>,
     ) -> Trans<GameData<'a, 'b>, StateEvent> {
         data.data.update_core(data.world);
-        Trans::Switch(Box::new(MainMenu::default()))
+        Trans::Switch(Box::new(Cutscene::default()))
     }
 }
 
@@ -22,6 +22,7 @@ fn setup(world: &mut World) {
     use crate::components::prelude::{
         BelongsToSegment,
         Coin,
+        Cutscene,
         Object,
         Obstacle,
         Portal,
@@ -38,6 +39,7 @@ fn setup(world: &mut World) {
     world.register::<Obstacle>();
     world.register::<Coin>();
     world.register::<Turret>();
+    world.register::<Cutscene>();
 
     let sprite_sheet_handles = SpriteSheetHandles::<PathBuf>::default();
     world.insert(sprite_sheet_handles);

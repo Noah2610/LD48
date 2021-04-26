@@ -11,8 +11,7 @@ pub fn build_tiles(
     world: &mut World,
     tiles: Vec<DataTile>,
     tile_size: Size,
-    segment_id: SegmentId,
-    segment_entity: Entity,
+    segment: Option<(SegmentId, Entity)>,
     offset_y: f32,
 ) -> amethyst::Result<()> {
     for tile in tiles {
@@ -39,17 +38,22 @@ pub fn build_tiles(
             }
         };
 
-        world
+        let mut entity_builder = world
             .create_entity()
             .with(transform)
             .with(tile_size.clone())
             .with(sprite_render)
             .with(Transparent)
             .with(ScaleOnce::default())
-            .with(Tile::default())
-            .with(BelongsToSegment(segment_id.clone()))
-            .with(ParentDelete(segment_entity))
-            .build();
+            .with(Tile::default());
+
+        if let Some((segment_id, segment_entity)) = segment.as_ref() {
+            entity_builder = entity_builder
+                .with(BelongsToSegment(segment_id.clone()))
+                .with(ParentDelete(*segment_entity));
+        }
+
+        entity_builder.build();
     }
 
     Ok(())
