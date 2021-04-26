@@ -3,13 +3,13 @@ use super::state_prelude::*;
 use crate::input::prelude::{MenuAction, MenuBindings};
 
 #[derive(Default)]
-pub struct GameOverState {
+pub struct Pause {
     ui_data: UiData,
 }
 
-impl GameOverState {
+impl Pause {
     fn start<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
-        self.create_ui(data, resource("ui/game_over.ron").to_str().unwrap());
+        self.create_ui(data, resource("ui/pause.ron").to_str().unwrap());
     }
 
     fn stop<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
@@ -20,17 +20,17 @@ impl GameOverState {
         &mut self,
         input_manager: &InputManager<MenuBindings>,
     ) -> Option<Trans<GameData<'a, 'b>, StateEvent>> {
-        if input_manager.is_down(MenuAction::Start)
-            || input_manager.is_down(MenuAction::Quit)
-        {
-            Some(Trans::Pop)
-        } else {
-            None
+        if input_manager.is_down(MenuAction::Pause) {
+            return Some(Trans::Pop);
         }
+        if input_manager.is_down(MenuAction::Quit) {
+            return Some(Trans::Replace(Box::new(MainMenu::default())));
+        }
+        None
     }
 }
 
-impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for GameOverState {
+impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Pause {
     fn on_start(&mut self, mut data: StateData<GameData<'a, 'b>>) {
         self.start(&mut data);
     }
@@ -51,9 +51,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for GameOverState {
         &mut self,
         data: StateData<GameData<'a, 'b>>,
     ) -> Trans<GameData<'a, 'b>, StateEvent> {
-        data.data
-            .update(data.world, DispatcherId::GameOver)
-            .unwrap();
+        data.data.update_core(data.world);
 
         if let Some(trans) = self.handle_input(
             &*data.world.read_resource::<InputManager<MenuBindings>>(),
@@ -76,7 +74,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for GameOverState {
     }
 }
 
-impl<'a, 'b> Menu<GameData<'a, 'b>, StateEvent> for GameOverState {
+impl<'a, 'b> Menu<GameData<'a, 'b>, StateEvent> for Pause {
     fn event_triggered(
         &mut self,
         _data: &mut StateData<GameData<'a, 'b>>,

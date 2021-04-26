@@ -46,18 +46,17 @@ pub(super) fn build_game_data<'a, 'b>(
         .with_core_bundle(audio_bundle)?
         .with_core_bundle(menu_input_bundle)?
         .with_core_bundle(UiBundle::<MenuBindings>::new())?
+        .with_core_bundle(animation_bundle)?
         .with_core(PrintFpsSystem::default(), "print_fps_system", &[])?
         .with_core(CameraOrthoSystem::default(), "camera_ortho_system", &[])?
         .with_core(ScaleSpritesSystem::default(), "scale_sprites_system", &[])?
-        .with_bundle(DispatcherId::Ingame, ingame_input_bundle)?
-        .with_bundle(DispatcherId::Ingame, physics_bundle)?
-        .with_bundle(DispatcherId::Ingame, animation_bundle)?
-        .with(
-            DispatcherId::MainMenu,
+        .with_core(
             InputManagerSystem::<MenuBindings>::default(),
-            "main_menu_input_manager_system",
+            "menu_input_manager_system",
             &[],
         )?
+        .with_bundle(DispatcherId::Ingame, ingame_input_bundle)?
+        .with_bundle(DispatcherId::Ingame, physics_bundle)?
         .with(
             DispatcherId::Ingame,
             InputManagerSystem::<IngameBindings>::default(),
@@ -156,6 +155,12 @@ pub(super) fn build_game_data<'a, 'b>(
             DispatcherId::Ingame,
             UpdateScoreUi::default(),
             "update_score_ui_system",
+            &[],
+        )?
+        .with(
+            DispatcherId::GameOver,
+            UpdateScoreUi::default(),
+            "game_over_update_score_ui_system",
             &[],
         )?
         .with(

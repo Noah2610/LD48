@@ -1,10 +1,10 @@
 #![enable(implicit_some)]
 Container(
     transform: (
-        id:             "main_menu",
+        id:             "game_over",
         x:              0.0,
         y:              0.0,
-        z:              0.0,
+        z:              10.0,
         width:          1.0,
         height:         1.0,
         anchor:         Middle,
@@ -13,5 +13,77 @@ Container(
         opaque:         false,
     ),
 
-    children: [],
+    children: [
+        Label(
+            transform: (
+                id:             "game_over_text",
+                x:              0.0,
+                y:              128.0,
+                z:              0.0,
+                width:          256.0,
+                height:         256.0,
+                anchor:         Middle,
+                pivot:          Middle,
+                mouse_reactive: false,
+                percent:        false,
+                opaque:         false,
+            ),
+            text: (
+                text:      "GAME OVER",
+                font_size: 64.0,
+                color:     (0.9, 0.9, 0.9, 1.0),
+                font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
+                align:     Middle,
+                line_mode: Wrap,
+            ),
+        ),
+
+        Label(
+            transform: (
+                id:             "score",
+                x:              0.0,
+                y:              -128.0,
+                z:              0.0,
+                width:          256.0,
+                height:         256.0,
+                anchor:         Middle,
+                pivot:          Middle,
+                mouse_reactive: false,
+                percent:        false,
+                opaque:         false,
+            ),
+            text: (
+                text:      "SCORE\n0",
+                font_size: 64.0,
+                color:     (0.9, 0.9, 0.9, 1.0),
+                font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
+                align:     Middle,
+                line_mode: Wrap,
+            ),
+        ),
+
+        Label(
+            transform: (
+                id:             "continue_text",
+                x:              0.0,
+                y:              64.0,
+                z:              0.0,
+                width:          512.0,
+                height:         128.0,
+                anchor:         BottomMiddle,
+                pivot:          BottomMiddle,
+                mouse_reactive: false,
+                percent:        false,
+                opaque:         false,
+            ),
+            text: (
+                text:      "Press 'Enter' to continue",
+                font_size: 24.0,
+                color:     (0.9, 0.9, 0.9, 1.0),
+                font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
+                align:     Middle,
+                line_mode: Wrap,
+            ),
+        ),
+    ],
 )

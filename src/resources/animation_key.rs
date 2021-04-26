@@ -2,4 +2,5 @@
 pub enum AnimationKey {
     Idle,
     LaneSwitch,
+    GameOver,
 }

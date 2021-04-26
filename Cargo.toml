@@ -35,10 +35,10 @@ vulkan = ["deathframe/vulkan"]
 metal = ["deathframe/metal"]
 
 [profile.dev]
-opt-level        = 2
+opt-level        = 1
 debug            = true
 debug-assertions = true
-codegen-units    = 8
+codegen-units    = 16
 incremental      = true
 overflow-checks  = true
 lto              = "off"

@@ -139,7 +139,7 @@ pub fn build_objects(
 
 pub fn build_player(
     world: &mut World,
-    transform: Transform,
+    mut transform: Transform,
     size: Size,
     player_speed: f32,
 ) -> Entity {
@@ -154,6 +154,8 @@ pub fn build_player(
     };
 
     let settings = (*world.read_resource::<PlayerSettings>()).clone();
+
+    transform.set_translation_z(settings.z);
 
     let mut entity_builder = world
         .create_entity()
@@ -203,7 +205,7 @@ pub fn build_camera(
         left:   -half_size.w,
         right:  half_size.w,
         near:   0.0,
-        far:    20.0,
+        far:    100.0,
     };
 
     let mut transform = Transform::default();
