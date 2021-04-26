@@ -5,7 +5,7 @@
 (
     zones: {
         "green": (
-            total_segments: 2,
+            total_segments: 8,
             first_segment: ["green/green_first.json"],
             final_segment: ["green/green_final.json"],
             segments: {
@@ -14,22 +14,40 @@
                     "green/green_easy_0.json",
                     "green/green_easy_1.json",
                     "green/green_easy_2.json",
+                    "green/green_easy_3.json",
                 ],
                 "green/green_easy_0.json": [
                     "green/green_easy_1.json",
                     "green/green_easy_2.json",
+                    "green/green_easy_3.json",
                 ],
                 "green/green_easy_1.json": [
                     "green/green_easy_0.json",
                     "green/green_easy_0.json",
                     "green/green_easy_2.json",
+                    "green/green_easy_3.json",
+                    "green/green_easy_3.json",
                     "green/green_medium_1.json",
+                    "green/green_medium_0.json",
                 ],
                 "green/green_easy_2.json": [
                     "green/green_easy_0.json",
                     "green/green_easy_1.json",
                     "green/green_easy_1.json",
+                    "green/green_easy_3.json",
+                    "green/green_medium_0.json",
                     "green/green_medium_1.json",
+                ],
+                "green/green_easy_3.json": [
+                    "green/green_easy_0.json",
+                    "green/green_easy_1.json",
+                    "green/green_easy_2.json",
+                    "green/green_medium_1.json",
+                ],
+                "green/green_medium_0.json": [
+                    "green/green_easy_0.json",
+                    "green/green_easy_1.json",
+                    "green/green_easy_2.json",
                 ],
                 "green/green_medium_1.json": [
                     "green/green_easy_0.json",
