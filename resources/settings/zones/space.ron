@@ -5,7 +5,6 @@
 (
     zones: {
         "space": (
-            is_skippable: true,
             song: Well,
             player_speed: -100.0,
             total_segments: 8,
