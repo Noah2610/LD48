@@ -3,13 +3,25 @@
     volume: 0.5,
 
     bgm: {
+        MainMenu: (
+            file: "welltrack.wav",
+        ),
+        Cutscene: (
+            file: "LD484.wav",
+        ),
         Well: (
-            file: "LD481.2.wav",
+            file: "welltrack.wav",
         ),
         Green: (
-            file: "LD482.2.wav",
+            file: "LD481.2.wav",
         ),
         Red: (
+            file: "LD482.2.wav",
+        ),
+        Space: (
+            file: "LD483.2.wav",
+        ),
+        Psychadelic: (
             file: "LD483.2.wav",
         ),
     },

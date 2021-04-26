@@ -54,6 +54,12 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Cutscene {
             )
             .expect("Couldn't load cutscene camera");
         };
+
+        {
+            let mut songs = data.world.write_resource::<Songs<SongKey>>();
+            songs.stop_all();
+            songs.play(&SongKey::Cutscene)
+        }
     }
 
     fn on_resume(&mut self, mut data: StateData<GameData<'a, 'b>>) {

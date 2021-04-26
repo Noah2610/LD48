@@ -9,7 +9,13 @@ pub struct MainMenu {
 
 impl MainMenu {
     fn start<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
+        data.world.delete_all();
         self.create_ui(data, resource("ui/main_menu.ron").to_str().unwrap());
+        {
+            let mut songs = data.world.write_resource::<Songs<SongKey>>();
+            songs.stop_all();
+            songs.play(&SongKey::MainMenu)
+        }
     }
 
     fn stop<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
