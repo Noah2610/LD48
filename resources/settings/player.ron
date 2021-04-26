@@ -2,6 +2,8 @@
 
 #![enable(implicit_some)]
 (
+    z: 10.0,
+
     components: [
         Size((
             w: 32.0,
