@@ -24,6 +24,7 @@ pub enum EntityComponent {
     Portal(Portal),
     Obstacle(Obstacle),
     Coin(Coin),
+    Turret(Turret),
     Loadable(Loadable),
 }
 
@@ -64,6 +65,7 @@ pub fn add_components_to_entity(
             Comp::Portal(portal) => builder.with(portal),
             Comp::Obstacle(obstacle) => builder.with(obstacle),
             Comp::Coin(coin) => builder.with(coin),
+            Comp::Turret(turret) => builder.with(turret),
             Comp::Loadable(loadable) => {
                 builder.with(loadable).with(Unloaded::default())
             }
