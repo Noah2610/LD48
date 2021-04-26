@@ -10,17 +10,26 @@ impl<'a> System<'a> for HandleCoinCollection {
         Entities<'a>,
         WriteExpect<'a, Score>,
         ReadStorage<'a, Player>,
+        ReadStorage<'a, Coin>,
         ReadStorage<'a, Collider<CollisionTag>>,
     );
 
     fn run(
         &mut self,
-        (entities, mut score, player_store, collider_store): Self::SystemData,
+        (
+            entities,
+            mut score,
+            player_store,
+            coin_store,
+            collider_store,
+        ): Self::SystemData,
     ) {
         let query_exp = {
             use query::exp::prelude_variants::*;
             And(vec![IsState(Steady), IsTag(CollisionTag::Coin)])
         };
+
+        let mut collected_coin_ids = Vec::new();
 
         for (_, collider) in (&player_store, &collider_store).join() {
             let collisions = collider
@@ -28,9 +37,14 @@ impl<'a> System<'a> for HandleCoinCollection {
                 .exp(&query_exp)
                 .run();
             for collision in collisions {
-                if entities.delete(entities.entity(collision.id)).is_ok() {
-                    score.coins += 1;
-                }
+                collected_coin_ids.push(collision.id);
+            }
+        }
+
+        for (coin_entity, _) in (&entities, &coin_store).join() {
+            if collected_coin_ids.contains(&coin_entity.id()) {
+                let _ = entities.delete(coin_entity);
+                score.coins += 1;
             }
         }
     }
