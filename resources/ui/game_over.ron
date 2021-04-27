@@ -13,6 +13,30 @@ Container(
         opaque:         false,
     ),
 
+    // background: Texture(File(
+    //     "resources/ui/game_over.png",
+    //     (
+    //         "IMAGE",
+    //         (
+    //             sampler_info: (
+    //                 min_filter: Nearest,
+    //                 mag_filter: Nearest,
+    //                 mip_filter: Nearest,
+    //                 wrap_mode: (Clamp, Clamp, Clamp),
+    //                 lod_bias: (0),
+    //                 lod_range: (
+    //                     start: (0),
+    //                     end: (32767),
+    //                 ),
+    //                 comparison: None,
+    //                 border: PackedColor(0),
+    //                 normalized: true,
+    //                 anisotropic: Off,
+    //             ),
+    //         ),
+    //     ),
+    // )),
+
     children: [
         Image(
             transform: (
@@ -21,7 +45,7 @@ Container(
                 // y:              128.0,
                 y:              0.0,
                 z:              0.0,
-                width:          256.0,
+                width:          512.0,
                 height:         256.0,
                 anchor:         Middle,
                 mouse_reactive: false,
@@ -29,7 +53,7 @@ Container(
                 opaque:         false,
             ),
             image: Texture(File(
-                "resources/spritesheets/gameover.png",
+                "resources/ui/game_over.png",
                 (
                     "IMAGE",
                     (
