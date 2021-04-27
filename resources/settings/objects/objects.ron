@@ -39,6 +39,21 @@
         ],
     ),
 
+    Custom("PsychGrid"): (
+        spritesheet: "psychedelic/psychedelic_grid.png",
+        components: [
+            Hitbox(Size),
+            Collidable(Obstacle),
+            Obstacle(()),
+            Animation([
+                (0, 200),
+                (1, 200),
+                (2, 200),
+                (3, 200),
+            ]),
+        ],
+    ),
+
     Custom("BgGreen"): (
         spritesheet: "bg/bg_green.png",
         components: [],
@@ -58,4 +73,40 @@
         spritesheet: "bg/bg_well_1.png",
         components: [],
     ),
+    
+    Custom("BgPsych0"): (
+        spritesheet: "bg/bg_psychedelic_0.png",
+        components: [],
+    ),
+
+    Custom("BgPsych1"): (
+        spritesheet: "bg/bg_psychedelic_1.png",
+        components: [],
+    ),
+
+    Custom("BgPsych2"): (
+        spritesheet: "bg/bg_psychedelic_2.png",
+        components: [],
+    ),
+
+    Custom("BgPsych3"): (
+        spritesheet: "bg/bg_psychedelic_3.png",
+        components: [],
+    ),
+
+    Custom("BgPsych4"): (
+        spritesheet: "bg/bg_psychedelic_4.png",
+        components: [],
+    ),
+
+    Custom("BgPsych5"): (
+        spritesheet: "bg/bg_psychedelic_5.png",
+        components: [],
+    ),
+
+    Custom("BgPsych6"): (
+        spritesheet: "bg/bg_psychedelic_6.png",
+        components: [],
+    ),
+    
 }

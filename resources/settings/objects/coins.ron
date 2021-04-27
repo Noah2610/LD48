@@ -95,4 +95,28 @@
             ]),
         ],
     ),
+
+    Coin("psychedelic"): (
+        spritesheet: "coins/coin_psychedelic.png",
+        components: [
+            Hitbox(Size),
+            Collidable(Coin),
+            Coin(()),
+            Animation([
+                (0, 50),
+                (1, 50),
+                (2, 50),
+                (3, 50),
+                (4, 50),
+                (5, 50),
+                (6, 50),
+                (7, 50),
+                (8, 50),
+                (9, 50),
+                (10, 50),
+                (11, 50),
+                (12, 50),
+            ]),
+        ],
+    ),
 }

@@ -1,0 +1,23 @@
+// src/settings/zones_settings.rs
+// ./zones.ron
+
+#![enable(implicit_some)]
+(
+    zones: {
+        "psychedelic": (
+            song: Psychadelic,
+            player_speed: -90.0,
+            total_segments: 3,
+            first_segment: ["psychedelic/psychedelic_first.json"],
+            final_segment: ["psychedelic/psychedelic_final.json"],
+            segments: {
+                "psychedelic/psychedelic_first.json": [
+                    "psychedelic/psychedelic_0.json",
+                ],
+                "psychedelic/psychedelic_0.json": [
+                    "psychedelic/psychedelic_1.json",
+                ],
+            }
+        ),
+    },
+)
