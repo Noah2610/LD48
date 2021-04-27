@@ -40,11 +40,6 @@ impl ZonesManager {
         self.current_zone.as_ref().map(|current| &current.id)
     }
 
-    #[deprecated]
-    pub fn set_zone(&mut self, zone_id: ZoneId) {
-        self.current_zone = Some(ZoneState::new(zone_id, 0));
-    }
-
     pub fn lock_segment_loading(&mut self) {
         self.segment_loading_locked = true;
     }

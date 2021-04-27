@@ -1,4 +1,3 @@
-use crate::components::prelude::Size;
 use crate::settings::prelude::LanesSettings;
 
 pub struct Lanes {

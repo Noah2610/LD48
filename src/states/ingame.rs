@@ -42,20 +42,10 @@ impl Ingame {
             let mut player_speed_opt = None;
 
             {
-                use deathframe::amethyst::core::HiddenPropagate;
-                use deathframe::amethyst::ecs::{
-                    Entities,
-                    Join,
-                    ReadExpect,
-                    ReadStorage,
-                    WriteExpect,
-                    WriteStorage,
-                };
-                use deathframe::amethyst::ui::UiTransform;
+                use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
 
                 data.world.exec(
-                    |(entities, mut zones_manager, settings, mut songs): (
-                        Entities,
+                    |(mut zones_manager, settings, mut songs): (
                         WriteExpect<ZonesManager>,
                         ReadExpect<ZonesSettings>,
                         WriteExpect<Songs<SongKey>>,
