@@ -6,9 +6,9 @@
 (
     config: (
         zone_order: [
-            "psychedelic",
             "well",
             "green",
+            "psychedelic",
             "space",
             "red",
         ],
