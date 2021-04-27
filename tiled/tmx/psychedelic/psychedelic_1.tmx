@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="64" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="218">
+ <editorsettings>
+  <export target="../../../resources/levels/zones/psychedelic/psychedelic_1.json" format="ld48-export"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tsx/tiles_red.tsx"/>
+ <tileset firstgid="593" source="../../tsx/tiles_green.tsx"/>
+ <objectgroup id="2" name="bg_base" visible="0">
+  <properties>
+   <property name="z" type="float" value="-1"/>
+  </properties>
+  <object id="42" name="BG" type="Custom(BgPsych3)" x="0" y="0" width="128" height="256"/>
+  <object id="126" name="BG" type="Custom(BgPsych2)" x="0" y="256" width="128" height="256"/>
+ </objectgroup>
+ <objectgroup id="3" name="pickups">
+  <object id="192" name="pickup" type="Coin(psychedelic)" x="8" y="232" width="16" height="16"/>
+  <object id="193" name="pickup" type="Coin(psychedelic)" x="8" y="184" width="16" height="16"/>
+  <object id="194" name="pickup" type="Coin(psychedelic)" x="104" y="184" width="16" height="16"/>
+  <object id="195" name="pickup" type="Coin(psychedelic)" x="104" y="232" width="16" height="16"/>
+  <object id="196" name="pickup" type="Coin(psychedelic)" x="56" y="248" width="16" height="16"/>
+  <object id="209" name="pickup" type="Coin(psychedelic)" x="24" y="408" width="16" height="16"/>
+  <object id="210" name="pickup" type="Coin(psychedelic)" x="56" y="408" width="16" height="16"/>
+  <object id="211" name="pickup" type="Coin(psychedelic)" x="88" y="408" width="16" height="16"/>
+  <object id="212" name="pickup" type="Coin(psychedelic)" x="56" y="432" width="16" height="16"/>
+  <object id="213" name="pickup" type="Coin(psychedelic)" x="72" y="448" width="16" height="16"/>
+  <object id="214" name="pickup" type="Coin(psychedelic)" x="40" y="448" width="16" height="16"/>
+  <object id="215" name="pickup" type="Coin(psychedelic)" x="8" y="448" width="16" height="16"/>
+  <object id="216" name="pickup" type="Coin(psychedelic)" x="104" y="448" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="5" name="obstacles">
+  <object id="84" name="obstacle" type="Custom(PsychGrid)" x="88" y="32" width="16" height="16"/>
+  <object id="93" name="obstacle" type="Custom(PsychGrid)" x="40" y="192" width="16" height="16"/>
+  <object id="94" name="obstacle" type="Custom(PsychGrid)" x="40" y="208" width="16" height="16"/>
+  <object id="95" name="obstacle" type="Custom(PsychGrid)" x="40" y="224" width="16" height="16"/>
+  <object id="96" name="obstacle" type="Custom(PsychGrid)" x="72" y="192" width="16" height="16"/>
+  <object id="97" name="obstacle" type="Custom(PsychGrid)" x="72" y="208" width="16" height="16"/>
+  <object id="98" name="obstacle" type="Custom(PsychGrid)" x="72" y="224" width="16" height="16"/>
+  <object id="101" name="obstacle" type="Custom(PsychGrid)" x="88" y="32" width="16" height="16"/>
+  <object id="102" name="obstacle" type="Custom(PsychGrid)" x="88" y="16" width="16" height="16"/>
+  <object id="103" name="obstacle" type="Custom(PsychGrid)" x="104" y="16" width="16" height="16"/>
+  <object id="104" name="obstacle" type="Custom(PsychGrid)" x="104" y="0" width="16" height="16"/>
+  <object id="105" name="obstacle" type="Custom(PsychGrid)" x="104" y="32" width="16" height="16"/>
+  <object id="106" name="obstacle" type="Custom(PsychGrid)" x="104" y="48" width="16" height="16"/>
+  <object id="107" name="obstacle" type="Custom(PsychGrid)" x="104" y="64" width="16" height="16"/>
+  <object id="108" name="obstacle" type="Custom(PsychGrid)" x="88" y="48" width="16" height="16"/>
+  <object id="127" name="obstacle" type="Custom(PsychGrid)" x="8" y="0" width="16" height="16"/>
+  <object id="128" name="obstacle" type="Custom(PsychGrid)" x="24" y="0" width="16" height="16"/>
+  <object id="129" name="obstacle" type="Custom(PsychGrid)" x="24" y="16" width="16" height="16"/>
+  <object id="130" name="obstacle" type="Custom(PsychGrid)" x="8" y="16" width="16" height="16"/>
+  <object id="131" name="obstacle" type="Custom(PsychGrid)" x="40" y="16" width="16" height="16"/>
+  <object id="132" name="obstacle" type="Custom(PsychGrid)" x="40" y="32" width="16" height="16"/>
+  <object id="133" name="obstacle" type="Custom(PsychGrid)" x="40" y="48" width="16" height="16"/>
+  <object id="134" name="obstacle" type="Custom(PsychGrid)" x="88" y="64" width="16" height="16"/>
+  <object id="135" name="obstacle" type="Custom(PsychGrid)" x="72" y="16" width="16" height="16"/>
+  <object id="136" name="obstacle" type="Custom(PsychGrid)" x="56" y="64" width="16" height="16"/>
+  <object id="137" name="obstacle" type="Custom(PsychGrid)" x="40" y="64" width="16" height="16"/>
+  <object id="138" name="obstacle" type="Custom(PsychGrid)" x="88" y="80" width="16" height="16"/>
+  <object id="139" name="obstacle" type="Custom(PsychGrid)" x="88" y="96" width="16" height="16"/>
+  <object id="140" name="obstacle" type="Custom(PsychGrid)" x="88" y="112" width="16" height="16"/>
+  <object id="146" name="obstacle" type="Custom(PsychGrid)" x="72" y="112" width="16" height="16"/>
+  <object id="148" name="obstacle" type="Custom(PsychGrid)" x="104" y="144" width="16" height="16"/>
+  <object id="149" name="obstacle" type="Custom(PsychGrid)" x="104" y="128" width="16" height="16"/>
+  <object id="150" name="obstacle" type="Custom(PsychGrid)" x="104" y="112" width="16" height="16"/>
+  <object id="151" name="obstacle" type="Custom(PsychGrid)" x="104" y="96" width="16" height="16"/>
+  <object id="152" name="obstacle" type="Custom(PsychGrid)" x="104" y="80" width="16" height="16"/>
+  <object id="153" name="obstacle" type="Custom(PsychGrid)" x="40" y="96" width="16" height="16"/>
+  <object id="154" name="obstacle" type="Custom(PsychGrid)" x="40" y="80" width="16" height="16"/>
+  <object id="155" name="obstacle" type="Custom(PsychGrid)" x="40" y="128" width="16" height="16"/>
+  <object id="156" name="obstacle" type="Custom(PsychGrid)" x="40" y="112" width="16" height="16"/>
+  <object id="157" name="obstacle" type="Custom(PsychGrid)" x="40" y="176" width="16" height="16"/>
+  <object id="158" name="obstacle" type="Custom(PsychGrid)" x="72" y="176" width="16" height="16"/>
+  <object id="160" name="obstacle" type="Custom(PsychGrid)" x="24" y="128" width="16" height="16"/>
+  <object id="161" name="obstacle" type="Custom(PsychGrid)" x="24" y="112" width="16" height="16"/>
+  <object id="162" name="obstacle" type="Custom(PsychGrid)" x="24" y="96" width="16" height="16"/>
+  <object id="163" name="obstacle" type="Custom(PsychGrid)" x="24" y="80" width="16" height="16"/>
+  <object id="164" name="obstacle" type="Custom(PsychGrid)" x="24" y="64" width="16" height="16"/>
+  <object id="165" name="obstacle" type="Custom(PsychGrid)" x="24" y="48" width="16" height="16"/>
+  <object id="166" name="obstacle" type="Custom(PsychGrid)" x="24" y="32" width="16" height="16"/>
+  <object id="167" name="obstacle" type="Custom(PsychGrid)" x="8" y="128" width="16" height="16"/>
+  <object id="168" name="obstacle" type="Custom(PsychGrid)" x="8" y="112" width="16" height="16"/>
+  <object id="169" name="obstacle" type="Custom(PsychGrid)" x="8" y="96" width="16" height="16"/>
+  <object id="170" name="obstacle" type="Custom(PsychGrid)" x="8" y="80" width="16" height="16"/>
+  <object id="171" name="obstacle" type="Custom(PsychGrid)" x="8" y="64" width="16" height="16"/>
+  <object id="172" name="obstacle" type="Custom(PsychGrid)" x="8" y="48" width="16" height="16"/>
+  <object id="173" name="obstacle" type="Custom(PsychGrid)" x="8" y="32" width="16" height="16"/>
+  <object id="176" name="obstacle" type="Custom(PsychGrid)" x="8" y="208" width="16" height="16"/>
+  <object id="179" name="obstacle" type="Custom(PsychGrid)" x="8" y="160" width="16" height="16"/>
+  <object id="180" name="obstacle" type="Custom(PsychGrid)" x="8" y="144" width="16" height="16"/>
+  <object id="181" name="obstacle" type="Custom(PsychGrid)" x="104" y="208" width="16" height="16"/>
+  <object id="182" name="obstacle" type="Custom(PsychGrid)" x="104" y="160" width="16" height="16"/>
+  <object id="183" name="obstacle" type="Custom(PsychGrid)" x="104" y="304" width="16" height="16"/>
+  <object id="184" name="obstacle" type="Custom(PsychGrid)" x="104" y="256" width="16" height="16"/>
+  <object id="185" name="obstacle" type="Custom(PsychGrid)" x="8" y="304" width="16" height="16"/>
+  <object id="186" name="obstacle" type="Custom(PsychGrid)" x="8" y="256" width="16" height="16"/>
+  <object id="187" name="obstacle" type="Custom(PsychGrid)" x="56" y="272" width="16" height="16"/>
+  <object id="188" name="obstacle" type="Custom(PsychGrid)" x="24" y="304" width="16" height="16"/>
+  <object id="189" name="obstacle" type="Custom(PsychGrid)" x="88" y="304" width="16" height="16"/>
+  <object id="190" name="obstacle" type="Custom(PsychGrid)" x="56" y="304" width="16" height="16"/>
+  <object id="191" name="obstacle" type="Custom(PsychGrid)" x="56" y="320" width="16" height="16"/>
+  <object id="197" name="obstacle" type="Custom(PsychGrid)" x="56" y="368" width="16" height="16"/>
+  <object id="198" name="obstacle" type="Custom(PsychGrid)" x="88" y="344" width="16" height="16"/>
+  <object id="199" name="obstacle" type="Custom(PsychGrid)" x="24" y="344" width="16" height="16"/>
+  <object id="200" name="obstacle" type="Custom(PsychGrid)" x="40" y="408" width="16" height="16"/>
+  <object id="201" name="obstacle" type="Custom(PsychGrid)" x="72" y="408" width="16" height="16"/>
+  <object id="202" name="obstacle" type="Custom(PsychGrid)" x="56" y="448" width="16" height="16"/>
+  <object id="203" name="obstacle" type="Custom(PsychGrid)" x="104" y="408" width="16" height="16"/>
+  <object id="204" name="obstacle" type="Custom(PsychGrid)" x="8" y="408" width="16" height="16"/>
+  <object id="205" name="obstacle" type="Custom(PsychGrid)" x="40" y="464" width="16" height="16"/>
+  <object id="206" name="obstacle" type="Custom(PsychGrid)" x="72" y="464" width="16" height="16"/>
+  <object id="207" name="obstacle" type="Custom(PsychGrid)" x="104" y="464" width="16" height="16"/>
+  <object id="208" name="obstacle" type="Custom(PsychGrid)" x="8" y="464" width="16" height="16"/>
+  <object id="217" name="obstacle" type="Custom(PsychGrid)" x="56" y="480" width="16" height="16"/>
+ </objectgroup>
+ <layer id="4" name="border" width="16" height="64">
+  <data encoding="csv">
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
+111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111
+</data>
+ </layer>
+ <layer id="1" name="Tile Layer 1" width="16" height="64">
+  <properties>
+   <property name="z" type="float" value="5"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
