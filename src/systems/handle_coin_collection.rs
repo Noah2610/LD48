@@ -46,7 +46,9 @@ impl<'a> System<'a> for HandleCoinCollection {
         for (coin_entity, _) in (&entities, &coin_store).join() {
             if collected_coin_ids.contains(&coin_entity.id()) {
                 let _ = entities.delete(coin_entity);
-                score.coins += 1;
+                if !score.locked {
+                    score.coins += 1;
+                }
                 sound_player.add_action(SoundAction::Play(SoundKey::Coin));
             }
         }

@@ -78,6 +78,11 @@ impl Ingame {
                 );
             }
 
+            {
+                data.world.write_resource::<Score>().locked =
+                    self.is_zone_skippable;
+            }
+
             if let Some(player_speed) = player_speed_opt {
                 let mut transform = Transform::default();
                 transform.set_translation_xyz(0.0, 64.0, 2.0);

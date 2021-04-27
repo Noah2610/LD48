@@ -5,6 +5,7 @@
 (
     zones: {
         "well": (
+            is_skippable: true,
             song: Well,
             player_speed: -85.0,
             total_segments: 3,
