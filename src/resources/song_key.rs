@@ -5,5 +5,5 @@ pub enum SongKey {
     Green,
     Red,
     Space,
-    Psychadelic,
+    Psychedelic,
 }

@@ -4,22 +4,22 @@
 
     bgm: {
         MainMenu: (
-            file: "welltrack.wav",
+            file: "title.wav",
         ),
         Well: (
-            file: "welltrack.wav",
+            file: "well.wav",
         ),
         Green: (
-            file: "LD481.2.wav",
+            file: "green.wav",
         ),
         Red: (
-            file: "LD482.2.wav",
+            file: "red.wav",
         ),
         Space: (
-            file: "LD483.2.wav",
+            file: "space.wav",
         ),
-        Psychadelic: (
-            file: "LD483.2.wav",
+        Psychedelic: (
+            file: "psychedelic.wav",
         ),
     },
 
