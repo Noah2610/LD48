@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="44" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="87">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="44" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="88">
  <editorsettings>
   <export target="../../../resources/levels/zones/space/space_final.json" format="ld48-export"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tsx/tiles_red.tsx"/>
  <tileset firstgid="593" source="../../tsx/tiles_green.tsx"/>
- <objectgroup id="2" name="bg_base">
+ <objectgroup id="2" name="bg_base" visible="0">
   <properties>
    <property name="z" type="float" value="-1"/>
   </properties>
@@ -38,14 +38,17 @@
     <property name="z" type="float" value="5"/>
    </properties>
   </object>
-  <object id="85" name="PortalBg" type="Custom(PortalFgRed)" x="0" y="272" width="128" height="32">
+  <object id="86" name="Portal" type="Portal" x="0" y="336" width="128" height="16"/>
+  <object id="87" name="PortalBg" type="Custom(PortalBg)" x="0" y="272" width="128" height="24">
    <properties>
     <property name="z" type="float" value="1"/>
    </properties>
   </object>
-  <object id="86" name="Portal" type="Custom(PortalFgRed)" x="0" y="336" width="128" height="16"/>
  </objectgroup>
  <layer id="4" name="border" width="16" height="44">
+  <properties>
+   <property name="z" type="float" value="6"/>
+  </properties>
   <data encoding="csv">
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
 33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,

@@ -12,6 +12,9 @@
   <object id="25" name="BG" type="Custom(BgRed)" x="0" y="144" width="128" height="144"/>
  </objectgroup>
  <layer id="1" name="border" width="16" height="36">
+  <properties>
+   <property name="z" type="float" value="6"/>
+  </properties>
   <data encoding="csv">
 109,0,0,0,0,0,0,0,0,0,0,0,0,0,0,109,
 109,0,0,0,0,0,0,0,0,0,0,0,0,0,0,109,
@@ -108,11 +111,11 @@
     <property name="z" type="float" value="5"/>
    </properties>
   </object>
-  <object id="27" name="PortalBg" type="Custom(PortalFgRed)" x="0" y="184" width="128" height="32">
+  <object id="27" name="PortalBg" type="Custom(PortalBg)" x="0" y="184" width="128" height="32">
    <properties>
     <property name="z" type="float" value="1"/>
    </properties>
   </object>
-  <object id="28" name="Portal" type="Custom(PortalFgRed)" x="0" y="272" width="128" height="16"/>
+  <object id="28" name="Portal" type="Portal" x="0" y="272" width="128" height="16"/>
  </objectgroup>
 </map>

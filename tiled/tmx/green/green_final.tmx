@@ -42,6 +42,9 @@
   <object id="88" name="Portal" type="Portal" x="0" y="336" width="128" height="16"/>
  </objectgroup>
  <layer id="4" name="border" width="16" height="44">
+  <properties>
+   <property name="z" type="float" value="6"/>
+  </properties>
   <data encoding="csv">
 692,0,0,0,0,0,0,0,0,0,0,0,0,0,0,611,
 616,0,0,0,0,0,0,0,0,0,0,0,0,0,0,629,

@@ -6,8 +6,6 @@
 (
     config: (
         zone_order: [
-            "space",
-
             "well",
             "green",
             "space",

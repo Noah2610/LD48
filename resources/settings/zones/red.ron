@@ -69,7 +69,7 @@
                     "red/red_easy_1.json",
                     "red/red_easy_2.json",
                     "red/red_easy_3.json",
-                    
+
                     "red/red_medium_2.json",
                     "red/red_medium_3.json",
                     "red/red_medium_3.json",
@@ -77,19 +77,19 @@
                 "red/red_medium_2.json": [
                     "red/red_easy_2.json",
                     "red/red_easy_2.json",
-                    
+
                     "red/red_medium_1.json",
                     "red/red_medium_2.json",
                     "red/red_medium_2.json",
                 ],
                 "red/red_medium_3.json": [
                     "red/red_easy_1.json",
-                    
+
                     "red/red_medium_1.json",
                     "red/red_medium_2.json",
                     "red/red_medium_2.json",
                 ],
-            }
+            },
         ),
     },
 )
