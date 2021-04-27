@@ -5,7 +5,7 @@
 (
     zones: {
         "psychedelic": (
-            song: Psychadelic,
+            song: Psychedelic,
             player_speed: -90.0,
             total_segments: 3,
             first_segment: ["psychedelic/psychedelic_first.json"],
