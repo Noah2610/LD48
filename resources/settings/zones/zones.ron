@@ -8,9 +8,9 @@
         zone_order: [
             "well",
             "green",
-            "psychedelic",
             "space",
             "red",
+            "psychedelic",
         ],
     ),
 )
