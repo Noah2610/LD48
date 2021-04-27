@@ -39,58 +39,60 @@ impl Ingame {
             data.world.insert(ObjectSpawner::default());
             data.world.write_resource::<ZoneSize>().reset();
 
-            let mut player_speed_opt = None;
+            self.load_zone(&mut data.world);
+        }
+    }
 
-            {
-                use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
+    fn load_zone(&mut self, world: &mut World) {
+        let mut player_speed_opt = None;
 
-                data.world.exec(
-                    |(mut zones_manager, settings, mut songs): (
-                        WriteExpect<ZonesManager>,
-                        ReadExpect<ZonesSettings>,
-                        WriteExpect<Songs<SongKey>>,
-                    )| {
-                        zones_manager.stage_initial_segments(&settings);
-                        player_speed_opt =
-                            zones_manager.get_current_player_speed(&settings);
-                        if let Some(is_skippable) =
-                            zones_manager.is_current_zone_skippable(&settings)
-                        {
-                            self.is_zone_skippable = is_skippable;
-                        }
-                        songs.stop_all();
-                        if let Some(song_key) =
-                            zones_manager.get_current_song(&settings)
-                        {
-                            songs.play(song_key);
-                        }
-                    },
-                );
-            }
+        {
+            use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
 
-            {
-                data.world.write_resource::<Score>().locked =
-                    self.is_zone_skippable;
-            }
+            world.exec(
+                |(mut zones_manager, settings, mut songs): (
+                    WriteExpect<ZonesManager>,
+                    ReadExpect<ZonesSettings>,
+                    WriteExpect<Songs<SongKey>>,
+                )| {
+                    zones_manager.stage_initial_segments(&settings);
+                    player_speed_opt =
+                        zones_manager.get_current_player_speed(&settings);
+                    if let Some(is_skippable) =
+                        zones_manager.is_current_zone_skippable(&settings)
+                    {
+                        self.is_zone_skippable = is_skippable;
+                    }
+                    songs.stop_all();
+                    if let Some(song_key) =
+                        zones_manager.get_current_song(&settings)
+                    {
+                        songs.play(song_key);
+                    }
+                },
+            );
+        }
 
-            if let Some(player_speed) = player_speed_opt {
-                let mut transform = Transform::default();
-                transform.set_translation_xyz(0.0, 64.0, 2.0);
-                let size = Size::new(32.0, 32.0);
-                let player =
-                    build_player(data.world, transform, size, player_speed);
-                let _ = build_camera(
-                    data.world,
-                    Some(player),
-                    Size::new(SEGMENT_WIDTH, 0.0),
-                    None,
-                );
-            } else {
-                eprintln!(
-                    "[WARNING]\n    No `player_speed` configured for current \
-                     zone.\n    Player will NOT be spawned."
-                );
-            }
+        {
+            world.write_resource::<Score>().locked = self.is_zone_skippable;
+        }
+
+        if let Some(player_speed) = player_speed_opt {
+            let mut transform = Transform::default();
+            transform.set_translation_xyz(0.0, 64.0, 2.0);
+            let size = Size::new(32.0, 32.0);
+            let player = build_player(world, transform, size, player_speed);
+            let _ = build_camera(
+                world,
+                Some(player),
+                Size::new(SEGMENT_WIDTH, 0.0),
+                None,
+            );
+        } else {
+            eprintln!(
+                "[WARNING]\n    No `player_speed` configured for current \
+                 zone.\n    Player will NOT be spawned."
+            );
         }
     }
 
@@ -111,6 +113,97 @@ impl Ingame {
         }
 
         None
+    }
+
+    fn handle_load_segments(&self, world: &mut World) {
+        let levels_to_load =
+            world.write_resource::<ZonesManager>().levels_to_load();
+        for (segment_id, level) in levels_to_load {
+            build_segment(world, level, segment_id).unwrap();
+        }
+    }
+
+    fn handle_load_next_zone<'a, 'b>(
+        &mut self,
+        world: &mut World,
+    ) -> Option<Trans<GameData<'a, 'b>, StateEvent>> {
+        let mut should_load_next_zone =
+            world.write_resource::<ShouldLoadNextZone>();
+        if should_load_next_zone.0 {
+            self.load_new_zone_on_resume = true;
+            should_load_next_zone.0 = false;
+            Some(Trans::Push(Box::new(ZoneTransition::default())))
+        } else {
+            None
+        }
+    }
+
+    fn handle_game_over<'a, 'b>(
+        &self,
+        world: &mut World,
+    ) -> Option<Trans<GameData<'a, 'b>, StateEvent>> {
+        let mut game_over = world.write_resource::<GameOver>();
+        if game_over.0 {
+            game_over.0 = false;
+            Some(Trans::Switch(Box::new(GameOverState::default())))
+        } else {
+            None
+        }
+    }
+
+    fn handle_spawn_objects(&self, world: &mut World) {
+        let objects_to_spawn =
+            world.write_resource::<ObjectSpawner>().objects_to_spawn();
+        if !objects_to_spawn.is_empty() {
+            for object in objects_to_spawn {
+                let transform = {
+                    let mut transform = Transform::default();
+                    transform.set_translation_xyz(
+                        object.pos.0,
+                        object.pos.1,
+                        object.pos.2,
+                    );
+                    transform
+                };
+                if let Some(entity_builder) = build_object(
+                    world,
+                    object.object_type,
+                    transform,
+                    object.size.map(Into::into),
+                ) {
+                    entity_builder.build();
+                }
+            }
+        }
+    }
+
+    fn handle_skippable_zone(&self, world: &mut World) {
+        use deathframe::amethyst::core::HiddenPropagate;
+        use deathframe::amethyst::ecs::{
+            Entities,
+            Join,
+            ReadStorage,
+            WriteStorage,
+        };
+        use deathframe::amethyst::ui::UiTransform;
+
+        if self.is_zone_skippable {
+            world.exec(
+                |(entities, ui_transform_store, mut hidden_propagate_store): (
+                    Entities,
+                    ReadStorage<UiTransform>,
+                    WriteStorage<HiddenPropagate>,
+                )| {
+                    for (entity, ui_transform) in
+                        (&entities, &ui_transform_store).join()
+                    {
+                        if &ui_transform.id == UI_SKIP_TEXT_ID {
+                            let _ = hidden_propagate_store.remove(entity);
+                        }
+                    }
+                },
+            )
+        }
     }
 }
 
@@ -179,84 +272,19 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         &mut self,
         data: StateData<GameData<'a, 'b>>,
     ) -> Trans<GameData<'a, 'b>, StateEvent> {
-        let levels_to_load =
-            data.world.write_resource::<ZonesManager>().levels_to_load();
-        for (segment_id, level) in levels_to_load {
-            build_segment(data.world, level, segment_id).unwrap();
+        self.handle_load_segments(data.world);
+
+        if let Some(trans) = self.handle_load_next_zone(data.world) {
+            return trans;
         }
 
-        {
-            let mut should_load_next_zone =
-                data.world.write_resource::<ShouldLoadNextZone>();
-            if should_load_next_zone.0 {
-                self.load_new_zone_on_resume = true;
-                should_load_next_zone.0 = false;
-                return Trans::Push(Box::new(ZoneTransition::default()));
-            }
+        if let Some(trans) = self.handle_game_over(data.world) {
+            return trans;
         }
 
-        {
-            let mut game_over = data.world.write_resource::<GameOver>();
-            if game_over.0 {
-                game_over.0 = false;
-                return Trans::Switch(Box::new(GameOverState::default()));
-            }
-        }
+        self.handle_spawn_objects(data.world);
 
-        {
-            let objects_to_spawn = data
-                .world
-                .write_resource::<ObjectSpawner>()
-                .objects_to_spawn();
-            if !objects_to_spawn.is_empty() {
-                for object in objects_to_spawn {
-                    let transform = {
-                        let mut transform = Transform::default();
-                        transform.set_translation_xyz(
-                            object.pos.0,
-                            object.pos.1,
-                            object.pos.2,
-                        );
-                        transform
-                    };
-                    if let Some(entity_builder) = build_object(
-                        data.world,
-                        object.object_type,
-                        transform,
-                        object.size.map(Into::into),
-                    ) {
-                        entity_builder.build();
-                    }
-                }
-            }
-        }
-
-        if self.is_zone_skippable {
-            use deathframe::amethyst::core::HiddenPropagate;
-            use deathframe::amethyst::ecs::{
-                Entities,
-                Join,
-                ReadStorage,
-                WriteStorage,
-            };
-            use deathframe::amethyst::ui::UiTransform;
-
-            data.world.exec(
-                |(entities, ui_transform_store, mut hidden_propagate_store): (
-                    Entities,
-                    ReadStorage<UiTransform>,
-                    WriteStorage<HiddenPropagate>,
-                )| {
-                    for (entity, ui_transform) in
-                        (&entities, &ui_transform_store).join()
-                    {
-                        if &ui_transform.id == UI_SKIP_TEXT_ID {
-                            let _ = hidden_propagate_store.remove(entity);
-                        }
-                    }
-                },
-            )
-        }
+        self.handle_skippable_zone(data.world);
 
         Trans::None
     }
