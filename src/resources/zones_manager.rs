@@ -74,11 +74,55 @@ impl ZonesManager {
         )
     }
 
+    fn load_all_segments(&mut self, settings: &ZonesSettings) {
+        if let Some(segments) = self
+            .current_zone
+            .as_ref()
+            .and_then(|zone| settings.zones.get(&zone.id))
+            .map(|zone| {
+                let mut segments = zone
+                    .segments
+                    .keys()
+                    .map(Clone::clone)
+                    .collect::<Vec<SegmentId>>();
+                segments.append(&mut zone.first_segment.clone());
+                segments.append(&mut zone.final_segment.clone());
+                segments
+            })
+        {
+            for segment in segments {
+                self.load_segment(segment);
+            }
+        } else {
+            eprintln!(
+                "[WARNING]\n    Can't load segments if there is no current \
+                 zone"
+            );
+        }
+    }
+
+    fn load_segment(&mut self, segment: SegmentId) {
+        if !self.levels.contains_key(&segment) {
+            match load_level(resource(format!("levels/zones/{}", &segment))) {
+                Ok(level) => {
+                    self.levels.insert(segment, level);
+                }
+                Err(e) => {
+                    eprintln!(
+                        "[WARNING]\n    Couldn't load segment {}!\n{}",
+                        &segment, e
+                    )
+                }
+            }
+        }
+    }
+
     pub fn stage_next_zone(&mut self, settings: &ZonesSettings) {
         if let Some((next_zone, next_order_idx)) = self.get_next_zone(settings)
         {
             self.reset();
             self.current_zone = Some(ZoneState::new(next_zone, next_order_idx));
+            self.load_all_segments(settings);
         } else {
             eprintln!("[WARNING]\n    There is no next zone to load!");
         }
