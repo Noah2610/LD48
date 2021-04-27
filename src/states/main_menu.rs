@@ -13,8 +13,12 @@ impl MainMenu {
         self.create_ui(data, resource("ui/main_menu.ron").to_str().unwrap());
         {
             let mut songs = data.world.write_resource::<Songs<SongKey>>();
-            songs.stop_all();
-            songs.play(&SongKey::MainMenu)
+            if let Some(song) = songs.get(&SongKey::MainMenu) {
+                if !song.is_playing() {
+                    songs.stop_all();
+                    songs.play(&SongKey::MainMenu)
+                }
+            }
         }
     }
 

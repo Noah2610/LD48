@@ -6,9 +6,6 @@
         MainMenu: (
             file: "welltrack.wav",
         ),
-        Cutscene: (
-            file: "LD484.2.wav",
-        ),
         Well: (
             file: "welltrack.wav",
         ),

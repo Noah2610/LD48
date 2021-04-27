@@ -60,7 +60,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Cutscene {
         {
             let mut songs = data.world.write_resource::<Songs<SongKey>>();
             songs.stop_all();
-            songs.play(&SongKey::Cutscene)
+            songs.play(&SongKey::MainMenu)
         }
 
         data.world.maintain();
