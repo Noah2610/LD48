@@ -18,8 +18,8 @@
                 left:   2.0,
                 right:  -2.0,
             ))),
-            // Collidable(Obstacle),
-            // Obstacle(()),
+            Collidable(Obstacle),
+            Obstacle(()),
         ],
     ),
 
@@ -27,8 +27,8 @@
         spritesheet: "psychedelic/psychedelic_grid.png",
         components: [
             Hitbox(Size),
-            // Collidable(Obstacle),
-            // Obstacle(()),
+            Collidable(Obstacle),
+            Obstacle(()),
             Animation([
                 (0, 200),
                 (1, 200),
