@@ -25,7 +25,7 @@
 
     sfx: {
         Coin: (
-            file: "coin1.wav",
+            file: "coin2.wav",
         ),
         LaneSwitch: (
             file: "dash.wav",
