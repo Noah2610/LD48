@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="64" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="84">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="64" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="126">
  <editorsettings>
-  <export format="ld48-export"/>
+  <export target="../../../resources/levels/zones/psychedelic/psychedelic_0.json" format="ld48-export"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tsx/tiles_red.tsx"/>
  <tileset firstgid="593" source="../../tsx/tiles_green.tsx"/>
@@ -51,7 +51,50 @@
   <object id="82" name="pickup" type="Coin(psychedelic)" x="60.1591" y="397.25" width="16" height="16"/>
   <object id="83" name="pickup" type="Coin(psychedelic)" x="56.0341" y="400.5" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="5" name="obstacles"/>
+ <objectgroup id="5" name="obstacles">
+  <object id="84" name="obstacle" type="Custom(PsychGrid)" x="88" y="40" width="16" height="16"/>
+  <object id="85" name="obstacle" type="Custom(PsychGrid)" x="104" y="112" width="16" height="16"/>
+  <object id="86" name="obstacle" type="Custom(PsychGrid)" x="24" y="168" width="16" height="16"/>
+  <object id="87" name="obstacle" type="Custom(PsychGrid)" x="24" y="168" width="16" height="16"/>
+  <object id="88" name="obstacle" type="Custom(PsychGrid)" x="8" y="136" width="16" height="16"/>
+  <object id="89" name="obstacle" type="Custom(PsychGrid)" x="88" y="216" width="16" height="16"/>
+  <object id="90" name="obstacle" type="Custom(PsychGrid)" x="88" y="200" width="16" height="16"/>
+  <object id="91" name="obstacle" type="Custom(PsychGrid)" x="104" y="200" width="16" height="16"/>
+  <object id="92" name="obstacle" type="Custom(PsychGrid)" x="104" y="184" width="16" height="16"/>
+  <object id="93" name="obstacle" type="Custom(PsychGrid)" x="24" y="216" width="16" height="16"/>
+  <object id="94" name="obstacle" type="Custom(PsychGrid)" x="24" y="232" width="16" height="16"/>
+  <object id="95" name="obstacle" type="Custom(PsychGrid)" x="24" y="248" width="16" height="16"/>
+  <object id="96" name="obstacle" type="Custom(PsychGrid)" x="8" y="232" width="16" height="16"/>
+  <object id="97" name="obstacle" type="Custom(PsychGrid)" x="8" y="248" width="16" height="16"/>
+  <object id="98" name="obstacle" type="Custom(PsychGrid)" x="8" y="264" width="16" height="16"/>
+  <object id="99" name="obstacle" type="Custom(PsychGrid)" x="8" y="328" width="16" height="16"/>
+  <object id="100" name="obstacle" type="Custom(PsychGrid)" x="8" y="312" width="16" height="16"/>
+  <object id="101" name="obstacle" type="Custom(PsychGrid)" x="88" y="280" width="16" height="16"/>
+  <object id="102" name="obstacle" type="Custom(PsychGrid)" x="88" y="264" width="16" height="16"/>
+  <object id="103" name="obstacle" type="Custom(PsychGrid)" x="104" y="264" width="16" height="16"/>
+  <object id="104" name="obstacle" type="Custom(PsychGrid)" x="104" y="248" width="16" height="16"/>
+  <object id="105" name="obstacle" type="Custom(PsychGrid)" x="104" y="280" width="16" height="16"/>
+  <object id="106" name="obstacle" type="Custom(PsychGrid)" x="104" y="296" width="16" height="16"/>
+  <object id="107" name="obstacle" type="Custom(PsychGrid)" x="104" y="312" width="16" height="16"/>
+  <object id="108" name="obstacle" type="Custom(PsychGrid)" x="88" y="296" width="16" height="16"/>
+  <object id="109" name="obstacle" type="Custom(PsychGrid)" x="8" y="344" width="16" height="16"/>
+  <object id="110" name="obstacle" type="Custom(PsychGrid)" x="24" y="328" width="16" height="16"/>
+  <object id="111" name="obstacle" type="Custom(PsychGrid)" x="24" y="344" width="16" height="16"/>
+  <object id="112" name="obstacle" type="Custom(PsychGrid)" x="8" y="360" width="16" height="16"/>
+  <object id="113" name="obstacle" type="Custom(PsychGrid)" x="104" y="408" width="16" height="16"/>
+  <object id="114" name="obstacle" type="Custom(PsychGrid)" x="104" y="392" width="16" height="16"/>
+  <object id="115" name="obstacle" type="Custom(PsychGrid)" x="104" y="376" width="16" height="16"/>
+  <object id="116" name="obstacle" type="Custom(PsychGrid)" x="104" y="360" width="16" height="16"/>
+  <object id="117" name="obstacle" type="Custom(PsychGrid)" x="8" y="456" width="16" height="16"/>
+  <object id="118" name="obstacle" type="Custom(PsychGrid)" x="8" y="440" width="16" height="16"/>
+  <object id="119" name="obstacle" type="Custom(PsychGrid)" x="8" y="424" width="16" height="16"/>
+  <object id="120" name="obstacle" type="Custom(PsychGrid)" x="8" y="408" width="16" height="16"/>
+  <object id="121" name="obstacle" type="Custom(PsychGrid)" x="24" y="472" width="16" height="16"/>
+  <object id="122" name="obstacle" type="Custom(PsychGrid)" x="24" y="456" width="16" height="16"/>
+  <object id="123" name="obstacle" type="Custom(PsychGrid)" x="24" y="440" width="16" height="16"/>
+  <object id="124" name="obstacle" type="Custom(PsychGrid)" x="24" y="424" width="16" height="16"/>
+  <object id="125" name="obstacle" type="Custom(PsychGrid)" x="104" y="424" width="16" height="16"/>
+ </objectgroup>
  <layer id="4" name="border" width="16" height="64">
   <data encoding="csv">
 111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,

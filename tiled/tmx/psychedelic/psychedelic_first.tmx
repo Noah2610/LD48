@@ -29,9 +29,7 @@
   <object id="52" name="pickup" type="Coin(psychedelic)" x="56" y="408" width="16" height="16"/>
   <object id="53" name="pickup" type="Coin(psychedelic)" x="56" y="424" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="5" name="obstacles">
-  <object id="54" name="asdf" type="Custom(PsychGrid)" x="81.4545" y="38.9091" width="16" height="16"/>
- </objectgroup>
+ <objectgroup id="5" name="obstacles"/>
  <layer id="4" name="border" width="16" height="56">
   <data encoding="csv">
 111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
