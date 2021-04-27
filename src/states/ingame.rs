@@ -7,6 +7,7 @@ use crate::level_loader::objects::{build_camera, build_object, build_player};
 
 const SEGMENT_WIDTH: f32 = 128.0;
 const UI_SKIP_TEXT_ID: &str = "skip_zone_text";
+const UI_SCORE_ID: &str = "score";
 
 pub struct Ingame {
     load_new_zone_on_resume: bool,
@@ -199,10 +200,13 @@ impl Ingame {
                     {
                         if &ui_transform.id == UI_SKIP_TEXT_ID {
                             let _ = hidden_propagate_store.remove(entity);
+                        } else if &ui_transform.id == UI_SCORE_ID {
+                            let _ = hidden_propagate_store
+                                .insert(entity, HiddenPropagate::new());
                         }
                     }
                 },
-            )
+            );
         }
     }
 }
