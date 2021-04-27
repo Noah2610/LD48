@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="56" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="68">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="16" height="56" tilewidth="8" tileheight="8" infinite="0" nextlayerid="8" nextobjectid="71">
  <editorsettings>
-  <export format="ld48-export"/>
+  <export target="../../../resources/levels/zones/well/well_final.json" format="ld48-export"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tsx/tiles_red.tsx"/>
  <tileset firstgid="593" source="../../tsx/tiles_green.tsx"/>
@@ -9,7 +9,7 @@
   <properties>
    <property name="z" type="float" value="-1"/>
   </properties>
-  <object id="42" name="BG" type="Custom(BgWell)" x="0" y="0" width="128" height="448"/>
+  <object id="42" name="BG" type="Custom(BgWell2)" x="0" y="0" width="128" height="448"/>
  </objectgroup>
  <objectgroup id="6" name="debug">
   <properties>
@@ -26,9 +26,24 @@
   <object id="64" name="pickup" type="Coin(well)" x="56" y="312" width="16" height="16"/>
   <object id="65" name="pickup" type="Coin(well)" x="56" y="32" width="16" height="16"/>
   <object id="66" name="pickup" type="Coin(well)" x="56" y="16" width="16" height="16"/>
-  <object id="67" type="Portal" x="8" y="368" width="112" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="obstacles"/>
+ <objectgroup id="7" name="portal">
+  <properties>
+   <property name="z" type="float" value="5"/>
+  </properties>
+  <object id="68" name="PortalFg" type="Custom(PortalFgBlack)" x="0" y="344" width="128" height="512">
+   <properties>
+    <property name="z" type="float" value="5"/>
+   </properties>
+  </object>
+  <object id="69" name="PortalBg" type="Custom(PortalBg)" x="0" y="344" width="128" height="32">
+   <properties>
+    <property name="z" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="70" name="Portal" type="Portal" x="0" y="432" width="128" height="16"/>
+ </objectgroup>
  <layer id="4" name="border" width="16" height="56">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

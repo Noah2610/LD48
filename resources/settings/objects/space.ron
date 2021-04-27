@@ -29,7 +29,7 @@
             Collidable(Obstacle),
             Obstacle(()),
             Rotate((
-                step: 0.01,
+                step: -0.01,
             )),
         ],
     ),
@@ -63,7 +63,7 @@
             Collidable(Obstacle),
             Obstacle(()),
             Rotate((
-                step: 0.01,
+                step: -0.01,
             )),
         ],
     ),
@@ -97,7 +97,7 @@
             Collidable(Obstacle),
             Obstacle(()),
             Rotate((
-                step: 0.03,
+                step: -0.03,
             )),
         ],
     ),
@@ -131,7 +131,7 @@
             Collidable(Obstacle),
             Obstacle(()),
             Rotate((
-                step: 0.03,
+                step: -0.03,
             )),
         ],
     ),

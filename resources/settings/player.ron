@@ -2,7 +2,7 @@
 
 #![enable(implicit_some)]
 (
-    z: 10.0,
+    z: 4.0,
 
     components: [
         Size((

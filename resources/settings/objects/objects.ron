@@ -57,7 +57,12 @@
         spritesheet: "bg/bg_well_1.png",
         components: [],
     ),
-    
+
+    Custom("BgWell2"): (
+        spritesheet: "bg/bg_well_2.png",
+        components: [],
+    ),
+
     Custom("BgPsych0"): (
         spritesheet: "bg/bg_psychedelic_0.png",
         components: [],
