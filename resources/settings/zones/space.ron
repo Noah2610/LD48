@@ -7,7 +7,7 @@
         "space": (
             song: Space,
             player_speed: -85.0,
-            total_segments: 14,
+            total_segments: 16,
             first_segment: ["space/space_first.json"],
             final_segment: ["space/space_final.json"],
             segments: {

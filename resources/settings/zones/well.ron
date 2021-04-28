@@ -7,7 +7,7 @@
         "well": (
             is_skippable: true,
             song: Well,
-            player_speed: -80.0,
+            player_speed: -78.0,
             total_segments: 3,
             first_segment: ["well/well_first.json"],
             final_segment: ["well/well_final.json"],
