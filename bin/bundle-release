@@ -19,7 +19,7 @@ check "git"
 SUFFIX="$1"
 [ -z "$SUFFIX" ] && SUFFIX="default"
 
-GAME_NAME="ld48"
+GAME_NAME="ld48-driftdown"
 BINARY_FILENAME="$GAME_NAME"
 # Path to the resources/ directory
 RESOURCES_DIR="${ROOT}/resources"

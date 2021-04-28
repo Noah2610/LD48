@@ -1,6 +1,6 @@
 [package]
-name = "ld48"
-version = "1.0.2"
+name = "ld48-driftdown"
+version = "1.0.3"
 authors = []
 edition = "2018"
 
