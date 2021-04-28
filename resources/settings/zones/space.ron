@@ -6,7 +6,7 @@
     zones: {
         "space": (
             song: Space,
-            player_speed: -95.0,
+            player_speed: -85.0,
             total_segments: 14,
             first_segment: ["space/space_first.json"],
             final_segment: ["space/space_final.json"],
