@@ -107,8 +107,7 @@ impl Ingame {
         if input_manager.is_down(MenuAction::Pause) {
             return Some(Trans::Push(Box::new(Pause::default())));
         }
-        if self.is_zone_skippable && input_manager.is_down(MenuAction::SkipZone)
-        {
+        if self.is_zone_skippable && input_manager.is_down(MenuAction::Start) {
             self.load_new_zone_on_resume = true;
             return Some(Trans::Push(Box::new(ZoneTransition::default())));
         }

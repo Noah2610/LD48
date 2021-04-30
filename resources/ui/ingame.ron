@@ -54,7 +54,7 @@ Container(
                 hidden:         true,
             ),
             text: (
-                text:      "Press S to skip zone",
+                text:      "Press SPACE to skip zone",
                 font_size: 16.0,
                 color:     (0.9, 0.9, 0.9, 1.0),
                 font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
