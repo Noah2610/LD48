@@ -2,6 +2,8 @@ use crate::resource;
 use crate::resources::prelude::*;
 use crate::settings::Settings;
 use crate::states::aliases::{CustomData, GameDataBuilder};
+use amethyst::prelude::Config;
+use amethyst::window::DisplayConfig;
 use deathframe::amethyst;
 
 pub(super) fn build_game_data<'a, 'b>(
@@ -18,9 +20,10 @@ pub(super) fn build_game_data<'a, 'b>(
     use deathframe::bundles::*;
 
     let transform_bundle = TransformBundle::new();
+    let display_config = get_display_config()?;
     let rendering_bundle = RenderingBundle::<DefaultBackend>::new()
         .with_plugin(
-            RenderToWindow::from_config_path(resource("config/display.ron"))?
+            RenderToWindow::from_config(display_config)
                 .with_clear([0.0, 0.0, 0.0, 1.0]),
         )
         .with_plugin(RenderUi::default())
@@ -189,4 +192,17 @@ pub(super) fn build_game_data<'a, 'b>(
         )?;
 
     Ok(custom_game_data)
+}
+
+fn get_display_config() -> amethyst::Result<DisplayConfig> {
+    #[cfg(not(feature = "dev"))]
+    let display_config = DisplayConfig::load(resource("config/display.ron"))?;
+    #[cfg(feature = "dev")]
+    let display_config = {
+        let mut config = DisplayConfig::load(resource("config/display.ron"))?;
+        config.min_dimensions = config.dimensions.clone();
+        config.max_dimensions = config.dimensions.clone();
+        config
+    };
+    Ok(display_config)
 }

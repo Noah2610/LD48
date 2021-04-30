@@ -6,6 +6,9 @@ pub struct Startup;
 
 impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Startup {
     fn on_start(&mut self, mut data: StateData<GameData<'a, 'b>>) {
+        #[cfg(not(feature = "dev"))]
+        enter_fullscreen(&mut data.world);
+
         setup(&mut data.world);
     }
 
@@ -89,4 +92,17 @@ fn setup(world: &mut World) {
 
     world
         .insert(crate::components::prelude::SoundPlayer::<SoundKey>::default());
+}
+
+fn enter_fullscreen(world: &mut World) {
+    use amethyst::ecs::{ReadExpect, SystemData};
+    use amethyst::renderer::rendy::wsi::winit::Window;
+    use amethyst::window::MonitorIdent;
+    use deathframe::amethyst;
+
+    let window = <ReadExpect<'_, Window>>::fetch(world);
+    let monitor_ident = MonitorIdent::from_primary(&*window);
+    let monitor_id = monitor_ident.monitor_id(&*window);
+
+    window.set_fullscreen(Some(monitor_id));
 }

@@ -33,6 +33,7 @@ default = ["vulkan"]
 debug = ["deathframe/debug"]
 vulkan = ["deathframe/vulkan"]
 metal = ["deathframe/metal"]
+dev = []
 
 [profile.dev]
 opt-level        = 1
