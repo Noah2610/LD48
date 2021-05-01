@@ -1,0 +1,267 @@
+// EASY ZONES
+// `resources/settings/zones/zones.ron`
+//
+// This settings file is an accumulation of all other zones'
+// settings files, but with easier settings.
+//
+// Use this settings file if the released game is a bit
+// too difficult for you, but you'd still like to check out
+// the other levels.
+//
+// This settings file changes the zones' difficulty in these ways:
+//   - Makes every zone skippable, so you can quickly
+//     get back to where you were, after a game over
+//     (except for the last zone, which is endless).
+//   - Decreases the total level segments in a zone.
+//   - Decreases the player/auto-scroll speed for each zone.
+//
+// To apply these settings, do the following:
+//   - Save this file under `resources/settings/zones/`,
+//     with any filename ending with ".ron" (example: "ez_zones.ron").
+//   - Delete the existing zones file: `resources/settings/zones/zones.ron`,
+//     or rename it to change its extension (example: "zones.ron.original").
+
+#![enable(implicit_some)]
+(
+    config: (
+        zone_order: [
+            "well",
+            "ez_green",
+            "ez_space",
+            "ez_red",
+            "ez_psychedelic",
+        ],
+    ),
+
+    zones: {
+        "ez_green": (
+            song: Green,
+            is_skippable: true,
+            player_speed: -60.0,
+            total_segments: 8,
+            first_segment: ["green/green_first.json"],
+            final_segment: ["green/green_final.json"],
+            segments: {
+                "green/green_first.json": [
+                    "green/green_easy_0.json",
+                    "green/green_easy_0.json",
+                    "green/green_easy_1.json",
+                    "green/green_easy_2.json",
+                    "green/green_easy_3.json",
+                ],
+                "green/green_easy_0.json": [
+                    "green/green_easy_1.json",
+                    "green/green_easy_2.json",
+                    "green/green_easy_3.json",
+                ],
+                "green/green_easy_1.json": [
+                    "green/green_easy_0.json",
+                    "green/green_easy_0.json",
+                    "green/green_easy_2.json",
+                    "green/green_easy_3.json",
+                    "green/green_easy_3.json",
+                    "green/green_medium_1.json",
+                    "green/green_medium_0.json",
+                ],
+                "green/green_easy_2.json": [
+                    "green/green_easy_0.json",
+                    "green/green_easy_1.json",
+                    "green/green_easy_1.json",
+                    "green/green_easy_3.json",
+                    "green/green_medium_0.json",
+                    "green/green_medium_1.json",
+                ],
+                "green/green_easy_3.json": [
+                    "green/green_easy_0.json",
+                    "green/green_easy_1.json",
+                    "green/green_easy_2.json",
+                    "green/green_medium_1.json",
+                ],
+                "green/green_medium_0.json": [
+                    "green/green_easy_0.json",
+                    "green/green_easy_1.json",
+                    "green/green_easy_2.json",
+                ],
+                "green/green_medium_1.json": [
+                    "green/green_easy_0.json",
+                    "green/green_easy_1.json",
+                    "green/green_easy_2.json",
+                ],
+            }
+        ),
+
+        "ez_space": (
+            song: Space,
+            is_skippable: true,
+            player_speed: -60.0,
+            total_segments: 12,
+            first_segment: ["space/space_first.json"],
+            final_segment: ["space/space_final.json"],
+            segments: {
+                "space/space_first.json": [
+                    "space/space_easy_0.json",
+                    "space/space_easy_0.json",
+                    "space/space_easy_0.json",
+                    "space/space_easy_1.json",
+                    "space/space_easy_2.json",
+                ],
+                "space/space_easy_0.json": [
+                    "space/space_easy_1.json",
+                    "space/space_easy_2.json",
+                    "space/space_easy_1.json",
+                    "space/space_easy_2.json",
+                    "space/space_medium_0.json",
+                    "space/space_medium_2.json",
+                ],
+                "space/space_easy_1.json": [
+                    "space/space_easy_0.json",
+                    "space/space_easy_2.json",
+                    "space/space_easy_0.json",
+                    "space/space_easy_2.json",
+                    "space/space_medium_1.json",
+                ],
+                "space/space_easy_2.json": [
+                    "space/space_easy_0.json",
+                    "space/space_easy_1.json",
+                    "space/space_easy_0.json",
+                    "space/space_easy_1.json",
+                ],
+                "space/space_medium_0.json": [
+                    "space/space_easy_2.json",
+                    "space/space_medium_1.json",
+                    "space/space_medium_2.json",
+                ],
+                "space/space_medium_1.json": [
+                    "space/space_easy_1.json",
+                    "space/space_easy_1.json",
+                    "space/space_medium_0.json",
+                    "space/space_medium_2.json",
+                ],
+                "space/space_medium_2.json": [
+                    "space/space_easy_2.json",
+                    "space/space_easy_1.json",
+                    "space/space_easy_1.json",
+                    "space/space_medium_0.json",
+                ],
+                "space/space_medium_3.json": [
+                    "space/space_easy_1.json",
+                    "space/space_easy_2.json",
+                    "space/space_medium_0.json",
+                    "space/space_easy_0.json",
+                    "space/space_easy_1.json",
+                    "space/space_medium_0.json",
+                    "space/space_medium_2.json",
+                ],
+            }
+        ),
+
+        "ez_red": (
+            song: Red,
+            is_skippable: true,
+            player_speed: -60.0,
+            total_segments: 12,
+            first_segment: ["red/red_first.json"],
+            final_segment: ["red/red_final.json"],
+            segments: {
+                "red/red_first.json": [
+                    "red/red_easy_0.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_1.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                ],
+                "red/red_easy_0.json": [
+                    "red/red_easy_1.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                    "red/red_easy_1.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                    "red/red_medium_1.json",
+                    "red/red_medium_2.json",
+                    "red/red_medium_3.json",
+                ],
+                "red/red_easy_1.json": [
+                    "red/red_easy_0.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                    "red/red_medium_2.json",
+                    "red/red_medium_3.json",
+                ],
+                "red/red_easy_2.json": [
+                    "red/red_easy_1.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_3.json",
+                    "red/red_easy_1.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_3.json",
+                    "red/red_medium_1.json",
+                    "red/red_medium_3.json",
+                ],
+                "red/red_easy_3.json": [
+                    "red/red_easy_1.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_3.json",
+                    "red/red_easy_1.json",
+                    "red/red_easy_0.json",
+                    "red/red_easy_3.json",
+                    "red/red_medium_2.json",
+                    "red/red_medium_3.json",
+                ],
+                "red/red_medium_1.json": [
+                    "red/red_easy_0.json",
+                    "red/red_easy_1.json",
+                    "red/red_easy_2.json",
+                    "red/red_easy_3.json",
+                    "red/red_medium_2.json",
+                    "red/red_medium_3.json",
+                    "red/red_medium_3.json",
+                ],
+                "red/red_medium_2.json": [
+                    "red/red_easy_2.json",
+                    "red/red_easy_2.json",
+                    "red/red_medium_1.json",
+                    "red/red_medium_2.json",
+                    "red/red_medium_2.json",
+                ],
+                "red/red_medium_3.json": [
+                    "red/red_easy_1.json",
+                    "red/red_medium_1.json",
+                    "red/red_medium_2.json",
+                    "red/red_medium_2.json",
+                ],
+            },
+        ),
+
+        "ez_psychedelic": (
+            song: Psychedelic,
+            player_speed: -60.0,
+            first_segment: ["psychedelic/psychedelic_first.json"],
+            final_segment: [],
+            segments: {
+                "psychedelic/psychedelic_first.json": [
+                    "psychedelic/psychedelic_0.json",
+                ],
+                "psychedelic/psychedelic_0.json": [
+                    "psychedelic/psychedelic_1.json",
+                ],
+                "psychedelic/psychedelic_1.json": [
+                    "psychedelic/psychedelic_2.json",
+                    "psychedelic/psychedelic_3.json",
+                ],
+                "psychedelic/psychedelic_2.json": [
+                    "psychedelic/psychedelic_1.json",
+                    "psychedelic/psychedelic_3.json",
+                ],
+                "psychedelic/psychedelic_3.json": [
+                    "psychedelic/psychedelic_1.json",
+                    "psychedelic/psychedelic_2.json",
+                ],
+            }
+        ),
+    },
+)
