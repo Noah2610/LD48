@@ -151,7 +151,7 @@ impl ZonesManager {
                     .zone_order
                     .iter()
                     .enumerate()
-                    .find(|(i, zone)| zone == &initial_zone)
+                    .find(|(_, zone)| zone == &initial_zone)
                     .map(|(i, _)| (initial_zone, i))
             } else {
                 settings.config.zone_order.first().map(|first| (first, 0))
