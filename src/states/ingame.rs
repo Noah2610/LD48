@@ -58,29 +58,41 @@ impl Ingame {
             use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
 
             world.exec(
-                |(mut zones_manager, settings, mut songs, mut savefile): (
+                |(
+                    mut zones_manager,
+                    settings,
+                    mut songs,
+                    savefile_settings,
+                    mut savefile,
+                ): (
                     WriteExpect<ZonesManager>,
                     ReadExpect<ZonesSettings>,
                     WriteExpect<Songs<SongKey>>,
+                    ReadExpect<SavefileSettings>,
                     WriteExpect<Savefile>,
                 )| {
-                    zones_manager.stage_initial_segments(&settings);
-                    player_speed_opt =
-                        zones_manager.get_current_player_speed(&settings);
-                    if let Some(is_skippable) =
-                        zones_manager.is_current_zone_skippable(&settings)
                     {
-                        self.is_zone_skippable = is_skippable;
-                    }
-                    songs.stop_all();
-                    if let Some(song_key) =
-                        zones_manager.get_current_song(&settings)
-                    {
-                        songs.play(song_key);
+                        zones_manager.stage_initial_segments(&settings);
+                        player_speed_opt =
+                            zones_manager.get_current_player_speed(&settings);
+                        if let Some(is_skippable) =
+                            zones_manager.is_current_zone_skippable(&settings)
+                        {
+                            self.is_zone_skippable = is_skippable;
+                        }
+                        songs.stop_all();
+                        if let Some(song_key) =
+                            zones_manager.get_current_song(&settings)
+                        {
+                            songs.play(song_key);
+                        }
                     }
 
-                    if let Some(zone) = zones_manager.current_zone() {
-                        savefile.unlock(zone.clone());
+                    {
+                        if let Some(zone) = zones_manager.current_zone() {
+                            savefile.unlock(zone.clone());
+                            savefile.handle_save(&*savefile_settings);
+                        }
                     }
                 },
             );

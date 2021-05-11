@@ -1,3 +1,4 @@
+use crate::settings::prelude::SavefileSettings;
 use crate::settings::prelude::ZoneId;
 use deathframe::amethyst;
 use std::collections::{HashMap, HashSet};
@@ -35,14 +36,28 @@ impl Savefile {
         }
     }
 
-    pub fn save(&self, savefile_path: PathBuf) -> amethyst::Result<()> {
+    pub fn save(&mut self, savefile_path: PathBuf) -> amethyst::Result<()> {
         let file = File::create(savefile_path)?;
         serde_json::ser::to_writer(file, self)?;
+        self.should_save = false;
         Ok(())
     }
 
     pub fn should_save(&self) -> bool {
         self.should_save
+    }
+
+    pub fn handle_save(&mut self, settings: &SavefileSettings) {
+        if self.should_save() {
+            match settings.savefile_path() {
+                Ok(savefile_path) => {
+                    if let Err(e) = self.save(savefile_path) {
+                        eprintln!("[WARNING]\n    {}", e);
+                    }
+                }
+                Err(e) => eprintln!("[WARNING]\n    {}", e),
+            }
+        }
     }
 
     pub fn unlock(&mut self, zone: ZoneId) -> bool {
