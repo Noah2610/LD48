@@ -29,9 +29,16 @@ impl ZoneSelect {
     fn handle_input<'a, 'b>(
         &mut self,
         input_manager: &InputManager<MenuBindings>,
+        selected_zone: Option<ZoneId>,
     ) -> Option<Trans<GameData<'a, 'b>, StateEvent>> {
         if input_manager.is_down(MenuAction::Start) {
-            return Some(Trans::Push(Box::new(Ingame::default())));
+            if let Some(selected_zone) = selected_zone {
+                return Some(Trans::Push(Box::new(
+                    Ingame::default().with_initial_zone(selected_zone),
+                )));
+            } else {
+                return Some(Trans::Push(Box::new(Ingame::default())));
+            }
         }
         if input_manager.is_down(MenuAction::Quit) {
             return Some(Trans::Pop);
@@ -67,6 +74,16 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for ZoneSelect {
 
         if let Some(trans) = self.handle_input(
             &*data.world.read_resource::<InputManager<MenuBindings>>(),
+            (&data.world.read_resource::<SelectedZone>().0).and_then(
+                |selected_zone_idx| {
+                    data.world
+                        .read_resource::<ZonesSettings>()
+                        .config
+                        .zone_order
+                        .get(selected_zone_idx)
+                        .map(ToString::to_string)
+                },
+            ),
         ) {
             return trans;
         }

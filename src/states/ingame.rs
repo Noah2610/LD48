@@ -10,6 +10,7 @@ const UI_SKIP_TEXT_ID: &str = "skip_zone_text";
 const UI_SCORE_ID: &str = "score";
 
 pub struct Ingame {
+    initial_zone:            Option<ZoneId>,
     load_new_zone_on_resume: bool,
     ui_data:                 UiData,
     is_zone_skippable:       bool,
@@ -18,6 +19,7 @@ pub struct Ingame {
 impl Default for Ingame {
     fn default() -> Self {
         Self {
+            initial_zone:            None,
             load_new_zone_on_resume: true,
             ui_data:                 Default::default(),
             is_zone_skippable:       false,
@@ -26,6 +28,11 @@ impl Default for Ingame {
 }
 
 impl Ingame {
+    pub fn with_initial_zone(mut self, initial_zone: ZoneId) -> Self {
+        self.initial_zone = Some(initial_zone);
+        self
+    }
+
     fn start<'a, 'b>(&mut self, mut data: &mut StateData<GameData<'a, 'b>>) {
         if self.load_new_zone_on_resume {
             self.load_new_zone_on_resume = false;
@@ -212,7 +219,15 @@ impl Ingame {
 
 impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
     fn on_start(&mut self, mut data: StateData<GameData<'a, 'b>>) {
-        data.world.insert(ZonesManager::default());
+        data.world.insert({
+            let mut zones_manager = ZonesManager::default();
+            if let Some(initial_zone) =
+                self.initial_zone.as_ref().map(|z| z.clone())
+            {
+                zones_manager.set_initial_zone(initial_zone);
+            }
+            zones_manager
+        });
         data.world.insert(ZoneSize::default());
         data.world.insert(ShouldLoadNextZone::default());
         data.world.insert(GameOver::default());
