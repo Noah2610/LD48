@@ -5,6 +5,7 @@ pub mod prelude {
     pub use super::game_over::GameOver;
     pub use super::lanes::{Lane, Lanes};
     pub use super::object_spawner::{ObjectSpawner, ObjectToSpawn};
+    pub use super::savefile::{Highscore, Highscores, Savefile};
     pub use super::score::Score;
     pub use super::selected_zone::SelectedZone;
     pub use super::should_load_next_zone::ShouldLoadNextZone;
@@ -21,6 +22,7 @@ mod dispatcher_id;
 mod game_over;
 mod lanes;
 mod object_spawner;
+mod savefile;
 mod score;
 mod selected_zone;
 mod should_load_next_zone;
