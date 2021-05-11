@@ -24,7 +24,7 @@ impl Pause {
             return Some(Trans::Pop);
         }
         if input_manager.is_down(MenuAction::Quit) {
-            return Some(Trans::Replace(Box::new(MainMenu::default())));
+            return Some(Trans::Sequence(vec![Trans::Pop, Trans::Pop]));
         }
         None
     }
