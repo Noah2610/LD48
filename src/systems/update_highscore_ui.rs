@@ -45,8 +45,12 @@ impl<'a> System<'a> for UpdateHighscoreUi {
                 }
             })
         {
-            if let Some(score) = highs.get(&high_type) {
-                ui_text.text = format!("HIGH\n{}", score);
+            if let Some(&score) = highs.get(&high_type) {
+                if score > 0 {
+                    ui_text.text = format!("HIGH\n{}", score);
+                } else {
+                    ui_text.text = String::new();
+                }
             }
         }
     }
