@@ -5,4 +5,5 @@ pub enum DispatcherId {
     Paused,
     ZoneTransition,
     GameOver,
+    ZoneSelect,
 }

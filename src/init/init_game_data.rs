@@ -43,6 +43,7 @@ pub(super) fn build_game_data<'a, 'b>(
         .dispatcher(DispatcherId::Paused)?
         .dispatcher(DispatcherId::ZoneTransition)?
         .dispatcher(DispatcherId::GameOver)?
+        .dispatcher(DispatcherId::ZoneSelect)?
         .with_core_bundle(FpsCounterBundle)?
         .with_core_bundle(transform_bundle)?
         .with_core_bundle(rendering_bundle)?
@@ -188,6 +189,12 @@ pub(super) fn build_game_data<'a, 'b>(
             DispatcherId::GameOver,
             UpdateRotate::default(),
             "game_over_update_rotate_system",
+            &[],
+        )?
+        .with(
+            DispatcherId::ZoneSelect,
+            HandleZoneSelect::default(),
+            "handle_zone_select_system",
             &[],
         )?;
 

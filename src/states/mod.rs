@@ -4,6 +4,7 @@ mod ingame;
 mod main_menu;
 mod pause;
 mod startup;
+mod zone_select;
 mod zone_transition;
 
 pub mod prelude {
@@ -13,6 +14,7 @@ pub mod prelude {
     pub use super::main_menu::MainMenu;
     pub use super::pause::Pause;
     pub use super::startup::Startup;
+    pub use super::zone_select::ZoneSelect;
     pub use super::zone_transition::ZoneTransition;
 }
 

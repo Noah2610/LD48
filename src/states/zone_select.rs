@@ -3,14 +3,14 @@ use super::state_prelude::*;
 use crate::input::prelude::{MenuAction, MenuBindings};
 
 #[derive(Default)]
-pub struct MainMenu {
+pub struct ZoneSelect {
     ui_data: UiData,
 }
 
-impl MainMenu {
+impl ZoneSelect {
     fn start<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
         data.world.delete_all();
-        self.create_ui(data, resource("ui/main_menu.ron").to_str().unwrap());
+        self.create_ui(data, resource("ui/zone_select.ron").to_str().unwrap());
         {
             let mut songs = data.world.write_resource::<Songs<SongKey>>();
             if let Some(song) = songs.get(&SongKey::MainMenu) {
@@ -20,8 +20,6 @@ impl MainMenu {
                 }
             }
         }
-
-        data.world.insert(SelectedZone::default());
     }
 
     fn stop<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
@@ -35,17 +33,14 @@ impl MainMenu {
         if input_manager.is_down(MenuAction::Start) {
             return Some(Trans::Push(Box::new(Ingame::default())));
         }
-        if input_manager.is_down(MenuAction::StartZoneSelect) {
-            return Some(Trans::Push(Box::new(ZoneSelect::default())));
-        }
         if input_manager.is_down(MenuAction::Quit) {
-            return Some(Trans::Quit);
+            return Some(Trans::Pop);
         }
         None
     }
 }
 
-impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for MainMenu {
+impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for ZoneSelect {
     fn on_start(&mut self, mut data: StateData<GameData<'a, 'b>>) {
         self.start(&mut data);
     }
@@ -67,7 +62,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for MainMenu {
         data: StateData<GameData<'a, 'b>>,
     ) -> Trans<GameData<'a, 'b>, StateEvent> {
         data.data
-            .update(data.world, DispatcherId::MainMenu)
+            .update(data.world, DispatcherId::ZoneSelect)
             .unwrap();
 
         if let Some(trans) = self.handle_input(
@@ -91,7 +86,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for MainMenu {
     }
 }
 
-impl<'a, 'b> Menu<GameData<'a, 'b>, StateEvent> for MainMenu {
+impl<'a, 'b> Menu<GameData<'a, 'b>, StateEvent> for ZoneSelect {
     fn event_triggered(
         &mut self,
         _data: &mut StateData<GameData<'a, 'b>>,

@@ -12,6 +12,9 @@ pub enum MenuAction {
     Start,
     Quit,
     Pause,
+    StartZoneSelect,
+    Next,
+    Prev,
 }
 
 impl BindingTypes for MenuBindings {
