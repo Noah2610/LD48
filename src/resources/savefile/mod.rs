@@ -30,4 +30,37 @@ impl Savefile {
             Err(amethyst::Error::from_string("Savefile doesn't exist"))
         }
     }
+
+    pub fn save(&self, savefile_path: PathBuf) -> amethyst::Result<()> {
+        let file = File::create(savefile_path)?;
+        serde_json::ser::to_writer(file, self)?;
+        Ok(())
+    }
+
+    pub fn update_highscore_progression(&mut self, score: usize) -> bool {
+        let highscore = self
+            .highscores
+            .progression
+            .get_or_insert_with(Default::default);
+        if score > highscore.highscore {
+            highscore.highscore = score;
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn update_highscore_infinite(
+        &mut self,
+        score: usize,
+        zone: ZoneId,
+    ) -> bool {
+        let highscore = self.highscores.infinite.entry(zone).or_default();
+        if score > highscore.highscore {
+            highscore.highscore = score;
+            true
+        } else {
+            false
+        }
+    }
 }

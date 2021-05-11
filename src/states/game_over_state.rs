@@ -10,6 +10,26 @@ pub struct GameOverState {
 impl GameOverState {
     fn start<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
         self.create_ui(data, resource("ui/game_over.ron").to_str().unwrap());
+
+        let score = data.world.read_resource::<Score>().coins;
+        match data
+            .world
+            .read_resource::<SavefileSettings>()
+            .savefile_path()
+        {
+            Ok(savefile_path) => {
+                let mut savefile = data.world.write_resource::<Savefile>();
+                let did_update = savefile.update_highscore_progression(score);
+                if did_update {
+                    if let Err(e) = savefile.save(savefile_path) {
+                        eprintln!("[WARNING]    \n{}", e);
+                    }
+                }
+            }
+            Err(e) => {
+                eprintln!("[WARNING]\n    {}", e);
+            }
+        }
     }
 
     fn stop<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
