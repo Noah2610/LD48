@@ -14,28 +14,69 @@ Container(
     ),
 
     children: [
-        Label(
+        Container(
             transform: (
-                id:             "score",
+                id:             "ingame_score_container",
                 x:              0.0,
-                y:              0.0,
+                y:              -0.02,
                 z:              0.0,
-                width:          128.0,
-                height:         128.0,
-                anchor:         TopLeft,
-                pivot:          TopLeft,
+                width:          0.95,
+                height:         0.5,
+                anchor:         TopMiddle,
+                pivot:          TopMiddle,
                 mouse_reactive: false,
-                percent:        false,
+                percent:        true,
                 opaque:         false,
             ),
-            text: (
-                text:      "SCORE\n0",
-                font_size: 32.0,
-                color:     (0.9, 0.9, 0.9, 1.0),
-                font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
-                align:     Middle,
-                line_mode: Wrap,
-            ),
+            children: [
+                Label(
+                    transform: (
+                        id:             "score",
+                        x:              0.0,
+                        y:              0.0,
+                        z:              0.0,
+                        width:          128.0,
+                        height:         128.0,
+                        anchor:         TopLeft,
+                        pivot:          TopLeft,
+                        mouse_reactive: false,
+                        percent:        false,
+                        opaque:         false,
+                    ),
+                    text: (
+                        text:      "SCORE\n0",
+                        font_size: 32.0,
+                        color:     (0.9, 0.9, 0.9, 1.0),
+                        font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
+                        align:     Middle,
+                        line_mode: Wrap,
+                    ),
+                ),
+
+                Label(
+                    transform: (
+                        id:             "highscore_progression",
+                        x:              0.0,
+                        y:              0.0,
+                        z:              0.0,
+                        width:          128.0,
+                        height:         128.0,
+                        anchor:         TopRight,
+                        pivot:          TopRight,
+                        mouse_reactive: false,
+                        percent:        false,
+                        opaque:         false,
+                    ),
+                    text: (
+                        text:      "HIGH\n0",
+                        font_size: 32.0,
+                        color:     (0.9, 0.9, 0.9, 1.0),
+                        font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
+                        align:     Middle,
+                        line_mode: Wrap,
+                    ),
+                ),
+            ],
         ),
 
         Label(
