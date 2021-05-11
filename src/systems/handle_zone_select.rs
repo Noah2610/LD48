@@ -21,9 +21,8 @@ impl<'a> System<'a> for HandleZoneSelect {
         } else {
             None
         };
+        let zone_idx = *selected_zone.0.get_or_insert(0);
         if let Some(select_dir) = select_dir_opt {
-            let zone_idx =
-                selected_zone.0.as_ref().map(|(_, i)| *i).unwrap_or(0);
             let zones_len = settings.config.zone_order.len();
             let next_zone_idx = match select_dir {
                 SelectDir::Next => {
@@ -32,11 +31,7 @@ impl<'a> System<'a> for HandleZoneSelect {
                 SelectDir::Prev => zone_idx.checked_sub(1).unwrap_or(0),
             };
             if zone_idx != next_zone_idx {
-                if let Some(next_zone) =
-                    settings.config.zone_order.get(next_zone_idx).cloned()
-                {
-                    selected_zone.0 = Some((next_zone, next_zone_idx));
-                }
+                selected_zone.0 = Some(next_zone_idx);
             }
         }
     }
