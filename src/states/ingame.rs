@@ -261,6 +261,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
 
     fn on_stop(&mut self, mut data: StateData<GameData<'a, 'b>>) {
         self.delete_ui(&mut data);
+        data.world.delete_all();
     }
 
     fn on_pause(&mut self, mut data: StateData<GameData<'a, 'b>>) {
