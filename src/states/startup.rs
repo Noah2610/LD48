@@ -47,6 +47,8 @@ fn setup(world: &mut World) {
     let sprite_sheet_handles = SpriteSheetHandles::<PathBuf>::default();
     world.insert(sprite_sheet_handles);
 
+    world.insert(load_savefile(&world));
+
     let (songs, sounds) = {
         let audio_settings = world.read_resource::<AudioSettings>();
 
@@ -105,4 +107,22 @@ fn enter_fullscreen(world: &mut World) {
     let monitor_id = monitor_ident.monitor_id(&*window);
 
     window.set_fullscreen(Some(monitor_id));
+}
+
+fn load_savefile(world: &World) -> Savefile {
+    let savefile =
+        match world.read_resource::<SavefileSettings>().savefile_path() {
+            Ok(savefile_path) => match Savefile::load(savefile_path) {
+                Ok(savefile) => Some(savefile),
+                Err(e) => {
+                    eprintln!("[WARNING]\n    {}", e);
+                    None
+                }
+            },
+            Err(e) => {
+                eprintln!("[WARNING]\n    {}", e);
+                None
+            }
+        };
+    savefile.unwrap_or_default()
 }

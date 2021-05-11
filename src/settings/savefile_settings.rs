@@ -1,5 +1,6 @@
 // resources/settings/savefile.ron
 
+use deathframe::amethyst;
 use std::fs::create_dir_all;
 use std::path::PathBuf;
 
@@ -10,28 +11,26 @@ pub struct SavefileSettings {
 }
 
 impl SavefileSettings {
-    pub fn savefile_path(&self) -> Option<PathBuf> {
+    pub fn savefile_path(&self) -> amethyst::Result<PathBuf> {
         const APP_NAME: &str = env!("CARGO_PKG_NAME");
 
         if let Some(mut path) = dirs::data_local_dir() {
             path.push(APP_NAME);
             if !path.exists() {
                 if let Err(e) = create_dir_all(&path) {
-                    eprintln!(
-                        "[WARNING]\n    Couldn't create data directory for \
+                    return Err(amethyst::Error::from_string(format!(
+                        "Couldn't create data directory for \
                          savefile:\n{:?}\n{:?}",
                         &path, e
-                    );
-                    return None;
+                    )));
                 }
             }
             path.push(&self.savefile_name);
-            Some(path)
+            Ok(path)
         } else {
-            eprintln!(
-                "[WARNING]\n    Couldn't find data directory for savefile"
-            );
-            None
+            Err(amethyst::Error::from_string(
+                "Couldn't find data directory for savefile",
+            ))
         }
     }
 }

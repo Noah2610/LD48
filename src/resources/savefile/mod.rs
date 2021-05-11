@@ -27,7 +27,7 @@ impl Savefile {
                 .expect("Savefile file should exist at this point");
             Ok(serde_json::de::from_reader(savefile_file)?)
         } else {
-            Err(amethyst::Error::from_string("Savefile path is not a file"))
+            Err(amethyst::Error::from_string("Savefile doesn't exist"))
         }
     }
 }
