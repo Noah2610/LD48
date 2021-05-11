@@ -19,8 +19,8 @@ impl GameOverState {
         {
             Ok(savefile_path) => {
                 let mut savefile = data.world.write_resource::<Savefile>();
-                let did_update = savefile.update_highscore_progression(score);
-                if did_update {
+                savefile.update_highscore_progression(score);
+                if savefile.should_save() {
                     if let Err(e) = savefile.save(savefile_path) {
                         eprintln!("[WARNING]    \n{}", e);
                     }

@@ -58,10 +58,11 @@ impl Ingame {
             use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
 
             world.exec(
-                |(mut zones_manager, settings, mut songs): (
+                |(mut zones_manager, settings, mut songs, mut savefile): (
                     WriteExpect<ZonesManager>,
                     ReadExpect<ZonesSettings>,
                     WriteExpect<Songs<SongKey>>,
+                    WriteExpect<Savefile>,
                 )| {
                     zones_manager.stage_initial_segments(&settings);
                     player_speed_opt =
@@ -76,6 +77,10 @@ impl Ingame {
                         zones_manager.get_current_song(&settings)
                     {
                         songs.play(song_key);
+                    }
+
+                    if let Some(zone) = zones_manager.current_zone() {
+                        savefile.unlock(zone.clone());
                     }
                 },
             );

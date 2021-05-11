@@ -1,12 +1,16 @@
 use crate::settings::prelude::ZoneId;
 use deathframe::amethyst;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::path::PathBuf;
 
 #[derive(Default, Serialize, Deserialize)]
 pub struct Savefile {
     pub highscores: Highscores,
+    pub unlocked:   HashSet<ZoneId>,
+
+    #[serde(skip)]
+    should_save: bool,
 }
 
 #[derive(Default, Serialize, Deserialize)]
@@ -37,17 +41,29 @@ impl Savefile {
         Ok(())
     }
 
+    pub fn should_save(&self) -> bool {
+        self.should_save
+    }
+
+    pub fn unlock(&mut self, zone: ZoneId) -> bool {
+        let did_update = self.unlocked.insert(zone);
+        if did_update {
+            self.should_save = true;
+        }
+        did_update
+    }
+
     pub fn update_highscore_progression(&mut self, score: usize) -> bool {
         let highscore = self
             .highscores
             .progression
             .get_or_insert_with(Default::default);
-        if score > highscore.highscore {
+        let did_update = score > highscore.highscore;
+        if did_update {
             highscore.highscore = score;
-            true
-        } else {
-            false
+            self.should_save = true;
         }
+        did_update
     }
 
     pub fn update_highscore_infinite(
@@ -56,11 +72,11 @@ impl Savefile {
         zone: ZoneId,
     ) -> bool {
         let highscore = self.highscores.infinite.entry(zone).or_default();
-        if score > highscore.highscore {
+        let did_update = score > highscore.highscore;
+        if did_update {
             highscore.highscore = score;
-            true
-        } else {
-            false
+            self.should_save = true;
         }
+        did_update
     }
 }
