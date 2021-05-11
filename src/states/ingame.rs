@@ -10,7 +10,7 @@ const UI_SKIP_TEXT_ID: &str = "skip_zone_text";
 const UI_SCORE_ID: &str = "score";
 
 pub struct Ingame {
-    initial_zone:            Option<ZoneId>,
+    initial_zone_idx:        Option<usize>,
     load_new_zone_on_resume: bool,
     ui_data:                 UiData,
     is_zone_skippable:       bool,
@@ -19,7 +19,7 @@ pub struct Ingame {
 impl Default for Ingame {
     fn default() -> Self {
         Self {
-            initial_zone:            None,
+            initial_zone_idx:        None,
             load_new_zone_on_resume: true,
             ui_data:                 Default::default(),
             is_zone_skippable:       false,
@@ -28,8 +28,8 @@ impl Default for Ingame {
 }
 
 impl Ingame {
-    pub fn with_initial_zone(mut self, initial_zone: ZoneId) -> Self {
-        self.initial_zone = Some(initial_zone);
+    pub fn with_initial_zone_idx(mut self, initial_zone_idx: usize) -> Self {
+        self.initial_zone_idx = Some(initial_zone_idx);
         self
     }
 
@@ -221,10 +221,8 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
     fn on_start(&mut self, mut data: StateData<GameData<'a, 'b>>) {
         data.world.insert({
             let mut zones_manager = ZonesManager::default();
-            if let Some(initial_zone) =
-                self.initial_zone.as_ref().map(|z| z.clone())
-            {
-                zones_manager.set_initial_zone(initial_zone);
+            if let Some(&initial_zone_idx) = self.initial_zone_idx.as_ref() {
+                zones_manager.set_initial_zone_idx(initial_zone_idx);
             }
             zones_manager
         });

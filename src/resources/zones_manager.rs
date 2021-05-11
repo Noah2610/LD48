@@ -12,7 +12,7 @@ const KEEP_COUNT_SEGMENTS_LOADED: usize = 2;
 #[derive(Default)]
 pub struct ZonesManager {
     current_zone:           Option<ZoneState>,
-    initial_zone:           Option<ZoneId>,
+    initial_zone_idx:       Option<usize>,
     last_staged_segment:    Option<SegmentId>,
     staged_segments:        Vec<SegmentId>,
     levels:                 HashMap<SegmentId, DataLevel>,
@@ -37,8 +37,8 @@ impl ZoneState {
 }
 
 impl ZonesManager {
-    pub fn set_initial_zone(&mut self, initial_zone: ZoneId) {
-        self.initial_zone = Some(initial_zone);
+    pub fn set_initial_zone_idx(&mut self, initial_zone_idx: usize) {
+        self.initial_zone_idx = Some(initial_zone_idx);
     }
 
     pub fn current_zone(&self) -> Option<&ZoneId> {
@@ -145,14 +145,12 @@ impl ZonesManager {
                 .get(order_idx)
                 .map(|next| (next, order_idx))
         } else {
-            if let Some(initial_zone) = self.initial_zone.as_ref() {
+            if let Some(&initial_zone_idx) = self.initial_zone_idx.as_ref() {
                 settings
                     .config
                     .zone_order
-                    .iter()
-                    .enumerate()
-                    .find(|(_, zone)| zone == &initial_zone)
-                    .map(|(i, _)| (initial_zone, i))
+                    .get(initial_zone_idx)
+                    .map(|initial_zone| (initial_zone, initial_zone_idx))
             } else {
                 settings.config.zone_order.first().map(|first| (first, 0))
             }
@@ -163,7 +161,7 @@ impl ZonesManager {
     fn reset(&mut self) {
         replace_with_or_abort(self, |self_| ZonesManager {
             current_zone:           None,
-            initial_zone:           self_.initial_zone,
+            initial_zone_idx:       self_.initial_zone_idx,
             last_staged_segment:    None,
             staged_segments:        Vec::new(),
             levels:                 HashMap::new(),
