@@ -13,7 +13,9 @@ impl GameOverState {
     }
 
     fn stop<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
-        self.delete_ui(data);
+        // self.delete_ui(data);
+        data.world.delete_all();
+        self.ui_data = UiData::default();
     }
 
     fn handle_input<'a, 'b>(
@@ -23,7 +25,7 @@ impl GameOverState {
         if input_manager.is_down(MenuAction::Start)
             || input_manager.is_down(MenuAction::Quit)
         {
-            Some(Trans::Pop)
+            Some(Trans::Sequence(vec![Trans::Pop, Trans::Pop]))
         } else {
             None
         }

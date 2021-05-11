@@ -152,7 +152,7 @@ impl Ingame {
         let mut game_over = world.write_resource::<GameOver>();
         if game_over.0 {
             game_over.0 = false;
-            Some(Trans::Switch(Box::new(GameOverState::default())))
+            Some(Trans::Push(Box::new(GameOverState::default())))
         } else {
             None
         }
@@ -259,9 +259,10 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         self.start(&mut data);
     }
 
-    fn on_stop(&mut self, mut data: StateData<GameData<'a, 'b>>) {
-        self.delete_ui(&mut data);
+    fn on_stop(&mut self, data: StateData<GameData<'a, 'b>>) {
+        // self.delete_ui(&mut data);
         data.world.delete_all();
+        self.ui_data = UiData::default();
     }
 
     fn on_pause(&mut self, mut data: StateData<GameData<'a, 'b>>) {
