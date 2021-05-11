@@ -1,0 +1,6 @@
+// src/settings/savefile_settings.rs
+
+#![enable(implicit_some)]
+(
+    savefile_name: "savefile.json",
+)

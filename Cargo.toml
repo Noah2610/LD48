@@ -5,6 +5,7 @@ authors = []
 edition = "2018"
 
 [dependencies]
+dirs = "3.0.2"
 rand = "0.8.3"
 replace_with = "0.1.7"
 ron = "0.6.4"

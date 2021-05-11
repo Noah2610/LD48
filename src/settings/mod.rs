@@ -4,6 +4,7 @@ pub mod prelude {
     pub use super::lanes_settings::LanesSettings;
     pub use super::objects_settings::{ObjectSettings, ObjectsSettings};
     pub use super::player_settings::PlayerSettings;
+    pub use super::savefile_settings::SavefileSettings;
     pub use super::zones_settings::{ZoneId, ZoneSettings, ZonesSettings};
     pub use super::Settings;
 }
@@ -15,6 +16,7 @@ pub mod hitbox_config;
 pub mod lanes_settings;
 pub mod objects_settings;
 pub mod player_settings;
+pub mod savefile_settings;
 pub mod zones_settings;
 
 use crate::resource;
@@ -26,23 +28,25 @@ use std::fs::File;
 use std::path::PathBuf;
 
 pub struct Settings {
-    pub camera:  CameraSettings,
-    pub player:  PlayerSettings,
-    pub objects: ObjectsSettings,
-    pub lanes:   LanesSettings,
-    pub zones:   ZonesSettings,
-    pub audio:   AudioSettings,
+    pub camera:   CameraSettings,
+    pub player:   PlayerSettings,
+    pub objects:  ObjectsSettings,
+    pub lanes:    LanesSettings,
+    pub zones:    ZonesSettings,
+    pub audio:    AudioSettings,
+    pub savefile: SavefileSettings,
 }
 
 impl Settings {
     pub fn load() -> deathframe::amethyst::Result<Self> {
         Ok(Self {
-            lanes:   load_settings("settings/lanes.ron")?,
-            camera:  load_settings("settings/camera.ron")?,
-            player:  load_settings("settings/player.ron")?,
-            objects: load_settings_dir("settings/objects")?,
-            zones:   load_settings_dir("settings/zones")?,
-            audio:   load_settings("settings/audio.ron")?,
+            lanes:    load_settings("settings/lanes.ron")?,
+            camera:   load_settings("settings/camera.ron")?,
+            player:   load_settings("settings/player.ron")?,
+            objects:  load_settings_dir("settings/objects")?,
+            zones:    load_settings_dir("settings/zones")?,
+            audio:    load_settings("settings/audio.ron")?,
+            savefile: load_settings("settings/savefile.ron")?,
         })
     }
 }
