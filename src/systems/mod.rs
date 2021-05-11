@@ -11,6 +11,7 @@ mod handle_zone_switch;
 mod update_on_lane;
 mod update_rotate;
 mod update_score_ui;
+mod update_selected_zone_ui;
 
 pub mod prelude {
     pub use super::confine_camera_to_first_and_final_segment::ConfineCameraToFirstAndFinalSegment;
@@ -26,6 +27,7 @@ pub mod prelude {
     pub use super::update_on_lane::UpdateOnLane;
     pub use super::update_rotate::UpdateRotate;
     pub use super::update_score_ui::UpdateScoreUi;
+    pub use super::update_selected_zone_ui::UpdateSelectedZoneUi;
     pub use deathframe::systems::prelude::*;
 }
 

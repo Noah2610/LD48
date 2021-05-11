@@ -196,6 +196,12 @@ pub(super) fn build_game_data<'a, 'b>(
             HandleZoneSelect::default(),
             "handle_zone_select_system",
             &[],
+        )?
+        .with(
+            DispatcherId::ZoneSelect,
+            UpdateSelectedZoneUi::default(),
+            "update_selected_zone_ui_system",
+            &[],
         )?;
 
     Ok(custom_game_data)
