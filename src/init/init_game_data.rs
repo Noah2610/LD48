@@ -162,9 +162,9 @@ pub(super) fn build_game_data<'a, 'b>(
             &[],
         )?
         .with(
-            DispatcherId::GameOver,
-            UpdateScoreUi::default(),
-            "game_over_update_score_ui_system",
+            DispatcherId::Ingame,
+            UpdateHighscoreUi::default(),
+            "update_highscore_ui_system",
             &[],
         )?
         .with(
@@ -183,6 +183,24 @@ pub(super) fn build_game_data<'a, 'b>(
             DispatcherId::Ingame,
             UpdateRotate::default(),
             "update_rotate_system",
+            &[],
+        )?
+        .with(
+            DispatcherId::MainMenu,
+            UpdateHighscoreUi::default(),
+            "main_menu_update_highscore_ui_system",
+            &[],
+        )?
+        .with(
+            DispatcherId::GameOver,
+            UpdateScoreUi::default(),
+            "game_over_update_score_ui_system",
+            &[],
+        )?
+        .with(
+            DispatcherId::GameOver,
+            UpdateHighscoreUi::default(),
+            "game_over_update_highscore_ui_system",
             &[],
         )?
         .with(
