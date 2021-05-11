@@ -18,7 +18,7 @@ Container(
             transform: (
                 id:             "zone_select_title",
                 x:              0.0,
-                y:              16.0,
+                y:              -128.0,
                 z:              0.0,
                 width:          512.0,
                 height:         512.0,
@@ -33,7 +33,7 @@ Container(
                 font_size: 48.0,
                 color:     (0.9, 0.9, 0.9, 1.0),
                 font:      File("resources/fonts/undefined-medium.ttf", ("TTF", ())),
-                align:     Middle,
+                align:     TopMiddle,
                 line_mode: Wrap,
             ),
         ),
