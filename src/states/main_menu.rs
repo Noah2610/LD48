@@ -25,7 +25,9 @@ impl MainMenu {
     }
 
     fn stop<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
-        self.delete_ui(data);
+        // self.delete_ui(data);
+        data.world.delete_all();
+        self.ui_data = UiData::default();
     }
 
     fn handle_input<'a, 'b>(

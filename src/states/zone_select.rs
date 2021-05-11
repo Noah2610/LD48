@@ -9,7 +9,6 @@ pub struct ZoneSelect {
 
 impl ZoneSelect {
     fn start<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
-        data.world.delete_all();
         self.create_ui(data, resource("ui/zone_select.ron").to_str().unwrap());
         {
             let mut songs = data.world.write_resource::<Songs<SongKey>>();
@@ -23,7 +22,9 @@ impl ZoneSelect {
     }
 
     fn stop<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
-        self.delete_ui(data);
+        // self.delete_ui(data);
+        data.world.delete_all();
+        self.ui_data = UiData::default();
     }
 
     fn handle_input<'a, 'b>(
