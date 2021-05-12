@@ -11,6 +11,7 @@ pub mod prelude {
     pub use super::should_load_next_zone::ShouldLoadNextZone;
     pub use super::song_key::SongKey;
     pub use super::sound_key::SoundKey;
+    pub use super::zone_progression_mode::ZoneProgressionMode;
     pub use super::zone_size::ZoneSize;
     pub use super::zones_manager::ZonesManager;
     pub use deathframe::resources::prelude::*;
@@ -28,5 +29,6 @@ mod selected_zone;
 mod should_load_next_zone;
 mod song_key;
 mod sound_key;
+mod zone_progression_mode;
 mod zone_size;
 mod zones_manager;

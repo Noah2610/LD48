@@ -254,6 +254,9 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
             zones_manager
         };
 
+        data.world.insert(ZoneProgressionMode::from_is_infinite(
+            zones_manager.is_infinite_zone(),
+        ));
         data.world.insert(zones_manager);
         data.world.insert(ZoneSize::default());
         data.world.insert(ShouldLoadNextZone::default());

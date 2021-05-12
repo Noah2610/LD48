@@ -46,6 +46,10 @@ impl ZonesManager {
         self.is_infinite_zone = is_infinite_zone;
     }
 
+    pub fn is_infinite_zone(&self) -> bool {
+        self.is_infinite_zone
+    }
+
     pub fn current_zone(&self) -> Option<&ZoneId> {
         self.current_zone.as_ref().map(|current| &current.id)
     }
