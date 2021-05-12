@@ -27,29 +27,37 @@ impl<'a> System<'a> for HandleZoneSelect {
         } else {
             None
         };
-        let zone_idx = *selected_zone
-            .0
-            .as_ref()
-            .map(|selected| selected.0)
-            .get_or_insert(0);
-        if let Some(select_dir) = select_dir_opt {
-            let zones_len = settings.config.zone_order.len();
-            let next_zone_idx = match select_dir {
-                SelectDir::Next => {
-                    (zone_idx + 1).min(zones_len.checked_sub(1).unwrap_or(0))
+
+        let next_zone_idx_opt = if let Some(zone_idx) =
+            selected_zone.0.as_ref().map(|selected| selected.0)
+        {
+            if let Some(select_dir) = select_dir_opt {
+                let zones_len = settings.config.zone_order.len();
+                let next_zone_idx = match select_dir {
+                    SelectDir::Next => (zone_idx + 1)
+                        .min(zones_len.checked_sub(1).unwrap_or(0)),
+                    SelectDir::Prev => zone_idx.checked_sub(1).unwrap_or(0),
+                };
+                if next_zone_idx != zone_idx {
+                    Some(next_zone_idx)
+                } else {
+                    None
                 }
-                SelectDir::Prev => zone_idx.checked_sub(1).unwrap_or(0),
-            };
-            if zone_idx != next_zone_idx {
-                if let Some(next_zone) =
-                    settings.config.zone_order.get(next_zone_idx)
-                {
-                    let has_unlocked_next_zone =
-                        savefile.unlocked.contains(next_zone);
-                    if has_unlocked_next_zone {
-                        selected_zone.0 =
-                            Some((next_zone_idx, next_zone.clone()));
-                    }
+            } else {
+                None
+            }
+        } else {
+            Some(0)
+        };
+
+        if let Some(next_zone_idx) = next_zone_idx_opt {
+            if let Some(next_zone) =
+                settings.config.zone_order.get(next_zone_idx)
+            {
+                let has_unlocked_next_zone =
+                    savefile.unlocked.contains(next_zone);
+                if has_unlocked_next_zone {
+                    selected_zone.0 = Some((next_zone_idx, next_zone.clone()));
                 }
             }
         }
