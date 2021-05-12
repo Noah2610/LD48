@@ -20,8 +20,8 @@ pub struct Highscores {
     pub infinite:    HashMap<ZoneId, Highscore>,
 }
 
-#[derive(Default, Serialize, Deserialize)]
-#[serde(from = "usize")]
+#[derive(Default, Serialize, Deserialize, Clone)]
+#[serde(from = "usize", into = "usize")]
 pub struct Highscore {
     pub highscore: usize,
 }
@@ -29,6 +29,12 @@ pub struct Highscore {
 impl From<usize> for Highscore {
     fn from(highscore: usize) -> Self {
         Self { highscore }
+    }
+}
+
+impl Into<usize> for Highscore {
+    fn into(self) -> usize {
+        self.highscore
     }
 }
 
