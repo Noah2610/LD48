@@ -16,7 +16,7 @@
     ),
 
     Custom("PortalBg"): (
-        spritesheet: "portal_bg.png",
+        spritesheet: "portals/portal_bg.png",
         components: [
             Animation([
                 (0, 100),
@@ -35,7 +35,7 @@
     ),
 
     Custom("PortalFgBlack"): (
-        spritesheet: "portal_fg_black.png",
+        spritesheet: "portals/portal_fg_black.png",
         components: [
             Animation([
                 (0, 100),
@@ -54,7 +54,7 @@
     ),
 
     Custom("PortalFgGreen"): (
-        spritesheet: "portal_fg_green.png",
+        spritesheet: "portals/portal_fg_green.png",
         components: [
             Animation([
                 (0, 100),
@@ -73,7 +73,7 @@
     ),
 
     Custom("PortalFgRed"): (
-        spritesheet: "portal_fg_red.png",
+        spritesheet: "portals/portal_fg_red.png",
         components: [
             Animation([
                 (0, 100),
