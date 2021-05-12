@@ -10,21 +10,22 @@ pub struct GameOverState {
 impl GameOverState {
     fn start<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
         self.create_ui(data, resource("ui/game_over.ron").to_str().unwrap());
+        self.update_highscore(data.world);
+    }
 
-        {
-            use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
+    fn update_highscore(&self, world: &mut World) {
+        use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
 
-            data.world.exec(
-                |(score, mut savefile, savefile_settings): (
-                    ReadExpect<Score>,
-                    WriteExpect<Savefile>,
-                    ReadExpect<SavefileSettings>,
-                )| {
-                    savefile.update_highscore_progression(score.coins);
-                    savefile.handle_save(&*savefile_settings);
-                },
-            );
-        }
+        world.exec(
+            |(score, mut savefile, savefile_settings): (
+                ReadExpect<Score>,
+                WriteExpect<Savefile>,
+                ReadExpect<SavefileSettings>,
+            )| {
+                savefile.update_highscore_progression(score.coins);
+                savefile.handle_save(&*savefile_settings);
+            },
+        );
     }
 
     fn stop<'a, 'b>(&mut self, data: &mut StateData<GameData<'a, 'b>>) {
