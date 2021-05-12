@@ -21,8 +21,15 @@ pub struct Highscores {
 }
 
 #[derive(Default, Serialize, Deserialize)]
+#[serde(from = "usize")]
 pub struct Highscore {
     pub highscore: usize,
+}
+
+impl From<usize> for Highscore {
+    fn from(highscore: usize) -> Self {
+        Self { highscore }
+    }
 }
 
 impl Savefile {
