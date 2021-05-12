@@ -14,6 +14,7 @@ impl<'a> System<'a> for UpdateHighscoreUi {
         Read<'a, SelectedZone>,
         ReadStorage<'a, UiTransform>,
         WriteStorage<'a, UiText>,
+        Read<'a, Option<ZoneProgressionMode>>,
     );
 
     fn run(
@@ -23,29 +24,43 @@ impl<'a> System<'a> for UpdateHighscoreUi {
             selected_zone,
             ui_transform_store,
             mut ui_text_store,
+            zone_progression_mode_opt,
         ): Self::SystemData,
     ) {
         let highs = {
+            let (show_progression, show_infinite) =
+                match *zone_progression_mode_opt {
+                    None => (true, true),
+                    Some(ZoneProgressionMode::Progression) => (true, false),
+                    Some(ZoneProgressionMode::Infinite) => (false, true),
+                };
+
             let mut highs = HashMap::new();
-            if let Some(progression) = savefile
-                .highscores
-                .progression
-                .as_ref()
-                .map(|high| high.highscore)
-            {
-                highs.insert(HighType::Progression, progression);
+            if show_progression {
+                if let Some(progression) = savefile
+                    .highscores
+                    .progression
+                    .as_ref()
+                    .map(|high| high.highscore)
+                {
+                    highs.insert(HighType::Progression, progression);
+                }
             }
-            if let Some(infinite) =
-                selected_zone.0.as_ref().and_then(|selected| {
-                    savefile
-                        .highscores
-                        .infinite
-                        .get(&selected.1)
-                        .map(|high| high.highscore)
-                })
-            {
-                highs.insert(HighType::Infinite, infinite);
+
+            if show_infinite {
+                if let Some(infinite) =
+                    selected_zone.0.as_ref().and_then(|selected| {
+                        savefile
+                            .highscores
+                            .infinite
+                            .get(&selected.1)
+                            .map(|high| high.highscore)
+                    })
+                {
+                    highs.insert(HighType::Infinite, infinite);
+                }
             }
+
             highs
         };
 
