@@ -14,15 +14,43 @@ impl GameOverState {
     }
 
     fn update_highscore(&self, world: &mut World) {
-        use deathframe::amethyst::ecs::{ReadExpect, WriteExpect};
+        use deathframe::amethyst::ecs::{Read, ReadExpect, WriteExpect};
 
         world.exec(
-            |(score, mut savefile, savefile_settings): (
+            |(
+                score,
+                mut savefile,
+                savefile_settings,
+                selected_zone,
+                zone_progression_mode,
+            ): (
                 ReadExpect<Score>,
                 WriteExpect<Savefile>,
                 ReadExpect<SavefileSettings>,
+                Read<SelectedZone>,
+                Read<ZoneProgressionMode>,
             )| {
-                savefile.update_highscore_progression(score.coins);
+                match *zone_progression_mode {
+                    ZoneProgressionMode::Progression => {
+                        savefile.update_highscore_progression(score.coins);
+                    }
+                    ZoneProgressionMode::Infinite => {
+                        if let Some(zone) =
+                            selected_zone.0.as_ref().map(|selected| &selected.1)
+                        {
+                            savefile.update_highscore_infinite(
+                                score.coins,
+                                zone.clone(),
+                            );
+                        } else {
+                            eprintln!(
+                                "[WARNING]\n    Couldn't update infinite \
+                                 highscore on game-over because there is no \
+                                 selected zone"
+                            );
+                        }
+                    }
+                }
                 savefile.handle_save(&*savefile_settings);
             },
         );

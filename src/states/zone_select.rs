@@ -78,7 +78,11 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for ZoneSelect {
 
         if let Some(trans) = self.handle_input(
             &*data.world.read_resource::<InputManager<MenuBindings>>(),
-            data.world.read_resource::<SelectedZone>().0,
+            data.world
+                .read_resource::<SelectedZone>()
+                .0
+                .as_ref()
+                .map(|selected| selected.0),
         ) {
             return trans;
         }

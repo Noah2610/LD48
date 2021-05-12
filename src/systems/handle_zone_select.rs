@@ -27,7 +27,11 @@ impl<'a> System<'a> for HandleZoneSelect {
         } else {
             None
         };
-        let zone_idx = *selected_zone.0.get_or_insert(0);
+        let zone_idx = *selected_zone
+            .0
+            .as_ref()
+            .map(|selected| selected.0)
+            .get_or_insert(0);
         if let Some(select_dir) = select_dir_opt {
             let zones_len = settings.config.zone_order.len();
             let next_zone_idx = match select_dir {
@@ -43,7 +47,8 @@ impl<'a> System<'a> for HandleZoneSelect {
                     let has_unlocked_next_zone =
                         savefile.unlocked.contains(next_zone);
                     if has_unlocked_next_zone {
-                        selected_zone.0 = Some(next_zone_idx);
+                        selected_zone.0 =
+                            Some((next_zone_idx, next_zone.clone()));
                     }
                 }
             }

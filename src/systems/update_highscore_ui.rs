@@ -11,13 +11,19 @@ pub struct UpdateHighscoreUi;
 impl<'a> System<'a> for UpdateHighscoreUi {
     type SystemData = (
         ReadExpect<'a, Savefile>,
+        Read<'a, SelectedZone>,
         ReadStorage<'a, UiTransform>,
         WriteStorage<'a, UiText>,
     );
 
     fn run(
         &mut self,
-        (savefile, ui_transform_store, mut ui_text_store): Self::SystemData,
+        (
+            savefile,
+            selected_zone,
+            ui_transform_store,
+            mut ui_text_store,
+        ): Self::SystemData,
     ) {
         let highs = {
             let mut highs = HashMap::new();
@@ -28,8 +34,18 @@ impl<'a> System<'a> for UpdateHighscoreUi {
                 .map(|high| high.highscore)
             {
                 highs.insert(HighType::Progression, progression);
-            };
-            // TODO: INFINITE SCORE
+            }
+            if let Some(infinite) =
+                selected_zone.0.as_ref().and_then(|selected| {
+                    savefile
+                        .highscores
+                        .infinite
+                        .get(&selected.1)
+                        .map(|high| high.highscore)
+                })
+            {
+                highs.insert(HighType::Infinite, infinite);
+            }
             highs
         };
 
