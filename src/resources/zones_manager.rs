@@ -268,9 +268,13 @@ impl ZonesManager {
         &self,
         settings: &ZonesSettings,
     ) -> Option<bool> {
-        self.current_zone
-            .as_ref()
-            .and_then(|current_zone| settings.zones.get(&current_zone.id))
-            .map(|zone_settings| zone_settings.is_skippable)
+        if self.is_infinite_zone {
+            Some(false)
+        } else {
+            self.current_zone
+                .as_ref()
+                .and_then(|current_zone| settings.zones.get(&current_zone.id))
+                .map(|zone_settings| zone_settings.is_skippable)
+        }
     }
 }
