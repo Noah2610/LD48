@@ -295,11 +295,6 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
         // self.delete_ui(&mut data);
         data.world.delete_all();
         self.ui_data = UiData::default();
-
-        // Remove ZoneProgressionMode because it is used by
-        // UpdateHighscoreUi system, which should render both
-        // highscores outside of Ingame.
-        data.world.remove::<ZoneProgressionMode>();
     }
 
     fn on_pause(&mut self, mut data: StateData<GameData<'a, 'b>>) {
