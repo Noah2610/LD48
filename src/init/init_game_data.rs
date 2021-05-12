@@ -204,6 +204,12 @@ pub(super) fn build_game_data<'a, 'b>(
             &[],
         )?
         .with(
+            DispatcherId::ZoneSelect,
+            UpdateHighscoreUi::default(),
+            "zone_select_update_highscore_ui_system",
+            &[],
+        )?
+        .with(
             DispatcherId::GameOver,
             UpdateRotate::default(),
             "game_over_update_rotate_system",
