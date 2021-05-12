@@ -1,0 +1,62 @@
+#![enable(implicit_some)]
+{
+    Custom("BgWell"): (
+        spritesheet: "bg/bg_well_1.png",
+        components: [],
+    ),
+
+    Custom("BgWell2"): (
+        spritesheet: "bg/bg_well_2.png",
+        components: [],
+    ),
+
+    Custom("BgGreen"): (
+        spritesheet: "bg/bg_green.png",
+        components: [],
+    ),
+
+    Custom("BgSpace"): (
+        spritesheet: "bg/bg_space_2.png",
+        components: [],
+    ),
+
+    Custom("BgRed"): (
+        spritesheet: "bg/bg_red.png",
+        components: [],
+    ),
+
+    Custom("BgPsych0"): (
+        spritesheet: "bg/bg_psychedelic_0.png",
+        components: [],
+    ),
+
+    Custom("BgPsych1"): (
+        spritesheet: "bg/bg_psychedelic_1.png",
+        components: [],
+    ),
+
+    Custom("BgPsych2"): (
+        spritesheet: "bg/bg_psychedelic_2.png",
+        components: [],
+    ),
+
+    Custom("BgPsych3"): (
+        spritesheet: "bg/bg_psychedelic_3.png",
+        components: [],
+    ),
+
+    Custom("BgPsych4"): (
+        spritesheet: "bg/bg_psychedelic_4.png",
+        components: [],
+    ),
+
+    Custom("BgPsych5"): (
+        spritesheet: "bg/bg_psychedelic_5.png",
+        components: [],
+    ),
+
+    Custom("BgPsych6"): (
+        spritesheet: "bg/bg_psychedelic_6.png",
+        components: [],
+    ),
+}
