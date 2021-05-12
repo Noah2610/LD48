@@ -55,7 +55,7 @@ Container(
 
                 Label(
                     transform: (
-                        id:             "highscore_progression",
+                        id:             "highscore",
                         x:              0.0,
                         y:              0.0,
                         z:              0.0,
