@@ -35,7 +35,10 @@ impl ZoneSelect {
         if input_manager.is_down(MenuAction::Start) {
             if let Some(selected_zone_idx) = selected_zone_idx {
                 return Some(Trans::Push(Box::new(
-                    Ingame::default().with_initial_zone_idx(selected_zone_idx),
+                    Ingame::default()
+                        .with_initial_zone_idx(selected_zone_idx)
+                        // TODO
+                        .with_is_infinite_zone(true),
                 )));
             } else {
                 return Some(Trans::Push(Box::new(Ingame::default())));

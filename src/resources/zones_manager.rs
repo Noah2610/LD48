@@ -13,6 +13,7 @@ const KEEP_COUNT_SEGMENTS_LOADED: usize = 2;
 pub struct ZonesManager {
     current_zone:           Option<ZoneState>,
     initial_zone_idx:       Option<usize>,
+    is_infinite_zone:       bool,
     last_staged_segment:    Option<SegmentId>,
     staged_segments:        Vec<SegmentId>,
     levels:                 HashMap<SegmentId, DataLevel>,
@@ -39,6 +40,10 @@ impl ZoneState {
 impl ZonesManager {
     pub fn set_initial_zone_idx(&mut self, initial_zone_idx: usize) {
         self.initial_zone_idx = Some(initial_zone_idx);
+    }
+
+    pub fn set_infinite_zone(&mut self, is_infinite_zone: bool) {
+        self.is_infinite_zone = is_infinite_zone;
     }
 
     pub fn current_zone(&self) -> Option<&ZoneId> {
@@ -162,6 +167,7 @@ impl ZonesManager {
         replace_with_or_abort(self, |self_| ZonesManager {
             current_zone:           None,
             initial_zone_idx:       self_.initial_zone_idx,
+            is_infinite_zone:       self_.is_infinite_zone,
             last_staged_segment:    None,
             staged_segments:        Vec::new(),
             levels:                 HashMap::new(),
@@ -210,21 +216,23 @@ impl ZonesManager {
                     .map(|settings| (current_zone, settings))
             })
             .map(|(current_zone, zone_settings)| {
-                let should_load_final_segment = zone_settings
+                let should_load_next_zone = zone_settings
                     .total_segments
                     .map(|total_segments| {
-                        current_zone.total_segments_loaded >= total_segments
+                        self.is_infinite_zone
+                            || current_zone.total_segments_loaded
+                                < total_segments
                     })
-                    .unwrap_or(false);
-                if should_load_final_segment {
-                    &zone_settings.final_segment
-                } else {
+                    .unwrap_or(true);
+                if should_load_next_zone {
                     self.last_staged_segment
                         .as_ref()
                         .and_then(|current_segment| {
                             zone_settings.segments.get(current_segment)
                         })
                         .unwrap_or(&zone_settings.first_segment)
+                } else {
+                    &zone_settings.final_segment
                 }
             })
             .and_then(|possible_segments| {

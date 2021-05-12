@@ -11,6 +11,7 @@ const UI_SCORE_ID: &str = "score";
 
 pub struct Ingame {
     initial_zone_idx:        Option<usize>,
+    is_infinite_zone:        bool,
     load_new_zone_on_resume: bool,
     ui_data:                 UiData,
     is_zone_skippable:       bool,
@@ -20,6 +21,7 @@ impl Default for Ingame {
     fn default() -> Self {
         Self {
             initial_zone_idx:        None,
+            is_infinite_zone:        false,
             load_new_zone_on_resume: true,
             ui_data:                 Default::default(),
             is_zone_skippable:       false,
@@ -30,6 +32,11 @@ impl Default for Ingame {
 impl Ingame {
     pub fn with_initial_zone_idx(mut self, initial_zone_idx: usize) -> Self {
         self.initial_zone_idx = Some(initial_zone_idx);
+        self
+    }
+
+    pub fn with_is_infinite_zone(mut self, is_infinite_zone: bool) -> Self {
+        self.is_infinite_zone = is_infinite_zone;
         self
     }
 
@@ -236,13 +243,18 @@ impl Ingame {
 
 impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Ingame {
     fn on_start(&mut self, mut data: StateData<GameData<'a, 'b>>) {
-        data.world.insert({
+        let zones_manager = {
             let mut zones_manager = ZonesManager::default();
             if let Some(&initial_zone_idx) = self.initial_zone_idx.as_ref() {
                 zones_manager.set_initial_zone_idx(initial_zone_idx);
             }
+            if self.is_infinite_zone {
+                zones_manager.set_infinite_zone(true);
+            }
             zones_manager
-        });
+        };
+
+        data.world.insert(zones_manager);
         data.world.insert(ZoneSize::default());
         data.world.insert(ShouldLoadNextZone::default());
         data.world.insert(GameOver::default());
