@@ -15,7 +15,7 @@ impl<'a> System<'a> for UpdateHighscoreUi {
         Read<'a, SelectedZone>,
         ReadStorage<'a, UiTransform>,
         WriteStorage<'a, UiText>,
-        Read<'a, Option<ZoneProgressionMode>>,
+        Read<'a, ZoneProgressionMode>,
     );
 
     fn run(
@@ -25,7 +25,7 @@ impl<'a> System<'a> for UpdateHighscoreUi {
             selected_zone,
             ui_transform_store,
             mut ui_text_store,
-            zone_progression_mode_opt,
+            zone_progression_mode,
         ): Self::SystemData,
     ) {
         let highs = {
@@ -37,8 +37,7 @@ impl<'a> System<'a> for UpdateHighscoreUi {
                 .map(|high| high.highscore)
             {
                 highs.insert(HighType::Progression, progression);
-                if let Some(ZoneProgressionMode::Progression) =
-                    *zone_progression_mode_opt
+                if let ZoneProgressionMode::Progression = *zone_progression_mode
                 {
                     highs.insert(HighType::Dynamic, progression);
                 }
@@ -53,9 +52,7 @@ impl<'a> System<'a> for UpdateHighscoreUi {
                 })
             {
                 highs.insert(HighType::Infinite, infinite);
-                if let Some(ZoneProgressionMode::Infinite) =
-                    *zone_progression_mode_opt
-                {
+                if let ZoneProgressionMode::Infinite = *zone_progression_mode {
                     highs.insert(HighType::Dynamic, infinite);
                 }
             }
