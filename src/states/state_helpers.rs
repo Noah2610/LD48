@@ -25,16 +25,16 @@ pub fn toggle_fullscreen(window: &Window) {
 }
 
 #[cfg(feature = "gl")]
-pub fn enter_fullscreen(window: &Window) {
+pub fn enter_fullscreen(_window: &Window) {
     eprintln!("[WARNING]\n    Fullscreen is not supported with OpenGL backend");
 }
 
 #[cfg(feature = "gl")]
-pub fn leave_fullscreen(window: &Window) {
+pub fn leave_fullscreen(_window: &Window) {
     eprintln!("[WARNING]\n    Fullscreen is not supported with OpenGL backend");
 }
 
 #[cfg(feature = "gl")]
-pub fn toggle_fullscreen(window: &Window) {
+pub fn toggle_fullscreen(_window: &Window) {
     eprintln!("[WARNING]\n    Fullscreen is not supported with OpenGL backend");
 }
