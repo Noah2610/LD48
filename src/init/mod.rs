@@ -4,6 +4,7 @@ use crate::states::aliases::GameData;
 use crate::states::prelude::Startup;
 use amethyst::core::frame_limiter::FrameRateLimitConfig;
 use amethyst::utils::app_root_dir::application_root_dir;
+use amethyst::window::EventLoop;
 use amethyst::ApplicationBuilder;
 use deathframe::amethyst;
 
@@ -13,7 +14,8 @@ pub fn run() -> amethyst::Result<()> {
     start_logger();
 
     let settings = Settings::load()?;
-    let game_data = init_game_data::build_game_data(&settings)?;
+    let event_loop = EventLoop::new();
+    let game_data = init_game_data::build_game_data(&settings, &event_loop)?;
 
     let Settings {
         camera: camera_settings,
@@ -37,7 +39,7 @@ pub fn run() -> amethyst::Result<()> {
             .with_resource(savefile_settings)
             .build(game_data)?;
 
-    game.run();
+    game.run_winit_loop(event_loop);
 
     Ok(())
 }

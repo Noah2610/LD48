@@ -4,30 +4,34 @@ use crate::settings::Settings;
 use crate::states::aliases::{CustomData, GameDataBuilder};
 use amethyst::prelude::Config;
 use amethyst::window::DisplayConfig;
+use amethyst::window::EventLoop;
 use deathframe::amethyst;
 
 pub(super) fn build_game_data<'a, 'b>(
     settings: &Settings,
+    event_loop: &EventLoop<()>,
 ) -> amethyst::Result<GameDataBuilder<'a, 'b>> {
     use crate::input::prelude::*;
     use crate::systems::prelude::*;
     use amethyst::core::transform::TransformBundle;
+    use amethyst::renderer::rendy::hal::command::ClearColor;
     use amethyst::renderer::types::DefaultBackend;
     use amethyst::renderer::{RenderFlat2D, RenderToWindow, RenderingBundle};
     use amethyst::ui::{RenderUi, UiBundle};
     use amethyst::utils::fps_counter::FpsCounterBundle;
     use amethyst::utils::ortho_camera::CameraOrthoSystem;
+    use amethyst::window::{EventLoop, WindowBundle};
     use deathframe::bundles::*;
 
     let transform_bundle = TransformBundle::new();
     let display_config = get_display_config()?;
-    let rendering_bundle = RenderingBundle::<DefaultBackend>::new()
-        .with_plugin(
-            RenderToWindow::from_config(display_config)
-                .with_clear([0.0, 0.0, 0.0, 1.0]),
-        )
-        .with_plugin(RenderUi::default())
-        .with_plugin(RenderFlat2D::default());
+    let rendering_bundle =
+        RenderingBundle::<DefaultBackend>::new(display_config, event_loop)
+            .with_plugin(RenderToWindow::default().with_clear(ClearColor {
+                float32: [0.0, 0.0, 0.0, 1.0],
+            }))
+            .with_plugin(RenderUi::default())
+            .with_plugin(RenderFlat2D::default());
     let audio_bundle = AudioBundle::<SoundKey, SongKey>::default()
         .with_sounds_default_volume(settings.audio.volume);
     let menu_input_bundle = MenuBindings::bundle()?;
