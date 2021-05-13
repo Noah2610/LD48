@@ -72,6 +72,7 @@ dependencies = [
 [[package]]
 name = "amethyst"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "amethyst_animation",
  "amethyst_assets",
@@ -105,6 +106,7 @@ dependencies = [
 [[package]]
 name = "amethyst_animation"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "amethyst_assets",
  "amethyst_core",
@@ -123,6 +125,7 @@ dependencies = [
 [[package]]
 name = "amethyst_assets"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "amethyst_core",
  "amethyst_derive",
@@ -147,6 +150,7 @@ dependencies = [
 [[package]]
 name = "amethyst_audio"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "amethyst_assets",
  "amethyst_core",
@@ -162,6 +166,7 @@ dependencies = [
 [[package]]
 name = "amethyst_config"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "log",
  "ron 0.5.1",
@@ -171,6 +176,7 @@ dependencies = [
 [[package]]
 name = "amethyst_controls"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "amethyst_assets",
  "amethyst_core",
@@ -187,6 +193,7 @@ dependencies = [
 [[package]]
 name = "amethyst_core"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "alga",
  "alga_derive",
@@ -209,6 +216,7 @@ dependencies = [
 [[package]]
 name = "amethyst_derive"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "heck",
  "proc-macro-crate",
@@ -221,6 +229,7 @@ dependencies = [
 [[package]]
 name = "amethyst_error"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "backtrace",
 ]
@@ -228,6 +237,7 @@ dependencies = [
 [[package]]
 name = "amethyst_input"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "amethyst_config",
  "amethyst_core",
@@ -244,6 +254,7 @@ dependencies = [
 [[package]]
 name = "amethyst_rendy"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "amethyst_assets",
  "amethyst_config",
@@ -273,6 +284,7 @@ dependencies = [
 [[package]]
 name = "amethyst_ui"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "amethyst_assets",
  "amethyst_audio",
@@ -305,6 +317,7 @@ dependencies = [
 [[package]]
 name = "amethyst_utils"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "amethyst_assets",
  "amethyst_controls",
@@ -324,6 +337,7 @@ dependencies = [
 [[package]]
 name = "amethyst_window"
 version = "0.15.3"
+source = "git+https://github.com/Noah2610/amethyst?branch=gl-hack#24905a92df7a55ec20d29dc3a11c09db9b137de5"
 dependencies = [
  "amethyst_config",
  "amethyst_core",
@@ -1021,6 +1035,7 @@ dependencies = [
 [[package]]
 name = "deathframe"
 version = "0.6.0"
+source = "git+https://github.com/Noah2610/deathframe?branch=gl#3a254ebc84896eaddecd4b9499c7867ecdceb30a"
 dependencies = [
  "deathframe_animation",
  "deathframe_audio",
@@ -1031,6 +1046,7 @@ dependencies = [
 [[package]]
 name = "deathframe_animation"
 version = "0.1.0"
+source = "git+https://github.com/Noah2610/deathframe?branch=gl#3a254ebc84896eaddecd4b9499c7867ecdceb30a"
 dependencies = [
  "climer",
  "deathframe_core",
@@ -1041,6 +1057,7 @@ dependencies = [
 [[package]]
 name = "deathframe_audio"
 version = "0.1.0"
+source = "git+https://github.com/Noah2610/deathframe?branch=gl#3a254ebc84896eaddecd4b9499c7867ecdceb30a"
 dependencies = [
  "deathframe_core",
  "serde",
@@ -1049,6 +1066,7 @@ dependencies = [
 [[package]]
 name = "deathframe_core"
 version = "0.1.0"
+source = "git+https://github.com/Noah2610/deathframe?branch=gl#3a254ebc84896eaddecd4b9499c7867ecdceb30a"
 dependencies = [
  "amethyst",
  "derive_builder",
@@ -1058,6 +1076,7 @@ dependencies = [
 [[package]]
 name = "deathframe_physics"
 version = "0.1.0"
+source = "git+https://github.com/Noah2610/deathframe?branch=gl#3a254ebc84896eaddecd4b9499c7867ecdceb30a"
 dependencies = [
  "deathframe_core",
  "derive_builder",

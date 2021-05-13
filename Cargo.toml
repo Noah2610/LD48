@@ -12,10 +12,9 @@ ron = "0.6.4"
 serde_json = "1.0.64"
 
 [dependencies.deathframe]
-path = "../deathframe"
-# version = "*"
-# git = "https://github.com/Noah2610/deathframe"
-# branch = "develop"
+version = "*"
+git = "https://github.com/Noah2610/deathframe"
+branch = "gl"
 features = [
     "animation",
     "audio",
