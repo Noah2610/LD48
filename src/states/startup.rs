@@ -7,7 +7,7 @@ pub struct Startup;
 impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Startup {
     fn on_start(&mut self, mut data: StateData<GameData<'a, 'b>>) {
         #[cfg(not(feature = "debug"))]
-        enter_fullscreen(&mut data.world);
+        enter_fullscreen(&*data.world.read_resource());
 
         setup(&mut data.world);
     }
@@ -26,7 +26,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Startup {
         let input_manager =
             data.world.read_resource::<InputManager<MenuBindings>>();
         if input_manager.is_down(MenuAction::ToggleFullscreen) {
-            toggle_fullscreen(data.world);
+            toggle_fullscreen(&*data.world.read_resource());
         }
     }
 }
