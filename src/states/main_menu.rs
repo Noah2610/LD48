@@ -91,14 +91,6 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for MainMenu {
             Trans::None
         }
     }
-
-    fn shadow_fixed_update(&mut self, data: StateData<GameData<'a, 'b>>) {
-        let input_manager =
-            data.world.read_resource::<InputManager<MenuBindings>>();
-        if input_manager.is_down(MenuAction::ToggleFullscreen) {
-            toggle_fullscreen(data.world);
-        }
-    }
 }
 
 impl<'a, 'b> Menu<GameData<'a, 'b>, StateEvent> for MainMenu {

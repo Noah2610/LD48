@@ -17,7 +17,17 @@ impl<'a, 'b> State<GameData<'a, 'b>, StateEvent> for Startup {
         data: StateData<GameData<'a, 'b>>,
     ) -> Trans<GameData<'a, 'b>, StateEvent> {
         data.data.update_core(data.world);
-        Trans::Switch(Box::new(Cutscene::default()))
+        Trans::Push(Box::new(Cutscene::default()))
+    }
+
+    fn shadow_fixed_update(&mut self, data: StateData<GameData<'a, 'b>>) {
+        use crate::input::prelude::{MenuAction, MenuBindings};
+
+        let input_manager =
+            data.world.read_resource::<InputManager<MenuBindings>>();
+        if input_manager.is_down(MenuAction::ToggleFullscreen) {
+            toggle_fullscreen(data.world);
+        }
     }
 }
 
