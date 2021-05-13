@@ -1,11 +1,12 @@
 (
     axes: {},
     actions: {
-        Start:           [[Key(Space)], [Key(Return)]],
-        Quit:            [[Key(Q)], [Key(LShift), Key(Escape)], [Key(RShift), Key(Escape)]],
-        Pause:           [[Key(Escape)], [Key(P)]],
-        StartZoneSelect: [[Key(Z)]],
-        Next:            [[Key(D)], [Key(Right)], [Key(K)]],
-        Prev:            [[Key(A)], [Key(Left)], [Key(J)]],
+        Start:            [[Key(Space)], [Key(Return)]],
+        Quit:             [[Key(Q)], [Key(LShift), Key(Escape)], [Key(RShift), Key(Escape)]],
+        Pause:            [[Key(Escape)], [Key(P)]],
+        StartZoneSelect:  [[Key(Z)]],
+        Next:             [[Key(D)], [Key(Right)], [Key(K)]],
+        Prev:             [[Key(A)], [Key(Left)], [Key(J)]],
+        ToggleFullscreen: [[Key(F)], [Key(F11)]],
     },
 )

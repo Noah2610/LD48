@@ -15,6 +15,7 @@ pub enum MenuAction {
     StartZoneSelect,
     Next,
     Prev,
+    ToggleFullscreen,
 }
 
 impl BindingTypes for MenuBindings {

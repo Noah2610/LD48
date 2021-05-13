@@ -4,6 +4,7 @@ mod ingame;
 mod main_menu;
 mod pause;
 mod startup;
+mod state_helpers;
 mod zone_select;
 mod zone_transition;
 
@@ -34,6 +35,7 @@ pub mod aliases {
 mod state_prelude {
     pub use super::aliases::*;
     pub use super::prelude::*;
+    pub use super::state_helpers::*;
     pub use crate::resource;
     pub use crate::resources::prelude::*;
     pub use crate::settings::prelude::*;
